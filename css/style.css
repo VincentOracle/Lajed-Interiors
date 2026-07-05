@@ -576,9 +576,92 @@ button:focus-visible {
     max-height: 700px;
     pointer-events: auto;
     padding: 0.6rem 0 0.2rem;
+     margin-left:60%;
   }
   .mega a {
-    padding: 0.65rem 0.4rem;
+    padding: 0.1rem 0.4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .mega .mega-title {
+    color: var(--white);
+    font-size: 1rem;
+  }
+  .mega .mega-desc {
+    display: none;
+  }
+  .portfolio-mega {
+    width: 100%;
+  }
+  .nav-cta .btn-outline {
+    display: none;
+  }
+  .nav-toggle {
+    display: flex;
+  }
+}
+
+
+
+@media (max-width: 570px) {
+  /* the middle <nav> wrapper collapses to zero width once its only
+     child (.nav-links) goes fixed-position below, which is exactly
+     what we want for the space-between layout above */
+  .nav-links {
+    position: fixed;
+    inset: 0 0 0 auto;
+    height: 100vh;
+    width: min(85vw, 360px);
+    max-width: calc(100vw - 1.5rem);
+    background: var(--charcoal);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 7rem 2rem 3rem;
+    gap: 1.4rem;
+    transform: translateX(100%);
+    transition: transform 0.5s var(--ease);
+    overflow-y: auto;
+    z-index: 1001;
+  }
+  .nav-links.open {
+    transform: translateX(0);
+  }
+  .nav-links > li {
+    width: 100%;
+  }
+  .mega {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    transform: none;
+    grid-template-columns: 1fr;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    margin-top: 0;
+    background: transparent;
+    z-index: auto;
+    /* Accordion reveal driven by max-height so the panel visibly
+       expands rather than snapping between display:none/grid,
+       which reads as "nothing happened" on a fast tap. */
+    display: grid;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s var(--ease);
+  }
+  .mega::before {
+    display: none;
+  }
+  .has-dd.open .mega {
+    max-height: 700px;
+    pointer-events: auto;
+    padding: 0.6rem 0 0.2rem;
+    margin-left:60%;
+  }
+  .mega a {
+    padding: 0.1rem 0.4rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
   .mega .mega-title {
