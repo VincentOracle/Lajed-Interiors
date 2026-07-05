@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy · Lajed Interiors</title>
+    <meta
+      name="description"
+      content="Privacy Policy for Lajed Interiors — how we collect, use, and protect your personal information."
+    />
+
+    <!-- Favicon -->
+    <link href="img/favicon-icon.png" rel="icon" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600;700&family=Oswald:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+    />
+
+    <!-- Custom Styles (same as homepage) -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <style>
+      /* ----- Privacy page specific overrides ----- */
+      .privacy-hero {
+        min-height: 40vh;
+        background: var(--charcoal) url("img/privacy-hero.jpg") center/cover
+          no-repeat;
+        position: relative;
+        display: flex;
+        align-items: center;
+        isolation: isolate;
+      }
+      .privacy-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(15, 15, 15, 0.4) 0%,
+          rgba(15, 15, 15, 0.8) 100%
+        );
+        z-index: 0;
+      }
+      .privacy-hero .container {
+        position: relative;
+        z-index: 2;
+        padding: 8rem 0 4rem;
+        color: var(--white);
+      }
+      .privacy-hero h1 {
+        font-size: clamp(2.8rem, 6vw, 4.8rem);
+        color: var(--white);
+      }
+      .privacy-hero p.sub {
+        max-width: 520px;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 1.1rem;
+        margin-top: 1.2rem;
+      }
+
+      /* Privacy content */
+      .privacy-content {
+        padding: var(--gap-xl) 0;
+        background: var(--white);
+      }
+      .privacy-content .container {
+        max-width: 820px;
+      }
+      .privacy-content .last-updated {
+        color: var(--stone);
+        font-size: 0.85rem;
+        margin-bottom: 2.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid rgba(15, 15, 15, 0.06);
+      }
+      .privacy-content h2 {
+        font-family: var(--font-display);
+        font-size: 1.8rem;
+        margin-top: 2.5rem;
+        margin-bottom: 0.8rem;
+      }
+      .privacy-content h2:first-of-type {
+        margin-top: 0;
+      }
+      .privacy-content h3 {
+        font-family: var(--font-body);
+        font-weight: 600;
+        font-size: 1.05rem;
+        margin-top: 1.8rem;
+        margin-bottom: 0.5rem;
+      }
+      .privacy-content p {
+        color: var(--stone);
+        line-height: 1.8;
+        margin-bottom: 1rem;
+      }
+      .privacy-content ul {
+        padding-left: 1.5rem;
+        margin-bottom: 1.2rem;
+      }
+      .privacy-content ul li {
+        color: var(--stone);
+        line-height: 1.8;
+        margin-bottom: 0.4rem;
+        list-style: disc;
+      }
+      .privacy-content .highlight-box {
+        background: var(--ivory);
+        padding: 1.8rem 2rem;
+        border-radius: 4px;
+        border-left: 3px solid var(--gold-500);
+        margin: 1.8rem 0;
+      }
+      .privacy-content .highlight-box p {
+        margin-bottom: 0;
+      }
+      .privacy-content .highlight-box strong {
+        color: var(--charcoal);
+      }
+      .privacy-content .back-link {
+        display: inline-block;
+        margin-top: 2.5rem;
+        color: var(--gold-700);
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 0.08em;
+        transition: color 0.3s;
+      }
+      .privacy-content .back-link:hover {
+        color: var(--gold-500);
+      }
+      .privacy-content .back-link i {
+        margin-right: 0.5rem;
+      }
+
+      @media (max-width: 600px) {
+        .privacy-content .highlight-box {
+          padding: 1.2rem 1.2rem;
+        }
+        .privacy-content h2 {
+          font-size: 1.5rem;
+        }
+      }
+
+      /* Override reveal to ensure content is visible */
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== TOP BAR ===== -->
+    <div class="top-bar">
+      <div class="container">
+        <div class="top-bar-inner">
+          <div class="top-bar-left">
+            <a href="mailto:info@lajedinteriors.co.ke"
+              ><i class="fas fa-envelope"></i> info@lajedinteriors.co.ke</a
+            >
+            <a href="tel:+254722601669"
+              ><i class="fas fa-phone-alt"></i> +254 722 601 669</a
+            >
+            <span
+              ><i class="fas fa-map-marker-alt"></i> 00100 Ruaka, Nairobi</span
+            >
+          </div>
+          <div class="top-bar-right">
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" aria-label="LinkedIn"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="navbar" id="navbar">
+      <div class="container">
+        <a href="index.html" class="brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#e8cd8d" />
+                  <stop offset="100%" stop-color="#9b7a2f" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M20 10 L20 78 L58 78 L58 64 L36 64 L36 10 Z"
+                fill="url(#goldGrad)"
+              />
+              <path d="M66 10 L82 10 L82 90 L66 90 Z" fill="#0f0f0f" />
+            </svg>
+          </span>
+          <span class="brand-text">
+            <span class="name">Lajed Interiors</span>
+            <span class="tag">Design. Create. Inspire.</span>
+          </span>
+        </a>
+
+        <nav>
+          <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li class="has-dd">
+              <a href="services.html"
+                >Services <i class="fa-solid fa-chevron-down"></i
+              ></a>
+              <div class="mega">
+                <a href="services-epoxy.html"
+                  ><div class="mega-title">Epoxy Flooring</div>
+                  <div class="mega-desc">
+                    Durable, seamless and glossy finishes
+                  </div></a
+                >
+                <a href="services-kitchens.html"
+                  ><div class="mega-title">Modern Kitchens</div>
+                  <div class="mega-desc">
+                    Stylish layouts made for how you cook and live
+                  </div></a
+                >
+                <a href="services-wardrobes.html"
+                  ><div class="mega-title">Wardrobes and Closets</div>
+                  <div class="mega-desc">
+                    Smart storage with elegant detailing
+                  </div></a
+                >
+                <a href="services-gypsum.html"
+                  ><div class="mega-title">Gypsum Ceiling</div>
+                  <div class="mega-desc">
+                    Modern ceiling designs with perfect finishes
+                  </div></a
+                >
+                <a href="services-spc.html"
+                  ><div class="mega-title">SPC and Laminate Flooring</div>
+                  <div class="mega-desc">
+                    Strong, stylish and easy to maintain
+                  </div></a
+                >
+                <a href="services-partitioning.html"
+                  ><div class="mega-title">Office Partitioning</div>
+                  <div class="mega-desc">
+                    Functional spaces for modern workplaces
+                  </div></a
+                >
+              </div>
+            </li>
+            <li class="has-dd">
+              <a href="portfolio.html"
+                >Portfolio <i class="fa-solid fa-chevron-down"></i
+              ></a>
+              <div class="mega portfolio-mega">
+                <a href="residential_design.html"
+                  ><div class="mega-title">Residential Interior Design</div>
+                  <div class="mega-desc">Completed residential projects</div></a
+                >
+                <a href="commercial.html"
+                  ><div class="mega-title">Commercial Interior Design</div>
+                  <div class="mega-desc">
+                    Commercial spaces we've transformed
+                  </div></a
+                >
+                <a href="hospitality.html"
+                  ><div class="mega-title">Hospitality Interior Design</div>
+                  <div class="mega-desc">Hotels, restaurants, and more</div></a
+                >
+                <a href="transformations.html"
+                  ><div class="mega-title">Transformations</div>
+                  <div class="mega-desc">Before and after renovations</div></a
+                >
+              </div>
+            </li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-cta">
+          <a href="tel:+254722601669" class="btn btn-outline">Call Now</a>
+          <button
+            class="nav-toggle"
+            id="navToggle"
+            aria-label="Menu"
+            aria-expanded="false"
+            aria-controls="navLinks"
+          >
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== PRIVACY HERO ===== -->
+    <section class="privacy-hero">
+      <div class="container">
+        <span class="eyebrow" style="color: var(--gold-300)">Privacy</span>
+        <h1>
+          Privacy
+          <span class="accent" style="color: var(--gold-300)">Policy</span>
+        </h1>
+        <p class="sub">
+          How we collect, use, and protect your personal information when you
+          interact with Lajed Interiors.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== PRIVACY CONTENT ===== -->
+    <section class="privacy-content">
+      <div class="container">
+        <p class="last-updated">
+          <i class="fa-regular fa-calendar"></i> Last Updated: April 2026
+        </p>
+
+        <h2>1. Introduction</h2>
+        <p>
+          Lajed Interiors ("we", "us", "our") respects your privacy and is
+          committed to protecting the personal information you share with us.
+          This Privacy Policy explains how we collect, use, disclose, and
+          safeguard your information when you visit our website, engage our
+          services, or interact with us in any way.
+        </p>
+        <p>
+          By using our website or services, you consent to the practices
+          described in this policy. If you do not agree with this policy, please
+          do not use our website or provide us with your personal information.
+        </p>
+
+        <div class="highlight-box">
+          <p>
+            <strong>We take your privacy seriously.</strong> This policy
+            outlines our commitment to protecting your data and your rights
+            regarding that data.
+          </p>
+        </div>
+
+        <h2>2. Information We Collect</h2>
+        <p>We may collect the following types of information:</p>
+
+        <h3>2.1 Personal Information You Provide</h3>
+        <ul>
+          <li>
+            <strong>Contact Information:</strong> Name, email address, phone
+            number, and physical address.
+          </li>
+          <li>
+            <strong>Project Details:</strong> Information about your interior
+            design requirements, preferences, and property.
+          </li>
+          <li>
+            <strong>Communication Data:</strong> Any information you provide
+            when contacting us via email, phone, social media, or through our
+            contact forms.
+          </li>
+          <li>
+            <strong>Payment Information:</strong> Payment details for service
+            transactions (processed securely through our payment partners).
+          </li>
+        </ul>
+
+        <h3>2.2 Information Collected Automatically</h3>
+        <ul>
+          <li>
+            <strong>Device and Usage Data:</strong> IP address, browser type,
+            operating system, pages viewed, time spent on our website, and
+            referring URLs.
+          </li>
+          <li>
+            <strong>Cookies:</strong> Small text files stored on your device to
+            enhance your browsing experience. See our Cookie section below for
+            more details.
+          </li>
+        </ul>
+
+        <h2>3. How We Use Your Information</h2>
+        <p>We use your personal information for the following purposes:</p>
+        <ul>
+          <li>
+            <strong>To Provide Services:</strong> To respond to your inquiries,
+            provide quotations, manage projects, and deliver interior design
+            services.
+          </li>
+          <li>
+            <strong>Communication:</strong> To send you project updates,
+            appointment confirmations, and relevant information about your
+            project.
+          </li>
+          <li>
+            <strong>Marketing:</strong> With your consent, to send you
+            newsletters, promotional materials, and updates about our services.
+            You may opt out at any time.
+          </li>
+          <li>
+            <strong>Improvement:</strong> To analyse website usage and improve
+            our services, website, and user experience.
+          </li>
+          <li>
+            <strong>Legal Compliance:</strong> To comply with legal obligations
+            and protect our rights and interests.
+          </li>
+        </ul>
+
+        <h2>4. Legal Basis for Processing</h2>
+        <p>
+          We process your personal information based on one or more of the
+          following legal grounds:
+        </p>
+        <ul>
+          <li>
+            <strong>Contractual Necessity:</strong> To fulfil our obligations
+            under a contract with you (e.g., providing interior design
+            services).
+          </li>
+          <li>
+            <strong>Legitimate Interests:</strong> To pursue our legitimate
+            business interests, such as marketing our services, improving our
+            website, and providing customer support.
+          </li>
+          <li>
+            <strong>Consent:</strong> Where you have given us explicit consent
+            to process your data for specific purposes (e.g., marketing
+            communications).
+          </li>
+          <li>
+            <strong>Legal Obligation:</strong> To comply with applicable laws
+            and regulations.
+          </li>
+        </ul>
+
+        <h2>5. Sharing Your Information</h2>
+        <p>
+          We do not sell, rent, or trade your personal information to third
+          parties. However, we may share your information in the following
+          limited circumstances:
+        </p>
+        <ul>
+          <li>
+            <strong>Service Providers:</strong> With trusted third-party vendors
+            who assist us in delivering our services (e.g., payment processors,
+            IT support, project partners). These providers are bound by
+            confidentiality agreements.
+          </li>
+          <li>
+            <strong>Legal Requirements:</strong> If required by law, regulation,
+            or legal process, we may disclose your information to law
+            enforcement or regulatory authorities.
+          </li>
+          <li>
+            <strong>Business Transfers:</strong> In the event of a merger,
+            acquisition, or sale of assets, your information may be transferred
+            to the new owner.
+          </li>
+        </ul>
+
+        <h2>6. Data Retention</h2>
+        <p>
+          We retain your personal information for as long as necessary to fulfil
+          the purposes outlined in this policy, unless a longer retention period
+          is required or permitted by law. When we no longer need your
+          information, we will securely delete or anonymise it.
+        </p>
+
+        <h2>7. Your Rights</h2>
+        <p>
+          You have the following rights regarding your personal information:
+        </p>
+        <ul>
+          <li>
+            <strong>Access:</strong> You have the right to request a copy of the
+            personal information we hold about you.
+          </li>
+          <li>
+            <strong>Correction:</strong> You have the right to request
+            correction of any inaccurate or incomplete information.
+          </li>
+          <li>
+            <strong>Deletion:</strong> You have the right to request deletion of
+            your personal information, subject to legal obligations.
+          </li>
+          <li>
+            <strong>Restriction:</strong> You have the right to request
+            restriction of processing in certain circumstances.
+          </li>
+          <li>
+            <strong>Portability:</strong> You have the right to request your
+            data in a structured, machine-readable format.
+          </li>
+          <li>
+            <strong>Objection:</strong> You have the right to object to
+            processing based on legitimate interests or for marketing purposes.
+          </li>
+          <li>
+            <strong>Withdraw Consent:</strong> You have the right to withdraw
+            your consent at any time where we rely on consent to process your
+            data.
+          </li>
+        </ul>
+        <p>
+          To exercise any of these rights, please contact us using the details
+          in Section 13 below.
+        </p>
+
+        <h2>8. Cookies and Tracking Technologies</h2>
+        <p>
+          We use cookies and similar tracking technologies to enhance your
+          browsing experience, analyse website traffic, and personalise content.
+          Cookies are small text files stored on your device.
+        </p>
+        <ul>
+          <li>
+            <strong>Essential Cookies:</strong> Necessary for the website to
+            function properly (e.g., session management).
+          </li>
+          <li>
+            <strong>Analytics Cookies:</strong> Help us understand how visitors
+            interact with our website (e.g., Google Analytics).
+          </li>
+          <li>
+            <strong>Preference Cookies:</strong> Remember your preferences and
+            settings.
+          </li>
+        </ul>
+        <p>
+          You can control cookie preferences through your browser settings.
+          However, disabling certain cookies may affect website functionality.
+        </p>
+
+        <h2>9. Data Security</h2>
+        <p>
+          We implement appropriate technical and organisational measures to
+          protect your personal information against unauthorised access,
+          alteration, disclosure, or destruction. These measures include:
+        </p>
+        <ul>
+          <li>Secure servers and data encryption</li>
+          <li>Regular security assessments and updates</li>
+          <li>Access controls and employee training</li>
+        </ul>
+        <p>
+          While we strive to protect your data, no method of transmission over
+          the internet is completely secure. We cannot guarantee absolute
+          security.
+        </p>
+
+        <div class="highlight-box">
+          <p>
+            <strong>Important:</strong> You are responsible for keeping any
+            passwords or access credentials secure. Please notify us immediately
+            if you suspect any unauthorised access to your account or data.
+          </p>
+        </div>
+
+        <h2>10. Third-Party Links</h2>
+        <p>
+          Our website may contain links to third-party websites, social media
+          platforms, or external services. We are not responsible for the
+          privacy practices or content of these third-party sites. We encourage
+          you to review their privacy policies before providing any personal
+          information.
+        </p>
+
+        <h2>11. Children's Privacy</h2>
+        <p>
+          Our services are not directed at children under the age of 16. We do
+          not knowingly collect personal information from children. If we become
+          aware that we have inadvertently collected such information, we will
+          take steps to delete it promptly.
+        </p>
+
+        <h2>12. Changes to This Privacy Policy</h2>
+        <p>
+          We may update this Privacy Policy from time to time to reflect changes
+          in our practices or legal requirements. Any changes will be posted on
+          this page with an updated "Last Updated" date. We encourage you to
+          review this policy periodically.
+        </p>
+
+        <h2>13. Contact Us</h2>
+        <p>
+          If you have any questions, concerns, or requests regarding this
+          Privacy Policy or our data practices, please contact us:
+        </p>
+        <ul>
+          <li>
+            <strong>Email:</strong>
+            <a
+              href="mailto:info@lajedinteriors.co.ke"
+              style="color: var(--gold-700)"
+              >info@lajedinteriors.co.ke</a
+            >
+          </li>
+          <li>
+            <strong>Phone:</strong>
+            <a href="tel:+254722601669" style="color: var(--gold-700)"
+              >+254 722 601 669</a
+            >
+          </li>
+          <li><strong>Address:</strong> 00100 Ruaka, Nairobi, Kenya</li>
+        </ul>
+
+        <a href="index.html" class="back-link"
+          ><i class="fa-solid fa-arrow-left"></i> Back to Home</a
+        >
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+      <img src="img/footer-bg.jpg" alt="" />
+      <div class="container">
+        <div class="foot-grid">
+          <div class="foot-brand">
+            <a href="index.html" class="brand">
+              <span class="brand-mark">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M20 10 L20 78 L58 78 L58 64 L36 64 L36 10 Z"
+                    fill="url(#goldGrad)"
+                  />
+                  <path d="M66 10 L82 10 L82 90 L66 90 Z" fill="#e8cd8d" />
+                </svg>
+              </span>
+              <span class="brand-text">
+                <span class="name">Lajed Interiors</span>
+                <span class="tag">Design. Create. Inspire.</span>
+              </span>
+            </a>
+            <p>
+              A premium interior design studio in Nairobi crafting refined,
+              functional and enduring spaces.
+            </p>
+            <div class="foot-socials">
+              <a href="#" aria-label="TikTok"
+                ><i class="fa-brands fa-tiktok"></i
+              ></a>
+              <a href="#" aria-label="Facebook"
+                ><i class="fa-brands fa-facebook-f"></i
+              ></a>
+              <a href="#" aria-label="Instagram"
+                ><i class="fa-brands fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="LinkedIn"
+                ><i class="fa-brands fa-linkedin-in"></i
+              ></a>
+              <a href="#" aria-label="X"
+                ><i class="fa-brands fa-x-twitter"></i
+              ></a>
+              <a href="#" aria-label="YouTube"
+                ><i class="fa-brands fa-youtube"></i
+              ></a>
+            </div>
+          </div>
+          <div class="foot-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="portfolio.html">Portfolio</a></li>
+              <li><a href="blog.html">Blog</a></li>
+            </ul>
+          </div>
+          <div class="foot-col">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><a href="terms.html">Terms and Conditions</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+              <li><a href="faqs.html">FAQs</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="foot-col contact">
+            <h4>Get In Touch</h4>
+            <p><i class="fa-solid fa-location-dot"></i> 00100 Ruaka, Nairobi</p>
+            <p><i class="fa-solid fa-phone"></i> +254 722 601 669</p>
+            <p>
+              <i class="fa-solid fa-envelope"></i> info@lajedinteriors.co.ke
+            </p>
+            <h4 style="margin-top: 1.8rem">Subscribe</h4>
+            <form class="newsletter-form">
+              <input type="email" placeholder="Your email address" required />
+              <button type="submit">
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="foot-bottom">
+          <span>Copyright Lajed Interiors. All rights reserved.</span>
+          <span
+            >Powered by
+            <a href="https://eontechsystems.com/" target="_blank"
+              >EonTech Systems</a
+            ></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- ===== FLOATING CONTACT DOCK ===== -->
+    <div class="dock" id="dock">
+      <div class="dock-items">
+        <div class="dock-item whatsapp">
+          <a href="https://wa.me/254722601669" target="_blank"
+            ><span class="ic"><i class="fa-brands fa-whatsapp"></i></span
+            ><span class="lbl">WhatsApp</span></a
+          >
+        </div>
+        <div class="dock-item call">
+          <a href="tel:+254722601669"
+            ><span class="ic"><i class="fa-solid fa-phone"></i></span
+            ><span class="lbl">Call Us</span></a
+          >
+        </div>
+        <div class="dock-item email">
+          <a href="mailto:info@lajedinteriors.co.ke"
+            ><span class="ic"><i class="fa-solid fa-envelope"></i></span
+            ><span class="lbl">Email Us</span></a
+          >
+        </div>
+      </div>
+      <button class="dock-toggle" id="dockToggle" aria-label="Contact options">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+    </div>
+
+    <a href="#" class="to-top" id="toTop" aria-label="Back to top"
+      ><i class="fa-solid fa-arrow-up"></i
+    ></a>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

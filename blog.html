@@ -1,0 +1,1521 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog · Lajed Interiors</title>
+    <meta
+      name="description"
+      content="Insights, inspiration, and stories from Lajed Interiors, design trends, project highlights, and interior tips."
+    />
+
+    <!-- Favicon -->
+    <link href="img/favicon-icon.png" rel="icon" />
+    <link href="img/favicon.ico" rel="shortcut icon" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600;700&family=Oswald:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+    />
+
+    <!-- Custom Styles (same as homepage) -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <style>
+      /* ----- Blog page specific overrides ----- */
+      .blog-hero {
+        min-height: 60vh;
+        background: var(--charcoal) url("img/blog-hero.jpg") center/cover
+          no-repeat;
+        position: relative;
+        display: flex;
+        align-items: center;
+        isolation: isolate;
+      }
+      .blog-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(15, 15, 15, 0.4) 0%,
+          rgba(15, 15, 15, 0.8) 100%
+        );
+        z-index: 0;
+      }
+      .blog-hero .container {
+        position: relative;
+        z-index: 2;
+        padding: 8rem 0 4rem;
+        color: var(--white);
+      }
+      .blog-hero h1 {
+        font-size: clamp(2.8rem, 6vw, 4.8rem);
+        color: var(--white);
+      }
+      .blog-hero p.sub {
+        max-width: 520px;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 1.1rem;
+        margin-top: 1.2rem;
+      }
+
+      /* Blog filters */
+      .blog-filters {
+        padding: 2rem 0;
+        background: var(--white);
+        border-bottom: 1px solid rgba(15, 15, 15, 0.06);
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      }
+      .blog-filters .filter-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        align-items: center;
+      }
+      .blog-filters .filter-group .label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--stone);
+        margin-right: 0.5rem;
+        font-weight: 600;
+      }
+      .blog-filters .filter-btn {
+        padding: 0.4rem 1.2rem;
+        border-radius: 30px;
+        border: 1px solid rgba(15, 15, 15, 0.1);
+        background: transparent;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-weight: 500;
+        color: var(--stone);
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+      .blog-filters .filter-btn:hover,
+      .blog-filters .filter-btn.active {
+        background: var(--gold-500);
+        color: var(--charcoal);
+        border-color: var(--gold-500);
+      }
+      .active-tag-chip {
+        display: none;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.4rem 0.5rem 0.4rem 1.1rem;
+        border-radius: 30px;
+        background: var(--charcoal);
+        color: var(--white);
+        font-size: 0.7rem;
+        letter-spacing: 0.04em;
+      }
+      .active-tag-chip.show {
+        display: inline-flex;
+      }
+      .active-tag-chip button {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.15);
+        color: var(--white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.65rem;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      .active-tag-chip button:hover {
+        background: var(--gold-500);
+        color: var(--charcoal);
+      }
+
+      /* Blog grid */
+      .blog-grid-section {
+        padding: var(--gap-lg) 0 var(--gap-xl);
+        background: var(--ivory);
+        min-height: 60vh;
+      }
+      .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+      @media (max-width: 992px) {
+        .blog-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 600px) {
+        .blog-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .blog-card {
+        background: var(--white);
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        transition: all 0.5s ease;
+        display: flex;
+        flex-direction: column;
+      }
+      .blog-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.15);
+      }
+      .blog-card .img-wrap {
+        aspect-ratio: 4/3;
+        overflow: hidden;
+        position: relative;
+        background: #eae7e1;
+        cursor: pointer;
+      }
+      .blog-card .img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s ease;
+      }
+      .blog-card:hover .img-wrap img {
+        transform: scale(1.05);
+      }
+      .blog-card .img-wrap .category-tag {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        background: var(--gold-500);
+        color: var(--charcoal);
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        padding: 0.2rem 1rem;
+        border-radius: 20px;
+        font-weight: 600;
+        z-index: 2;
+      }
+      .blog-card .content {
+        padding: 1.6rem 1.6rem 1.4rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .blog-card .content .meta {
+        display: flex;
+        gap: 1rem;
+        font-size: 0.7rem;
+        color: var(--stone);
+        margin-bottom: 0.5rem;
+        letter-spacing: 0.04em;
+      }
+      .blog-card .content .meta span i {
+        margin-right: 0.3rem;
+        color: var(--gold-500);
+      }
+      .blog-card .content h3 {
+        font-family: var(--font-display);
+        font-size: 1.3rem;
+        line-height: 1.2;
+        margin-bottom: 0.5rem;
+        cursor: pointer;
+      }
+      .blog-card .content h3:hover {
+        color: var(--gold-700);
+      }
+      .blog-card .content p.excerpt {
+        font-size: 0.9rem;
+        color: var(--stone);
+        flex: 1;
+        margin-bottom: 1rem;
+      }
+      .blog-card .content .hashtags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-top: 0.6rem;
+        margin-bottom: 0.4rem;
+        font-size: 0.65rem;
+        color: var(--stone);
+      }
+      .blog-card .content .hashtags span {
+        background: rgba(15, 15, 15, 0.05);
+        padding: 0.1rem 0.8rem;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .blog-card .content .hashtags span:hover {
+        background: var(--gold-500);
+        color: var(--charcoal);
+      }
+      .blog-card .content .bottom-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: auto;
+        border-top: 1px solid rgba(15, 15, 15, 0.04);
+        padding-top: 1rem;
+      }
+      .blog-card .content .bottom-row .engagement {
+        display: flex;
+        gap: 0.9rem;
+        font-size: 0.7rem;
+        color: var(--stone);
+      }
+      .blog-card .content .bottom-row .engagement span {
+        display: inline-flex;
+        align-items: center;
+      }
+      .blog-card .content .bottom-row .engagement span i {
+        margin-right: 0.3rem;
+        color: var(--gold-500);
+      }
+      .blog-card .content .bottom-row .like-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 0.7rem;
+        color: var(--stone);
+        display: inline-flex;
+        align-items: center;
+        padding: 0.2rem 0.3rem;
+        border-radius: 4px;
+        transition: all 0.25s ease;
+      }
+      .blog-card .content .bottom-row .like-btn:hover {
+        background: rgba(201, 161, 74, 0.1);
+      }
+      .blog-card .content .bottom-row .like-btn i {
+        margin-right: 0.3rem;
+        color: var(--gold-500);
+        transition: transform 0.25s ease;
+      }
+      .blog-card .content .bottom-row .like-btn.liked i {
+        font-weight: 900;
+        color: #c9394a;
+      }
+      .blog-card .content .bottom-row .like-btn.liked i:before {
+        content: "\f004"; /* solid heart glyph fallback */
+      }
+      .blog-card .content .bottom-row .like-btn.bump i {
+        transform: scale(1.3);
+      }
+      .blog-card .content .bottom-row .readmore {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 600;
+        color: var(--gold-700);
+        transition: 0.3s;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.4rem 0.8rem;
+        border-radius: 4px;
+      }
+      .blog-card .content .bottom-row .readmore:hover {
+        color: var(--gold-500);
+        background: rgba(201, 161, 74, 0.08);
+      }
+
+      /* No posts message */
+      .no-posts {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: var(--stone);
+        font-size: 1.1rem;
+        grid-column: 1 / -1;
+      }
+      .no-posts button {
+        margin-top: 1rem;
+        display: inline-block;
+      }
+
+      /* Blog detail modal / popup */
+      .blog-popup {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: rgba(15, 15, 15, 0.85);
+        backdrop-filter: blur(8px);
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+      .blog-popup.active {
+        display: flex;
+      }
+      .blog-popup .popup-card {
+        max-width: 720px;
+        width: 100%;
+        background: var(--white);
+        border-radius: 8px;
+        overflow: hidden;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.6);
+        position: relative;
+      }
+      .blog-popup .popup-card .close-popup {
+        position: sticky;
+        top: 0;
+        right: 0;
+        float: right;
+        background: rgba(15, 15, 15, 0.8);
+        color: var(--white);
+        border: none;
+        width: 44px;
+        height: 44px;
+        font-size: 1.3rem;
+        cursor: pointer;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0 0 0 8px;
+        transition: 0.3s;
+      }
+      .blog-popup .popup-card .close-popup:hover {
+        background: var(--gold-500);
+        color: var(--charcoal);
+      }
+      .blog-popup .popup-card img {
+        width: 100%;
+        aspect-ratio: 16/9;
+        object-fit: cover;
+        background: #eae7e1;
+      }
+      .blog-popup .popup-card .popup-body {
+        padding: 2rem 2rem 2.2rem;
+      }
+      .blog-popup .popup-card .popup-body h2 {
+        font-family: var(--font-display);
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+      .blog-popup .popup-card .popup-body .popup-meta {
+        font-size: 0.8rem;
+        color: var(--stone);
+        display: flex;
+        gap: 1.2rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.2rem;
+        align-items: center;
+      }
+      .blog-popup .popup-card .popup-body .popup-meta span i {
+        color: var(--gold-500);
+        margin-right: 0.3rem;
+      }
+      .blog-popup .popup-card .popup-body .popup-like-btn {
+        border: 1px solid rgba(15, 15, 15, 0.12);
+        background: none;
+        cursor: pointer;
+        font-size: 0.78rem;
+        color: var(--stone);
+        display: inline-flex;
+        align-items: center;
+        padding: 0.4rem 0.9rem;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+      }
+      .blog-popup .popup-card .popup-body .popup-like-btn i {
+        margin-right: 0.4rem;
+        color: var(--gold-500);
+      }
+      .blog-popup .popup-card .popup-body .popup-like-btn.liked {
+        border-color: #c9394a;
+        color: #c9394a;
+      }
+      .blog-popup .popup-card .popup-body .popup-like-btn.liked i {
+        color: #c9394a;
+      }
+      .blog-popup .popup-card .popup-body p {
+        color: var(--charcoal);
+        line-height: 1.8;
+        margin-bottom: 1rem;
+      }
+      .blog-popup .popup-card .popup-body .popup-hashtags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+      .blog-popup .popup-card .popup-body .popup-hashtags span {
+        background: rgba(15, 15, 15, 0.06);
+        padding: 0.2rem 1rem;
+        border-radius: 20px;
+        font-size: 0.7rem;
+        color: var(--stone);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .blog-popup .popup-card .popup-body .popup-hashtags span:hover {
+        background: var(--gold-500);
+        color: var(--charcoal);
+      }
+
+      /* Comments */
+      .comments-section {
+        margin-top: 2rem;
+        border-top: 1px solid rgba(15, 15, 15, 0.08);
+        padding-top: 1.6rem;
+      }
+      .comments-section h4 {
+        font-family: var(--font-body);
+        font-size: 0.78rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: var(--charcoal);
+        margin-bottom: 1.1rem;
+      }
+      .comments-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 1.4rem;
+      }
+      .comments-empty {
+        font-size: 0.85rem;
+        color: var(--stone);
+        font-style: italic;
+      }
+      .comment-item {
+        background: var(--ivory);
+        padding: 0.9rem 1.1rem;
+        border-radius: 6px;
+      }
+      .comment-item .c-head {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--charcoal);
+        margin-bottom: 0.3rem;
+      }
+      .comment-item .c-head .c-date {
+        font-weight: 400;
+        color: var(--stone);
+        font-size: 0.7rem;
+      }
+      .comment-item p {
+        font-size: 0.85rem;
+        color: var(--charcoal);
+        margin: 0;
+        line-height: 1.5;
+      }
+      .comment-form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+      }
+      .comment-form input,
+      .comment-form textarea {
+        border: 1px solid rgba(15, 15, 15, 0.14);
+        border-radius: 4px;
+        padding: 0.7rem 0.9rem;
+        font-family: var(--font-body);
+        font-size: 0.85rem;
+        color: var(--charcoal);
+        resize: vertical;
+      }
+      .comment-form textarea {
+        min-height: 80px;
+      }
+      .comment-form button {
+        align-self: flex-start;
+        padding: 0.7rem 1.6rem;
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-weight: 600;
+        border-radius: 2px;
+        background: var(--gold-500);
+        color: var(--charcoal);
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .comment-form button:hover {
+        background: var(--gold-700);
+        color: var(--white);
+      }
+
+      @media (max-width: 600px) {
+        .blog-popup .popup-card .popup-body {
+          padding: 1.2rem;
+        }
+        .blog-popup .popup-card .popup-body h2 {
+          font-size: 1.4rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== TOP BAR ===== -->
+    <div class="top-bar">
+      <div class="container">
+        <div class="top-bar-inner">
+          <div class="top-bar-left">
+            <a href="mailto:info@lajedinteriors.co.ke"
+              ><i class="fas fa-envelope"></i> info@lajedinteriors.co.ke</a
+            >
+            <a href="tel:+254722601669"
+              ><i class="fas fa-phone-alt"></i> +254 722 601 669</a
+            >
+            <span
+              ><i class="fas fa-map-marker-alt"></i> 00100 Ruaka, Nairobi</span
+            >
+          </div>
+          <div class="top-bar-right">
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" aria-label="LinkedIn"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="navbar" id="navbar">
+      <div class="container">
+        <a href="index.html" class="brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#e8cd8d" />
+                  <stop offset="100%" stop-color="#9b7a2f" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M20 10 L20 78 L58 78 L58 64 L36 64 L36 10 Z"
+                fill="url(#goldGrad)"
+              />
+              <path d="M66 10 L82 10 L82 90 L66 90 Z" fill="#0f0f0f" />
+            </svg>
+          </span>
+          <span class="brand-text">
+            <span class="name">Lajed Interiors</span>
+            <span class="tag">Design. Create. Inspire.</span>
+          </span>
+        </a>
+
+        <nav>
+          <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li class="has-dd">
+              <a href="services.html"
+                >Services <i class="fa-solid fa-chevron-down"></i
+              ></a>
+              <div class="mega">
+                <a href="services-epoxy.html"
+                  ><div class="mega-title">Epoxy Flooring</div>
+                  <div class="mega-desc">
+                    Durable, seamless and glossy finishes
+                  </div></a
+                >
+                <a href="services-kitchens.html"
+                  ><div class="mega-title">Modern Kitchens</div>
+                  <div class="mega-desc">
+                    Stylish layouts made for how you cook and live
+                  </div></a
+                >
+                <a href="services-wardrobes.html"
+                  ><div class="mega-title">Wardrobes and Closets</div>
+                  <div class="mega-desc">
+                    Smart storage with elegant detailing
+                  </div></a
+                >
+                <a href="services-gypsum.html"
+                  ><div class="mega-title">Gypsum Ceiling</div>
+                  <div class="mega-desc">
+                    Modern ceiling designs with perfect finishes
+                  </div></a
+                >
+                <a href="services-spc.html"
+                  ><div class="mega-title">SPC and Laminate Flooring</div>
+                  <div class="mega-desc">
+                    Strong, stylish and easy to maintain
+                  </div></a
+                >
+                <a href="services-partitioning.html"
+                  ><div class="mega-title">Office Partitioning</div>
+                  <div class="mega-desc">
+                    Functional spaces for modern workplaces
+                  </div></a
+                >
+              </div>
+            </li>
+            <li class="has-dd">
+              <a href="portfolio.html"
+                >Portfolio <i class="fa-solid fa-chevron-down"></i
+              ></a>
+              <div class="mega portfolio-mega">
+                <a href="residential_design.html"
+                  ><div class="mega-title">Residential Interior Design</div>
+                  <div class="mega-desc">Completed residential projects</div></a
+                >
+                <a href="commercial.html"
+                  ><div class="mega-title">Commercial Interior Design</div>
+                  <div class="mega-desc">
+                    Commercial spaces we've transformed
+                  </div></a
+                >
+                <a href="hospitality.html"
+                  ><div class="mega-title">Hospitality Interior Design</div>
+                  <div class="mega-desc">Hotels, restaurants, and more</div></a
+                >
+                <a href="transformations.html"
+                  ><div class="mega-title">Transformations</div>
+                  <div class="mega-desc">Before and after renovations</div></a
+                >
+              </div>
+            </li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="blog.html" class="active">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-cta">
+          <a href="tel:+254722601669" class="btn btn-outline">Call Now</a>
+          <button
+            class="nav-toggle"
+            id="navToggle"
+            aria-label="Menu"
+            aria-expanded="false"
+            aria-controls="navLinks"
+          >
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== BLOG HERO ===== -->
+    <section class="blog-hero">
+      <div class="container">
+        <span class="eyebrow" style="color: var(--gold-300)"
+          >Insights and Stories</span
+        >
+        <h1>
+          Our <span class="accent" style="color: var(--gold-300)">Blog</span>
+        </h1>
+        <p class="sub">
+          Design inspiration, project highlights, and thoughtful perspectives
+          from the Lajed Interiors team.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== FILTERS ===== -->
+    <section class="blog-filters">
+      <div class="container">
+        <div class="filter-group">
+          <span class="label">Categories</span>
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="residential">
+            Residential
+          </button>
+          <button class="filter-btn" data-filter="commercial">
+            Commercial
+          </button>
+          <button class="filter-btn" data-filter="hospitality">
+            Hospitality
+          </button>
+          <button class="filter-btn" data-filter="tips">Design Tips</button>
+          <button class="filter-btn" data-filter="transformations">
+            Transformations
+          </button>
+          <span class="active-tag-chip" id="activeTagChip">
+            <span id="activeTagLabel"></span>
+            <button id="clearTagBtn" aria-label="Clear hashtag filter">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== BLOG GRID ===== -->
+    <section class="blog-grid-section">
+      <div class="container">
+        <div class="blog-grid" id="blogGrid">
+          <!-- Blog posts are injected by JS -->
+          <div class="no-posts" style="display: none">
+            No posts found for this filter.
+            <div>
+              <button class="btn btn-outline on-light" id="resetFilterBtn">
+                Show All Posts
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== BLOG POPUP ===== -->
+    <div class="blog-popup" id="blogPopup">
+      <div class="popup-card">
+        <button class="close-popup" id="closePopup">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <img src="" alt="" id="popupImage" />
+        <div class="popup-body">
+          <h2 id="popupTitle"></h2>
+          <div class="popup-meta" id="popupMeta"></div>
+          <div id="popupContent"></div>
+          <div class="popup-hashtags" id="popupHashtags"></div>
+
+          <div class="comments-section">
+            <h4 id="commentsHeading">Comments</h4>
+            <div class="comments-list" id="commentsList"></div>
+            <form class="comment-form" id="commentForm">
+              <input
+                type="text"
+                id="commentName"
+                placeholder="Your name"
+                maxlength="60"
+                required
+              />
+              <textarea
+                id="commentText"
+                placeholder="Share your thoughts on this post"
+                maxlength="400"
+                required
+              ></textarea>
+              <button type="submit">Post Comment</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+      <img src="img/footer-bg.jpg" alt="" />
+      <div class="container">
+        <div class="foot-grid">
+          <div class="foot-brand">
+            <a href="index.html" class="brand">
+              <span class="brand-mark">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M20 10 L20 78 L58 78 L58 64 L36 64 L36 10 Z"
+                    fill="url(#goldGrad)"
+                  />
+                  <path d="M66 10 L82 10 L82 90 L66 90 Z" fill="#e8cd8d" />
+                </svg>
+              </span>
+              <span class="brand-text">
+                <span class="name">Lajed Interiors</span>
+                <span class="tag">Design. Create. Inspire.</span>
+              </span>
+            </a>
+            <p>
+              A premium interior design studio in Nairobi crafting refined,
+              functional and enduring spaces.
+            </p>
+            <div class="foot-socials">
+              <a href="#" aria-label="TikTok"
+                ><i class="fa-brands fa-tiktok"></i
+              ></a>
+              <a href="#" aria-label="Facebook"
+                ><i class="fa-brands fa-facebook-f"></i
+              ></a>
+              <a href="#" aria-label="Instagram"
+                ><i class="fa-brands fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="LinkedIn"
+                ><i class="fa-brands fa-linkedin-in"></i
+              ></a>
+              <a href="#" aria-label="X"
+                ><i class="fa-brands fa-x-twitter"></i
+              ></a>
+              <a href="#" aria-label="YouTube"
+                ><i class="fa-brands fa-youtube"></i
+              ></a>
+            </div>
+          </div>
+          <div class="foot-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="portfolio.html">Portfolio</a></li>
+              <li><a href="blog.html">Blog</a></li>
+            </ul>
+          </div>
+          <div class="foot-col">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><a href="terms.html">Terms and Conditions</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+              <li><a href="faqs.html">FAQs</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="foot-col contact">
+            <h4>Get In Touch</h4>
+            <p><i class="fa-solid fa-location-dot"></i> 00100 Ruaka, Nairobi</p>
+            <p><i class="fa-solid fa-phone"></i> +254 722 601 669</p>
+            <p>
+              <i class="fa-solid fa-envelope"></i> info@lajedinteriors.co.ke
+            </p>
+            <h4 style="margin-top: 1.8rem">Subscribe</h4>
+            <form class="newsletter-form">
+              <input type="email" placeholder="Your email address" required />
+              <button type="submit">
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="foot-bottom">
+          <span>Copyright Lajed Interiors. All rights reserved.</span>
+          <span
+            >Powered by
+            <a href="https://eontechsystems.com/" target="_blank"
+              >EonTech Systems</a
+            ></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- ===== FLOATING CONTACT DOCK ===== -->
+    <div class="dock" id="dock">
+      <div class="dock-items">
+        <div class="dock-item whatsapp">
+          <a href="https://wa.me/254722601669" target="_blank"
+            ><span class="ic"><i class="fa-brands fa-whatsapp"></i></span
+            ><span class="lbl">WhatsApp</span></a
+          >
+        </div>
+        <div class="dock-item call">
+          <a href="tel:+254722601669"
+            ><span class="ic"><i class="fa-solid fa-phone"></i></span
+            ><span class="lbl">Call Us</span></a
+          >
+        </div>
+        <div class="dock-item email">
+          <a href="mailto:info@lajedinteriors.co.ke"
+            ><span class="ic"><i class="fa-solid fa-envelope"></i></span
+            ><span class="lbl">Email Us</span></a
+          >
+        </div>
+      </div>
+      <button class="dock-toggle" id="dockToggle" aria-label="Contact options">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+    </div>
+
+    <a href="#" class="to-top" id="toTop" aria-label="Back to top"
+      ><i class="fa-solid fa-arrow-up"></i
+    ></a>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Blog data and logic, self-contained -->
+    <script>
+      (function () {
+        "use strict";
+
+        // ---------- Base post data ----------
+        var basePosts = [
+          {
+            id: 1,
+            title: "Designing a Modern Minimalist Living Room",
+            excerpt:
+              "Clean lines, neutral tones, and purposeful furniture create a calming living space that feels spacious and inviting.",
+            category: "residential",
+            image: "img/blog-1.jpg",
+            baseLikes: 42,
+            baseViews: 287,
+            date: "Apr 12, 2026",
+            hashtags: ["#minimalist", "#livingroom", "#interiordesign"],
+            content:
+              "Minimalism is about more than just white walls, it is a philosophy of living with intention. In this project we focused on natural light, textured fabrics, and a curated furniture selection that makes the room feel both airy and warm. The result is a space that encourages relaxation and connection.",
+          },
+          {
+            id: 2,
+            title: "5 Commercial Design Trends for 2026",
+            excerpt:
+              "From biophilic elements to flexible workspaces, these trends are shaping the future of commercial interiors.",
+            category: "commercial",
+            image: "img/blog-2.jpg",
+            baseLikes: 58,
+            baseViews: 412,
+            date: "Apr 5, 2026",
+            hashtags: ["#commercialdesign", "#officetrends", "#workspace"],
+            content:
+              "Commercial design is evolving rapidly. We are seeing a shift towards more human centric workspaces that prioritise wellbeing and collaboration. In this post we explore five key trends that are redefining offices, retail spaces, and hospitality venues in 2026.",
+          },
+          {
+            id: 3,
+            title: "Hospitality Design, Creating Memorable Guest Experiences",
+            excerpt:
+              "Every detail, from lighting to layout, shapes how guests feel. Learn how we design for impact.",
+            category: "hospitality",
+            image: "img/blog-3.jpg",
+            baseLikes: 35,
+            baseViews: 203,
+            date: "Mar 28, 2026",
+            hashtags: ["#hospitality", "#hoteldesign", "#guestexperience"],
+            content:
+              "Hospitality design is an art of storytelling. In this post we break down how we approach hotel and restaurant projects, from the first sketch to the final installation, ensuring every element contributes to a cohesive, memorable experience for guests.",
+          },
+          {
+            id: 4,
+            title: "Before and After, A Kitchen Transformation",
+            excerpt:
+              "See how we turned a dated, cramped kitchen into a bright, functional heart of the home.",
+            category: "transformations",
+            image: "img/blog-4.jpg",
+            baseLikes: 67,
+            baseViews: 534,
+            date: "Mar 20, 2026",
+            hashtags: ["#kitchendesign", "#beforeandafter", "#transformation"],
+            content:
+              "This kitchen renovation is a perfect example of how thoughtful design can completely change the way a home functions. We opened the layout, added custom cabinetry, and introduced a warm, earthy palette that now makes the kitchen the most used room in the house.",
+          },
+          {
+            id: 5,
+            title: "The Art of Space Planning in Small Apartments",
+            excerpt:
+              "Clever spatial strategies can make even compact apartments feel open and functional.",
+            category: "tips",
+            image: "img/blog-5.jpg",
+            baseLikes: 29,
+            baseViews: 178,
+            date: "Mar 12, 2026",
+            hashtags: ["#smallspaces", "#apartmentdesign", "#spaceplanning"],
+            content:
+              "Living in a smaller home does not mean compromising on style or comfort. We share our top strategies for maximising space, from multi functional furniture to clever storage solutions that keep clutter at bay.",
+          },
+          {
+            id: 6,
+            title: "Why Epoxy Flooring is a Smart Choice for Offices",
+            excerpt:
+              "Durable, hygienic, and visually striking, epoxy flooring is transforming commercial workspaces.",
+            category: "commercial",
+            image: "img/blog-6.jpg",
+            baseLikes: 44,
+            baseViews: 312,
+            date: "Mar 5, 2026",
+            hashtags: [
+              "#epoxyflooring",
+              "#officeflooring",
+              "#commercialinteriors",
+            ],
+            content:
+              "Epoxy flooring is becoming a go to solution for modern offices. Its seamless finish, easy maintenance, and design versatility make it ideal for high traffic environments. We explore the benefits and showcase a few recent installations.",
+          },
+        ];
+
+        // ---------- Persisted engagement state ----------
+        // Likes, views and comments genuinely change as you use the page and
+        // are remembered on this device between visits (stored locally in
+        // the browser, nothing is sent anywhere).
+        var STORAGE_KEY = "lajed_blog_engagement_v1";
+
+        function loadState() {
+          try {
+            var raw = window.localStorage.getItem(STORAGE_KEY);
+            return raw ? JSON.parse(raw) : {};
+          } catch (err) {
+            return {};
+          }
+        }
+        function saveState(state) {
+          try {
+            window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+          } catch (err) {
+            /* ignore quota or privacy-mode errors, state just will not persist */
+          }
+        }
+
+        var engagement = loadState();
+
+        function getPostState(id) {
+          if (!engagement[id]) {
+            engagement[id] = {
+              liked: false,
+              extraLikes: 0,
+              views: 0,
+              comments: [],
+            };
+          }
+          return engagement[id];
+        }
+
+        function getPost(id) {
+          for (var i = 0; i < basePosts.length; i++) {
+            if (basePosts[i].id === id) return basePosts[i];
+          }
+          return null;
+        }
+
+        function displayLikes(post) {
+          var st = getPostState(post.id);
+          return post.baseLikes + st.extraLikes + (st.liked ? 1 : 0);
+        }
+        function displayViews(post) {
+          var st = getPostState(post.id);
+          return post.baseViews + st.views;
+        }
+        function displayCommentsCount(post) {
+          var st = getPostState(post.id);
+          return st.comments.length;
+        }
+
+        // ---------- DOM refs ----------
+        var grid = document.getElementById("blogGrid");
+        var noPostsMsg = grid ? grid.querySelector(".no-posts") : null;
+        var popup = document.getElementById("blogPopup");
+        var closePopupBtn = document.getElementById("closePopup");
+        var activeTagChip = document.getElementById("activeTagChip");
+        var activeTagLabel = document.getElementById("activeTagLabel");
+        var clearTagBtn = document.getElementById("clearTagBtn");
+        var resetFilterBtn = document.getElementById("resetFilterBtn");
+        var filterBtns = document.querySelectorAll(".filter-btn");
+
+        var currentCategory = "all";
+        var currentTag = null; // e.g. "#minimalist"
+
+        function currentPostId() {
+          return popup
+            ? parseInt(popup.getAttribute("data-open-id"), 10)
+            : null;
+        }
+
+        // ---------- Rendering the grid ----------
+        function getFilteredPosts() {
+          return basePosts.filter(function (p) {
+            var matchesCategory =
+              currentCategory === "all" || p.category === currentCategory;
+            var matchesTag =
+              !currentTag || p.hashtags.indexOf(currentTag) !== -1;
+            return matchesCategory && matchesTag;
+          });
+        }
+
+        function renderGrid() {
+          if (!grid) return;
+          var filtered = getFilteredPosts();
+
+          var children = grid.children;
+          for (var i = children.length - 1; i >= 0; i--) {
+            if (
+              children[i].classList &&
+              children[i].classList.contains("no-posts")
+            )
+              continue;
+            grid.removeChild(children[i]);
+          }
+
+          if (filtered.length === 0) {
+            if (noPostsMsg) noPostsMsg.style.display = "block";
+            return;
+          }
+          if (noPostsMsg) noPostsMsg.style.display = "none";
+
+          filtered.forEach(function (post, index) {
+            var card = buildCard(post, index);
+            grid.appendChild(card);
+          });
+
+          setTimeout(function () {
+            grid.querySelectorAll(".reveal").forEach(function (el, idx) {
+              setTimeout(
+                function () {
+                  el.classList.add("in");
+                },
+                50 + idx * 80,
+              );
+            });
+          }, 60);
+        }
+
+        function buildCard(post, index) {
+          var st = getPostState(post.id);
+          var card = document.createElement("div");
+          card.className = "blog-card reveal";
+          card.classList.add("reveal-delay-" + ((index % 4) + 1));
+          card.dataset.category = post.category;
+          card.dataset.id = post.id;
+
+          var hashtagsHtml = post.hashtags
+            .map(function (h) {
+              return '<span data-tag="' + h + '">' + h + "</span>";
+            })
+            .join("");
+
+          card.innerHTML =
+            '<div class="img-wrap" data-open="' +
+            post.id +
+            '">' +
+            '<img src="' +
+            post.image +
+            '" alt="' +
+            post.title +
+            '" loading="lazy" onerror="this.style.display=\'none\'" />' +
+            '<span class="category-tag">' +
+            post.category +
+            "</span>" +
+            "</div>" +
+            '<div class="content">' +
+            '<div class="meta">' +
+            '<span><i class="fa-regular fa-calendar"></i>' +
+            post.date +
+            "</span>" +
+            '<span><i class="fa-regular fa-clock"></i>4 min read</span>' +
+            "</div>" +
+            '<h3 data-open="' +
+            post.id +
+            '">' +
+            post.title +
+            "</h3>" +
+            '<p class="excerpt">' +
+            post.excerpt +
+            "</p>" +
+            '<div class="hashtags">' +
+            hashtagsHtml +
+            "</div>" +
+            '<div class="bottom-row">' +
+            '<div class="engagement">' +
+            '<button class="like-btn' +
+            (st.liked ? " liked" : "") +
+            '" data-like="' +
+            post.id +
+            '"><i class="fa-regular fa-heart"></i><span class="like-count">' +
+            displayLikes(post) +
+            "</span></button>" +
+            '<span><i class="fa-regular fa-eye"></i>' +
+            '<span class="view-count">' +
+            displayViews(post) +
+            "</span></span>" +
+            '<span><i class="fa-regular fa-comment"></i>' +
+            '<span class="comment-count">' +
+            displayCommentsCount(post) +
+            "</span></span>" +
+            "</div>" +
+            '<button class="readmore" data-open="' +
+            post.id +
+            '">Read More</button>' +
+            "</div>" +
+            "</div>";
+
+          return card;
+        }
+
+        // ---------- Grid interactions (event delegation) ----------
+        if (grid) {
+          grid.addEventListener("click", function (e) {
+            var likeBtn = e.target.closest("[data-like]");
+            if (likeBtn) {
+              e.stopPropagation();
+              toggleLike(
+                parseInt(likeBtn.getAttribute("data-like"), 10),
+                likeBtn,
+              );
+              return;
+            }
+            var tagEl = e.target.closest("[data-tag]");
+            if (tagEl) {
+              e.stopPropagation();
+              applyTagFilter(tagEl.getAttribute("data-tag"));
+              return;
+            }
+            var opener = e.target.closest("[data-open]");
+            if (opener) {
+              var id = parseInt(opener.getAttribute("data-open"), 10);
+              var post = getPost(id);
+              if (post) openPopup(post);
+            }
+          });
+        }
+
+        function toggleLike(id, btnEl) {
+          var st = getPostState(id);
+          st.liked = !st.liked;
+          saveState(engagement);
+
+          var post = getPost(id);
+          var count = displayLikes(post);
+
+          // Update every matching like control on the page (card + popup)
+          document
+            .querySelectorAll('[data-like="' + id + '"]')
+            .forEach(function (el) {
+              el.classList.toggle("liked", st.liked);
+              el.classList.add("bump");
+              setTimeout(function () {
+                el.classList.remove("bump");
+              }, 260);
+              var countEl = el.querySelector(".like-count");
+              if (countEl) countEl.textContent = count;
+            });
+          var popupLikeCount = document.getElementById("popupLikeCount");
+          if (popupLikeCount) popupLikeCount.textContent = count;
+        }
+
+        // ---------- Hashtag filter chip ----------
+        function applyTagFilter(tag) {
+          currentTag = tag;
+          if (activeTagChip && activeTagLabel) {
+            activeTagLabel.textContent = tag;
+            activeTagChip.classList.add("show");
+          }
+          renderGrid();
+        }
+        function clearTagFilter() {
+          currentTag = null;
+          if (activeTagChip) activeTagChip.classList.remove("show");
+          renderGrid();
+        }
+        if (clearTagBtn) clearTagBtn.addEventListener("click", clearTagFilter);
+        if (resetFilterBtn) {
+          resetFilterBtn.addEventListener("click", function () {
+            currentCategory = "all";
+            currentTag = null;
+            if (activeTagChip) activeTagChip.classList.remove("show");
+            filterBtns.forEach(function (b) {
+              b.classList.toggle(
+                "active",
+                b.getAttribute("data-filter") === "all",
+              );
+            });
+            renderGrid();
+          });
+        }
+
+        // ---------- Category filter buttons ----------
+        filterBtns.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            filterBtns.forEach(function (b) {
+              b.classList.remove("active");
+            });
+            this.classList.add("active");
+            currentCategory = this.getAttribute("data-filter");
+            renderGrid();
+          });
+        });
+
+        // ---------- Popup ----------
+        function openPopup(post) {
+          if (!post) return;
+          var st = getPostState(post.id);
+
+          // Simulated but working view counter: each open genuinely
+          // increments and persists the view count for that post.
+          st.views += 1;
+          saveState(engagement);
+          var cardViewEl = document.querySelector(
+            '.blog-card[data-id="' + post.id + '"] .view-count',
+          );
+          if (cardViewEl) cardViewEl.textContent = displayViews(post);
+
+          popup.setAttribute("data-open-id", post.id);
+
+          var popupImage = document.getElementById("popupImage");
+          var popupTitle = document.getElementById("popupTitle");
+          var popupMeta = document.getElementById("popupMeta");
+          var popupContent = document.getElementById("popupContent");
+          var popupHashtags = document.getElementById("popupHashtags");
+
+          if (popupImage) {
+            popupImage.src = post.image;
+            popupImage.alt = post.title;
+          }
+          if (popupTitle) popupTitle.textContent = post.title;
+          if (popupMeta) {
+            popupMeta.innerHTML =
+              '<span><i class="fa-regular fa-calendar"></i>' +
+              post.date +
+              "</span>" +
+              '<button class="popup-like-btn' +
+              (st.liked ? " liked" : "") +
+              '" data-like="' +
+              post.id +
+              '"><i class="fa-regular fa-heart"></i>' +
+              '<span class="like-count" id="popupLikeCount">' +
+              displayLikes(post) +
+              "</span> likes</button>" +
+              '<span><i class="fa-regular fa-eye"></i>' +
+              displayViews(post) +
+              " views</span>";
+          }
+          if (popupContent) {
+            popupContent.innerHTML =
+              "<p>" +
+              post.content +
+              "</p>" +
+              '<p style="margin-top:0.8rem; color:var(--stone);">' +
+              post.excerpt +
+              "</p>";
+          }
+          if (popupHashtags) {
+            popupHashtags.innerHTML = post.hashtags
+              .map(function (h) {
+                return '<span data-tag="' + h + '">' + h + "</span>";
+              })
+              .join("");
+          }
+
+          renderComments(post);
+
+          if (popup) popup.classList.add("active");
+          document.body.style.overflow = "hidden";
+        }
+
+        function closePopupFn() {
+          if (popup) popup.classList.remove("active");
+          document.body.style.overflow = "";
+        }
+        if (closePopupBtn)
+          closePopupBtn.addEventListener("click", closePopupFn);
+        if (popup) {
+          popup.addEventListener("click", function (e) {
+            if (e.target === popup) closePopupFn();
+
+            var likeBtn = e.target.closest("[data-like]");
+            if (likeBtn) {
+              toggleLike(
+                parseInt(likeBtn.getAttribute("data-like"), 10),
+                likeBtn,
+              );
+              return;
+            }
+            var tagEl = e.target.closest("[data-tag]");
+            if (tagEl) {
+              closePopupFn();
+              applyTagFilter(tagEl.getAttribute("data-tag"));
+            }
+          });
+        }
+        document.addEventListener("keydown", function (e) {
+          if (
+            e.key === "Escape" &&
+            popup &&
+            popup.classList.contains("active")
+          ) {
+            closePopupFn();
+          }
+        });
+
+        // ---------- Comments ----------
+        function renderComments(post) {
+          var st = getPostState(post.id);
+          var heading = document.getElementById("commentsHeading");
+          var list = document.getElementById("commentsList");
+          if (heading) {
+            heading.textContent = "Comments (" + st.comments.length + ")";
+          }
+          if (!list) return;
+
+          if (st.comments.length === 0) {
+            list.innerHTML =
+              '<p class="comments-empty">Be the first to share your thoughts on this post.</p>';
+            return;
+          }
+          list.innerHTML = st.comments
+            .map(function (c) {
+              return (
+                '<div class="comment-item"><div class="c-head"><span>' +
+                escapeHtml(c.name) +
+                '</span><span class="c-date">' +
+                c.date +
+                "</span></div><p>" +
+                escapeHtml(c.text) +
+                "</p></div>"
+              );
+            })
+            .join("");
+        }
+
+        function escapeHtml(str) {
+          var div = document.createElement("div");
+          div.textContent = str;
+          return div.innerHTML;
+        }
+
+        var commentForm = document.getElementById("commentForm");
+        if (commentForm) {
+          commentForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            var id = currentPostId();
+            var post = getPost(id);
+            if (!post) return;
+
+            var nameInput = document.getElementById("commentName");
+            var textInput = document.getElementById("commentText");
+            var name = (nameInput.value || "Guest").trim();
+            var text = (textInput.value || "").trim();
+            if (!text) return;
+
+            var st = getPostState(id);
+            st.comments.push({
+              name: name || "Guest",
+              text: text,
+              date: new Date().toLocaleDateString("en-GB", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              }),
+            });
+            saveState(engagement);
+
+            renderComments(post);
+            textInput.value = "";
+
+            var cardCommentEl = document.querySelector(
+              '.blog-card[data-id="' + id + '"] .comment-count',
+            );
+            if (cardCommentEl)
+              cardCommentEl.textContent = displayCommentsCount(post);
+          });
+        }
+
+        // ---------- Initial render ----------
+        renderGrid();
+      })();
+    </script>
+  </body>
+</html>

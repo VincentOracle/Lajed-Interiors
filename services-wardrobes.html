@@ -1,0 +1,860 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wardrobes & Closets · Lajed Interiors</title>
+    <meta
+      name="description"
+      content="Smart storage with elegant detailing — custom wardrobes and closets designed to organise your life beautifully."
+    />
+
+    <!-- Favicon -->
+    <link href="img/favicon-icon.png" rel="icon" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600;700&family=Oswald:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+    />
+
+    <!-- Owl Carousel / Lightbox -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
+
+    <!-- Custom Styles (same as homepage) -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <style>
+      /* ----- Service page specific overrides (wardrobes) ----- */
+      .service-hero {
+        min-height: 80vh;
+        background: var(--charcoal) url("img/wardrobe-hero.jpg") center/cover
+          no-repeat;
+        position: relative;
+        display: flex;
+        align-items: center;
+        isolation: isolate;
+      }
+      .service-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(15, 15, 15, 0.4) 0%,
+          rgba(15, 15, 15, 0.8) 100%
+        );
+        z-index: 0;
+      }
+      .service-hero .container {
+        position: relative;
+        z-index: 2;
+        padding: 8rem 0 4rem;
+        color: var(--white);
+      }
+      .service-hero h1 {
+        font-size: clamp(2.8rem, 6vw, 4.8rem);
+        color: var(--white);
+        max-width: 14ch;
+        line-height: 1.05;
+      }
+      .service-hero h1 .accent {
+        color: var(--gold-300);
+        font-style: italic;
+      }
+      .service-hero p.sub {
+        max-width: 520px;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 1.1rem;
+        margin-top: 1.2rem;
+      }
+      .service-hero .hero-actions {
+        margin-top: 2.2rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .service-hero .badge-urgency {
+        margin-top: 1.6rem;
+      }
+
+      /* Transformation philosophy */
+      .philosophy {
+        padding: var(--gap-xl) 0;
+        background: var(--white);
+      }
+      .philosophy-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+      .philosophy-grid .image {
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.2);
+      }
+      .philosophy-grid .image img {
+        width: 100%;
+        aspect-ratio: 4/3;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.8s ease;
+      }
+      .philosophy-grid .image:hover img {
+        transform: scale(1.03);
+      }
+      .philosophy-grid .text h2 {
+        font-size: clamp(2rem, 3.8vw, 3rem);
+        line-height: 1.1;
+        margin-top: 0.5rem;
+      }
+      .philosophy-grid .text p {
+        color: var(--stone);
+        margin-top: 1.2rem;
+        font-size: 1rem;
+        max-width: 520px;
+      }
+      @media (max-width: 992px) {
+        .philosophy-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+      }
+
+      /* Features grid */
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.8rem;
+        margin-top: 2rem;
+      }
+      .feature-card {
+        background: var(--white);
+        padding: 2rem 1.4rem 1.6rem;
+        border-radius: 4px;
+        text-align: center;
+        border: 1px solid rgba(15, 15, 15, 0.06);
+        transition: all 0.5s ease;
+      }
+      .feature-card:hover {
+        transform: translateY(-6px);
+        border-color: var(--gold-500);
+        box-shadow: 0 20px 40px -20px rgba(201, 161, 74, 0.25);
+      }
+      .feature-card .icon {
+        font-size: 2.2rem;
+        color: var(--gold-500);
+        margin-bottom: 0.8rem;
+      }
+      .feature-card h4 {
+        font-family: var(--font-body);
+        font-weight: 600;
+        font-size: 0.95rem;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+      .feature-card p {
+        font-size: 0.85rem;
+        color: var(--stone);
+        margin-top: 0.4rem;
+      }
+      @media (max-width: 992px) {
+        .features-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 600px) {
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Gallery */
+      .wardrobe-gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.2rem;
+        margin-top: 2rem;
+      }
+      .wardrobe-gallery .g-item {
+        border-radius: 4px;
+        overflow: hidden;
+        position: relative;
+        aspect-ratio: 4/3;
+      }
+      .wardrobe-gallery .g-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.7s ease;
+      }
+      .wardrobe-gallery .g-item:hover img {
+        transform: scale(1.06);
+      }
+      .wardrobe-gallery .g-item .overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          0deg,
+          rgba(15, 15, 15, 0.5) 0%,
+          transparent 60%
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        display: flex;
+        align-items: flex-end;
+        padding: 1.2rem;
+        color: var(--white);
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+      .wardrobe-gallery .g-item:hover .overlay {
+        opacity: 1;
+      }
+      @media (max-width: 768px) {
+        .wardrobe-gallery {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 480px) {
+        .wardrobe-gallery {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Customisation */
+      .customisation {
+        background: var(--ivory);
+        padding: var(--gap-xl) 0;
+      }
+      .custom-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+        margin-top: 2rem;
+      }
+      .custom-grid .text p {
+        color: var(--stone);
+        margin-top: 1rem;
+        font-size: 1rem;
+      }
+      .custom-grid .image {
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.15);
+      }
+      .custom-grid .image img {
+        width: 100%;
+        aspect-ratio: 4/3;
+        object-fit: cover;
+        display: block;
+      }
+      @media (max-width: 992px) {
+        .custom-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+      }
+
+      /* Benefits mini grid */
+      .benefits-mini {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+      .benefit-mini {
+        text-align: center;
+        padding: 1.2rem 0.8rem;
+        border-bottom: 2px solid var(--gold-300);
+      }
+      .benefit-mini .icon {
+        font-size: 1.8rem;
+        color: var(--gold-500);
+        margin-bottom: 0.4rem;
+      }
+      .benefit-mini h5 {
+        font-family: var(--font-body);
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .benefit-mini p {
+        font-size: 0.8rem;
+        color: var(--stone);
+        margin-top: 0.2rem;
+      }
+      @media (max-width: 768px) {
+        .benefits-mini {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 480px) {
+        .benefits-mini {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* closing banner */
+      .closing-banner {
+        padding: var(--gap-xl) 0;
+        background: var(--charcoal) url("img/wardrobe-closing.jpg") center/cover
+          no-repeat;
+        position: relative;
+        text-align: center;
+        color: var(--white);
+        isolation: isolate;
+      }
+      .closing-banner::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(15, 15, 15, 0.82);
+        z-index: 0;
+      }
+      .closing-banner .container {
+        position: relative;
+        z-index: 1;
+      }
+      .closing-banner h2 {
+        font-size: clamp(2.2rem, 5vw, 3.8rem);
+        color: var(--white);
+        max-width: 16ch;
+        margin: 0 auto;
+      }
+      .closing-banner .btn {
+        margin-top: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== TOP BAR ===== -->
+    <div class="top-bar">
+      <div class="container">
+        <div class="top-bar-inner">
+          <div class="top-bar-left">
+            <a href="mailto:info@lajedinteriors.co.ke"
+              ><i class="fas fa-envelope"></i> info@lajedinteriors.co.ke</a
+            >
+            <a href="tel:+254722601669"
+              ><i class="fas fa-phone-alt"></i> +254 722 601 669</a
+            >
+            <span
+              ><i class="fas fa-map-marker-alt"></i> 00100 Ruaka, Nairobi</span
+            >
+          </div>
+          <div class="top-bar-right">
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" aria-label="LinkedIn"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="navbar" id="navbar">
+      <div class="container">
+        <a href="index.html" class="brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#e8cd8d" />
+                  <stop offset="100%" stop-color="#9b7a2f" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M20 10 L20 78 L58 78 L58 64 L36 64 L36 10 Z"
+                fill="url(#goldGrad)"
+              />
+              <path d="M66 10 L82 10 L82 90 L66 90 Z" fill="#0f0f0f" />
+            </svg>
+          </span>
+          <span class="brand-text">
+            <span class="name">Lajed Interiors</span>
+            <span class="tag">Design. Create. Inspire.</span>
+          </span>
+        </a>
+
+        <nav>
+          <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li class="has-dd">
+              <a href="services.html"
+                >Services <i class="fa-solid fa-chevron-down"></i
+              ></a>
+              <div class="mega">
+                <a href="services-epoxy.html"
+                  ><div class="mega-title">Epoxy Flooring</div>
+                  <div class="mega-desc">
+                    Durable, seamless and glossy finishes
+                  </div></a
+                >
+                <a href="services-kitchens.html"
+                  ><div class="mega-title">Modern Kitchens</div>
+                  <div class="mega-desc">
+                    Stylish layouts made for how you cook and live
+                  </div></a
+                >
+                <a href="services-wardrobes.html" class="active"
+                  ><div class="mega-title">Wardrobes and Closets</div>
+                  <div class="mega-desc">
+                    Smart storage with elegant detailing
+                  </div></a
+                >
+                <a href="services-gypsum.html"
+                  ><div class="mega-title">Gypsum Ceiling</div>
+                  <div class="mega-desc">
+                    Modern ceiling designs with perfect finishes
+                  </div></a
+                >
+                <a href="services-spc.html"
+                  ><div class="mega-title">SPC and Laminate Flooring</div>
+                  <div class="mega-desc">
+                    Strong, stylish and easy to maintain
+                  </div></a
+                >
+                <a href="services-partitioning.html"
+                  ><div class="mega-title">Office Partitioning</div>
+                  <div class="mega-desc">
+                    Functional spaces for modern workplaces
+                  </div></a
+                >
+              </div>
+            </li>
+            <li class="has-dd">
+              <a href="portfolio.html"
+                >Portfolio <i class="fa-solid fa-chevron-down"></i
+              ></a>
+              <div class="mega portfolio-mega">
+                <a href="residential_design.html"
+                  ><div class="mega-title">Residential Interior Design</div>
+                  <div class="mega-desc">Completed residential projects</div></a
+                >
+                <a href="commercial.html"
+                  ><div class="mega-title">Commercial Interior Design</div>
+                  <div class="mega-desc">
+                    Commercial spaces we've transformed
+                  </div></a
+                >
+                <a href="hospitality.html"
+                  ><div class="mega-title">Hospitality Interior Design</div>
+                  <div class="mega-desc">Hotels, restaurants, and more</div></a
+                >
+                <a href="transformations.html"
+                  ><div class="mega-title">Transformations</div>
+                  <div class="mega-desc">Before and after renovations</div></a
+                >
+              </div>
+            </li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-cta">
+          <a href="tel:+254722601669" class="btn btn-outline">Call Now</a>
+          <button
+            class="nav-toggle"
+            id="navToggle"
+            aria-label="Menu"
+            aria-expanded="false"
+            aria-controls="navLinks"
+          >
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== WARDROBES HERO ===== -->
+    <section class="service-hero">
+      <div class="container">
+        <span class="eyebrow" style="color: var(--gold-300)"
+          >Wardrobes & Closets</span
+        >
+        <h1>
+          Smart Storage with <span class="accent">Elegant Detailing</span>
+        </h1>
+        <p class="sub">
+          Every item has its place. Custom wardrobes designed to bring order,
+          beauty, and a sense of calm to your daily routine.
+        </p>
+        <div class="hero-actions">
+          <a
+            href="https://wa.me/254722601669"
+            target="_blank"
+            class="btn btn-gold"
+            ><i class="fa-brands fa-whatsapp"></i> Book a Consultation</a
+          >
+          <a href="contact.html" class="btn btn-outline">Free Site Visit</a>
+        </div>
+        <div class="badge-urgency">
+          <span class="dot"></span> Custom designs — limited slots available
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PHILOSOPHY ===== -->
+    <section class="philosophy">
+      <div class="container">
+        <div class="philosophy-grid">
+          <div class="image reveal">
+            <img
+              src="img/wardrobe-philosophy.jpg"
+              alt="Elegant wardrobe design philosophy"
+            />
+          </div>
+          <div class="text reveal reveal-delay-1">
+            <span class="eyebrow">Our Philosophy</span>
+            <h2>From Clutter to Clarity</h2>
+            <p>
+              We believe your wardrobe should be more than just a place to store
+              clothes — it should be a sanctuary of organisation and calm. Our
+              designs transform chaos into order, with every shelf, drawer, and
+              rail placed with intention.
+            </p>
+            <p style="margin-top: 0.8rem">
+              We listen to how you live, what you need, and how you move through
+              your space, then craft a storage solution that feels effortlessly
+              yours.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FEATURES ===== -->
+    <section class="split-section" style="background: var(--ivory)">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Signature Elements</span>
+          <h2 class="section-title">Intelligent Storage</h2>
+          <p class="section-lede">
+            Every detail considered for beauty, function, and longevity.
+          </p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card reveal">
+            <div class="icon"><i class="fa-solid fa-expand"></i></div>
+            <h4>Custom Shelving</h4>
+            <p>
+              Adjustable and tailored to your wardrobe needs, from shoes to
+              handbags.
+            </p>
+          </div>
+          <div class="feature-card reveal reveal-delay-1">
+            <div class="icon">
+              <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            </div>
+            <h4>Sliding Systems</h4>
+            <p>
+              Space-saving doors with smooth, quiet operation and premium
+              finishes.
+            </p>
+          </div>
+          <div class="feature-card reveal reveal-delay-2">
+            <div class="icon"><i class="fa-solid fa-lightbulb"></i></div>
+            <h4>Lighting Integration</h4>
+            <p>
+              Soft, warm illumination that highlights your collection and adds
+              ambiance.
+            </p>
+          </div>
+          <div class="feature-card reveal reveal-delay-3">
+            <div class="icon"><i class="fa-solid fa-ruler-combined"></i></div>
+            <h4>Space Optimisation</h4>
+            <p>
+              Maximising every inch, from walk-in wardrobes to compact alcoves.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== GALLERY ===== -->
+    <section class="split-section">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Inspiration</span>
+          <h2 class="section-title">Wardrobe Styles</h2>
+          <p class="section-lede">
+            From walk-in luxury to clever compact solutions.
+          </p>
+        </div>
+        <div class="wardrobe-gallery">
+          <div class="g-item reveal">
+            <img src="img/wardrobe-1.jpg" alt="Walk-in wardrobe" />
+            <div class="overlay">Walk-in Luxury</div>
+          </div>
+          <div class="g-item reveal reveal-delay-1">
+            <img src="img/wardrobe-2.jpg" alt="Sliding wardrobe" />
+            <div class="overlay">Sliding Wardrobe</div>
+          </div>
+          <div class="g-item reveal reveal-delay-2">
+            <img src="img/wardrobe-3.jpg" alt="Compact storage" />
+            <div class="overlay">Compact Storage</div>
+          </div>
+          <div class="g-item reveal reveal-delay-3">
+            <img src="img/wardrobe-4.jpg" alt="Built-in wardrobe" />
+            <div class="overlay">Built-in Elegance</div>
+          </div>
+          <div class="g-item reveal">
+            <img src="img/wardrobe-5.jpg" alt="Open wardrobe" />
+            <div class="overlay">Open Concept</div>
+          </div>
+          <div class="g-item reveal reveal-delay-1">
+            <img src="img/wardrobe-6.jpg" alt="Walk-through closet" />
+            <div class="overlay">Walk-through Closet</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CUSTOMISATION ===== -->
+    <section class="customisation">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Made for You</span>
+          <h2 class="section-title">Tailored to Your Life</h2>
+          <p class="section-lede">
+            Every wardrobe is designed around your daily rhythm and space
+            constraints.
+          </p>
+        </div>
+        <div class="custom-grid">
+          <div class="text reveal">
+            <p>
+              <strong>We start with a conversation.</strong> How do you get
+              dressed? What do you reach for first? What items need special
+              care? We design around your answers.
+            </p>
+            <p style="margin-top: 0.8rem">
+              From integrated jewellery drawers to dedicated shoe racks, every
+              element is customised. We work with premium materials and finishes
+              that complement your interior style, ensuring your wardrobe
+              becomes a seamless part of your home.
+            </p>
+          </div>
+          <div class="image reveal reveal-delay-1">
+            <img
+              src="img/wardrobe-custom.jpg"
+              alt="Custom wardrobe design process"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== BENEFITS MINI ===== -->
+    <section class="split-section" style="padding-top: 0">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Why Choose Us</span>
+          <h2 class="section-title">Benefits at a Glance</h2>
+        </div>
+        <div class="benefits-mini">
+          <div class="benefit-mini reveal">
+            <div class="icon"><i class="fa-solid fa-list-check"></i></div>
+            <h5>Organisation</h5>
+            <p>Effortless order, every day</p>
+          </div>
+          <div class="benefit-mini reveal reveal-delay-1">
+            <div class="icon"><i class="fa-solid fa-expand"></i></div>
+            <h5>Space Efficiency</h5>
+            <p>Maximise every square inch</p>
+          </div>
+          <div class="benefit-mini reveal reveal-delay-2">
+            <div class="icon"><i class="fa-solid fa-gem"></i></div>
+            <h5>Durability</h5>
+            <p>Built to last with premium materials</p>
+          </div>
+          <div class="benefit-mini reveal reveal-delay-3">
+            <div class="icon">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </div>
+            <h5>Aesthetics</h5>
+            <p>Elegant finishes that complement your home</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CLOSING BANNER ===== -->
+    <section class="closing-banner">
+      <div class="container">
+        <span class="eyebrow" style="color: var(--gold-300)"
+          >Transform Your Space</span
+        >
+        <h2>Redefine Your Space with Intelligent Storage</h2>
+        <a
+          href="https://wa.me/254722601669"
+          target="_blank"
+          class="btn btn-gold"
+          ><i class="fa-brands fa-whatsapp"></i> Start Your Design Journey</a
+        >
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+      <img src="img/footer-bg.jpg" alt="" />
+      <div class="container">
+        <div class="foot-grid">
+          <div class="foot-brand">
+            <a href="index.html" class="brand">
+              <span class="brand-mark">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M20 10 L20 78 L58 78 L58 64 L36 64 L36 10 Z"
+                    fill="url(#goldGrad)"
+                  />
+                  <path d="M66 10 L82 10 L82 90 L66 90 Z" fill="#e8cd8d" />
+                </svg>
+              </span>
+              <span class="brand-text">
+                <span class="name">Lajed Interiors</span>
+                <span class="tag">Design. Create. Inspire.</span>
+              </span>
+            </a>
+            <p>
+              A premium interior design studio in Nairobi crafting refined,
+              functional and enduring spaces.
+            </p>
+            <div class="foot-socials">
+              <a href="#" aria-label="TikTok"
+                ><i class="fa-brands fa-tiktok"></i
+              ></a>
+              <a href="#" aria-label="Facebook"
+                ><i class="fa-brands fa-facebook-f"></i
+              ></a>
+              <a href="#" aria-label="Instagram"
+                ><i class="fa-brands fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="LinkedIn"
+                ><i class="fa-brands fa-linkedin-in"></i
+              ></a>
+              <a href="#" aria-label="X"
+                ><i class="fa-brands fa-x-twitter"></i
+              ></a>
+              <a href="#" aria-label="YouTube"
+                ><i class="fa-brands fa-youtube"></i
+              ></a>
+            </div>
+          </div>
+          <div class="foot-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="portfolio.html">Portfolio</a></li>
+              <li><a href="blog.html">Blog</a></li>
+            </ul>
+          </div>
+          <div class="foot-col">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><a href="terms.html">Terms and Conditions</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+              <li><a href="faqs.html">FAQs</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="foot-col contact">
+            <h4>Get In Touch</h4>
+            <p><i class="fa-solid fa-location-dot"></i> 00100 Ruaka, Nairobi</p>
+            <p><i class="fa-solid fa-phone"></i> +254 722 601 669</p>
+            <p>
+              <i class="fa-solid fa-envelope"></i> info@lajedinteriors.co.ke
+            </p>
+            <h4 style="margin-top: 1.8rem">Subscribe</h4>
+            <form class="newsletter-form">
+              <input type="email" placeholder="Your email address" required />
+              <button type="submit">
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="foot-bottom">
+          <span>Copyright Lajed Interiors. All rights reserved.</span>
+          <span
+            >Powered by
+            <a href="https://eontechsystems.com/" target="_blank"
+              >EonTech Systems</a
+            ></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- ===== FLOATING CONTACT DOCK ===== -->
+    <div class="dock" id="dock">
+      <div class="dock-items">
+        <div class="dock-item whatsapp">
+          <a href="https://wa.me/254722601669" target="_blank"
+            ><span class="ic"><i class="fa-brands fa-whatsapp"></i></span
+            ><span class="lbl">WhatsApp</span></a
+          >
+        </div>
+        <div class="dock-item call">
+          <a href="tel:+254722601669"
+            ><span class="ic"><i class="fa-solid fa-phone"></i></span
+            ><span class="lbl">Call Us</span></a
+          >
+        </div>
+        <div class="dock-item email">
+          <a href="mailto:info@lajedinteriors.co.ke"
+            ><span class="ic"><i class="fa-solid fa-envelope"></i></span
+            ><span class="lbl">Email Us</span></a
+          >
+        </div>
+      </div>
+      <button class="dock-toggle" id="dockToggle" aria-label="Contact options">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+    </div>
+
+    <a href="#" class="to-top" id="toTop" aria-label="Back to top"
+      ><i class="fa-solid fa-arrow-up"></i
+    ></a>
+
+    <!-- Scripts (same as homepage) -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

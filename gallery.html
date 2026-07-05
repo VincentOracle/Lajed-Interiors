@@ -1,0 +1,782 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery · Lajed Interiors</title>
+    <meta
+      name="description"
+      content="Explore our portfolio of interior design projects — images and videos of completed residential, commercial, and hospitality spaces."
+    />
+
+    <!-- Favicon -->
+    <link href="img/favicon-icon.png" rel="icon" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600;700&family=Oswald:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+    />
+
+    <!-- Lightbox (for image & video) -->
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
+
+    <!-- Custom Styles (same as homepage) -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <style>
+      /* ----- Gallery page specific overrides ----- */
+      .gallery-hero {
+        min-height: 60vh;
+        background: var(--charcoal) url("img/gallery-hero.jpg") center/cover
+          no-repeat;
+        position: relative;
+        display: flex;
+        align-items: center;
+        isolation: isolate;
+      }
+      .gallery-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(15, 15, 15, 0.4) 0%,
+          rgba(15, 15, 15, 0.8) 100%
+        );
+        z-index: 0;
+      }
+      .gallery-hero .container {
+        position: relative;
+        z-index: 2;
+        padding: 8rem 0 4rem;
+        color: var(--white);
+      }
+      .gallery-hero h1 {
+        font-size: clamp(2.8rem, 6vw, 4.8rem);
+        color: var(--white);
+      }
+      .gallery-hero p.sub {
+        max-width: 520px;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 1.1rem;
+        margin-top: 1.2rem;
+      }
+
+      /* Gallery grid */
+      .gallery-grid-section {
+        padding: var(--gap-xl) 0;
+        background: var(--white);
+      }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.2rem;
+        margin-top: 2rem;
+      }
+      .gallery-item {
+        border-radius: 4px;
+        overflow: hidden;
+        position: relative;
+        aspect-ratio: 4/3;
+        background: var(--charcoal);
+        cursor: pointer;
+        transition: transform 0.4s ease;
+      }
+      .gallery-item:hover {
+        transform: translateY(-4px);
+      }
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s ease;
+      }
+      .gallery-item:hover img {
+        transform: scale(1.06);
+      }
+      .gallery-item .overlay-icon {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(15, 15, 15, 0.3);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        color: var(--white);
+        font-size: 2.2rem;
+      }
+      .gallery-item:hover .overlay-icon {
+        opacity: 1;
+      }
+
+      /* Video cards */
+      .gallery-item.video .play-btn {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(15, 15, 15, 0.35);
+        color: var(--white);
+        font-size: 3.2rem;
+        transition: all 0.4s ease;
+        z-index: 2;
+      }
+      .gallery-item.video:hover .play-btn {
+        background: rgba(15, 15, 15, 0.5);
+        transform: scale(1.05);
+      }
+      .gallery-item.video .play-btn i {
+        filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5));
+      }
+      .gallery-item.video video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .gallery-item.video .badge {
+        position: absolute;
+        top: 0.8rem;
+        right: 0.8rem;
+        background: rgba(201, 161, 74, 0.85);
+        color: var(--charcoal);
+        font-size: 0.6rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.2rem 1rem;
+        border-radius: 20px;
+        z-index: 3;
+        font-weight: 600;
+      }
+
+      /* Video modal (lightbox style) */
+      .video-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: rgba(15, 15, 15, 0.92);
+        backdrop-filter: blur(8px);
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+      .video-modal.active {
+        display: flex;
+      }
+      .video-modal .close-modal {
+        position: absolute;
+        top: 1.6rem;
+        right: 2rem;
+        color: var(--white);
+        font-size: 2.2rem;
+        cursor: pointer;
+        transition: 0.3s;
+        background: none;
+        border: none;
+      }
+      .video-modal .close-modal:hover {
+        transform: rotate(90deg);
+        color: var(--gold-300);
+      }
+      .video-modal video {
+        max-width: 90vw;
+        max-height: 80vh;
+        border-radius: 4px;
+        box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.8);
+        background: var(--charcoal);
+      }
+
+      /* Lightbox override for consistency */
+      .lb-outerContainer {
+        background: rgba(15, 15, 15, 0.95);
+        border-radius: 4px;
+      }
+      .lb-data .lb-details .lb-caption {
+        font-family: var(--font-body);
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      @media (max-width: 992px) {
+        .gallery-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media (max-width: 768px) {
+        .gallery-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 480px) {
+        .gallery-grid {
+          grid-template-columns: 1fr;
+        }
+        .video-modal video {
+          max-width: 95vw;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== TOP BAR ===== -->
+    <div class="top-bar">
+      <div class="container">
+        <div class="top-bar-inner">
+          <div class="top-bar-left">
+            <a href="mailto:info@lajedinteriors.co.ke"
+              ><i class="fas fa-envelope"></i> info@lajedinteriors.co.ke</a
+            >
+            <a href="tel:+254722601669"
+              ><i class="fas fa-phone-alt"></i> +254 722 601 669</a
+            >
+            <span
+              ><i class="fas fa-map-marker-alt"></i> 00100 Ruaka, Nairobi</span
+            >
+          </div>
+          <div class="top-bar-right">
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" aria-label="LinkedIn"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="navbar" id="navbar">
+      <div class="container">
+        <a href="index.html" class="brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#e8cd8d" />
+                  <stop offset="100%" stop-color="#9b7a2f" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M20 10 L20 78 L58 78 L58 64 L36 64 L36 10 Z"
+                fill="url(#goldGrad)"
+              />
+              <path d="M66 10 L82 10 L82 90 L66 90 Z" fill="#0f0f0f" />
+            </svg>
+          </span>
+          <span class="brand-text">
+            <span class="name">Lajed Interiors</span>
+            <span class="tag">Design. Create. Inspire.</span>
+          </span>
+        </a>
+
+        <nav>
+          <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li class="has-dd">
+              <a href="services.html"
+                >Services <i class="fa-solid fa-chevron-down"></i
+              ></a>
+              <div class="mega">
+                <a href="services-epoxy.html"
+                  ><div class="mega-title">Epoxy Flooring</div>
+                  <div class="mega-desc">
+                    Durable, seamless and glossy finishes
+                  </div></a
+                >
+                <a href="services-kitchens.html"
+                  ><div class="mega-title">Modern Kitchens</div>
+                  <div class="mega-desc">
+                    Stylish layouts made for how you cook and live
+                  </div></a
+                >
+                <a href="services-wardrobes.html"
+                  ><div class="mega-title">Wardrobes and Closets</div>
+                  <div class="mega-desc">
+                    Smart storage with elegant detailing
+                  </div></a
+                >
+                <a href="services-gypsum.html"
+                  ><div class="mega-title">Gypsum Ceiling</div>
+                  <div class="mega-desc">
+                    Modern ceiling designs with perfect finishes
+                  </div></a
+                >
+                <a href="services-spc.html"
+                  ><div class="mega-title">SPC and Laminate Flooring</div>
+                  <div class="mega-desc">
+                    Strong, stylish and easy to maintain
+                  </div></a
+                >
+                <a href="services-partitioning.html"
+                  ><div class="mega-title">Office Partitioning</div>
+                  <div class="mega-desc">
+                    Functional spaces for modern workplaces
+                  </div></a
+                >
+              </div>
+            </li>
+            <li class="has-dd">
+              <a href="portfolio.html"
+                >Portfolio <i class="fa-solid fa-chevron-down"></i
+              ></a>
+              <div class="mega portfolio-mega">
+                <a href="residential_design.html"
+                  ><div class="mega-title">Residential Interior Design</div>
+                  <div class="mega-desc">Completed residential projects</div></a
+                >
+                <a href="commercial.html"
+                  ><div class="mega-title">Commercial Interior Design</div>
+                  <div class="mega-desc">
+                    Commercial spaces we've transformed
+                  </div></a
+                >
+                <a href="hospitality.html"
+                  ><div class="mega-title">Hospitality Interior Design</div>
+                  <div class="mega-desc">Hotels, restaurants, and more</div></a
+                >
+                <a href="transformations.html"
+                  ><div class="mega-title">Transformations</div>
+                  <div class="mega-desc">Before and after renovations</div></a
+                >
+              </div>
+            </li>
+            <li><a href="gallery.html" class="active">Gallery</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-cta">
+          <a href="tel:+254722601669" class="btn btn-outline">Call Now</a>
+          <button
+            class="nav-toggle"
+            id="navToggle"
+            aria-label="Menu"
+            aria-expanded="false"
+            aria-controls="navLinks"
+          >
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== GALLERY HERO ===== -->
+    <section class="gallery-hero">
+      <div class="container">
+        <span class="eyebrow" style="color: var(--gold-300)"
+          >Visual Stories</span
+        >
+        <h1>
+          Our <span class="accent" style="color: var(--gold-300)">Gallery</span>
+        </h1>
+        <p class="sub">
+          A curated collection of completed projects — images and videos that
+          showcase our craft and attention to detail.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== GALLERY GRID ===== -->
+    <section class="gallery-grid-section">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Portfolio</span>
+          <h2 class="section-title">Images &amp; Videos</h2>
+          <p class="section-lede">
+            Click on any image to view larger. Videos play in a custom modal.
+          </p>
+        </div>
+
+        <div class="gallery-grid" id="galleryGrid">
+          <!-- Images (lightbox) -->
+          <a
+            href="img/gallery-1.jpg"
+            data-lightbox="gallery"
+            data-title="Modern Living Room"
+            class="gallery-item reveal"
+          >
+            <img
+              src="img/gallery-1.jpg"
+              alt="Modern Living Room"
+              loading="lazy"
+            />
+            <div class="overlay-icon"><i class="fa-regular fa-expand"></i></div>
+          </a>
+          <a
+            href="img/gallery-2.jpg"
+            data-lightbox="gallery"
+            data-title="Kitchen Design"
+            class="gallery-item reveal reveal-delay-1"
+          >
+            <img src="img/gallery-2.jpg" alt="Kitchen Design" loading="lazy" />
+            <div class="overlay-icon"><i class="fa-regular fa-expand"></i></div>
+          </a>
+          <a
+            href="img/gallery-3.jpg"
+            data-lightbox="gallery"
+            data-title="Bedroom Interior"
+            class="gallery-item reveal reveal-delay-2"
+          >
+            <img
+              src="img/gallery-3.jpg"
+              alt="Bedroom Interior"
+              loading="lazy"
+            />
+            <div class="overlay-icon"><i class="fa-regular fa-expand"></i></div>
+          </a>
+          <a
+            href="img/gallery-4.jpg"
+            data-lightbox="gallery"
+            data-title="Bathroom Design"
+            class="gallery-item reveal reveal-delay-3"
+          >
+            <img src="img/gallery-4.jpg" alt="Bathroom Design" loading="lazy" />
+            <div class="overlay-icon"><i class="fa-regular fa-expand"></i></div>
+          </a>
+          <a
+            href="img/gallery-5.jpg"
+            data-lightbox="gallery"
+            data-title="Office Partitioning"
+            class="gallery-item reveal"
+          >
+            <img
+              src="img/gallery-5.jpg"
+              alt="Office Partitioning"
+              loading="lazy"
+            />
+            <div class="overlay-icon"><i class="fa-regular fa-expand"></i></div>
+          </a>
+          <a
+            href="img/gallery-6.jpg"
+            data-lightbox="gallery"
+            data-title="Hospitality Lounge"
+            class="gallery-item reveal reveal-delay-1"
+          >
+            <img
+              src="img/gallery-6.jpg"
+              alt="Hospitality Lounge"
+              loading="lazy"
+            />
+            <div class="overlay-icon"><i class="fa-regular fa-expand"></i></div>
+          </a>
+          <a
+            href="img/gallery-7.jpg"
+            data-lightbox="gallery"
+            data-title="Epoxy Flooring"
+            class="gallery-item reveal reveal-delay-2"
+          >
+            <img src="img/gallery-7.jpg" alt="Epoxy Flooring" loading="lazy" />
+            <div class="overlay-icon"><i class="fa-regular fa-expand"></i></div>
+          </a>
+          <a
+            href="img/gallery-8.jpg"
+            data-lightbox="gallery"
+            data-title="Gypsum Ceiling"
+            class="gallery-item reveal reveal-delay-3"
+          >
+            <img src="img/gallery-8.jpg" alt="Gypsum Ceiling" loading="lazy" />
+            <div class="overlay-icon"><i class="fa-regular fa-expand"></i></div>
+          </a>
+
+          <!-- Video Cards Section -->
+          <div
+            class="section-head center reveal"
+            style="grid-column: 1 / -1; margin-top: 2rem"
+          >
+            <span class="eyebrow">Our Stories</span>
+            <h2 class="section-title">Watch Our Gallery</h2>
+            <p class="section-lede">
+              Click on any video to view our Success. Videos play in a custom
+              modal.
+            </p>
+          </div>
+
+          <!-- Video Card 1 -->
+          <div
+            class="gallery-item video reveal"
+            data-video="img/laged-videos/lgd_video_1.mp4"
+            data-title="Lajed Interiors Showreel"
+          >
+            <video muted loop playsinline preload="metadata">
+              <source src="img/laged-videos/lgd_video_1.mp4" type="video/mp4" />
+            </video>
+            <div class="play-btn">
+              <i class="fa-regular fa-circle-play"></i>
+            </div>
+            <span class="badge">Video</span>
+          </div>
+
+          <!-- Video Card 2 -->
+          <div
+            class="gallery-item video reveal reveal-delay-1"
+            data-video="img/laged-videos/lgd_video_2.mp4"
+            data-title="Project Walkthrough"
+          >
+            <video muted loop playsinline preload="metadata">
+              <source src="img/laged-videos/lgd_video_2.mp4" type="video/mp4" />
+            </video>
+            <div class="play-btn">
+              <i class="fa-regular fa-circle-play"></i>
+            </div>
+            <span class="badge">Video</span>
+          </div>
+
+          <!-- Video Card 3 -->
+          <div
+            class="gallery-item video reveal reveal-delay-2"
+            data-video="img/laged-videos/lgd_video_3.mp4"
+            data-title="Design Process"
+          >
+            <video muted loop playsinline preload="metadata">
+              <source src="img/laged-videos/lgd_video_3.mp4" type="video/mp4" />
+            </video>
+            <div class="play-btn">
+              <i class="fa-regular fa-circle-play"></i>
+            </div>
+            <span class="badge">Video</span>
+          </div>
+
+          <!-- Video Card 4 (additional) -->
+          <div
+            class="gallery-item video reveal reveal-delay-1"
+            data-video="img/laged-videos/lgd_video_4.mp4"
+            data-title="Client Success Story"
+          >
+            <video muted loop playsinline preload="metadata">
+              <source src="img/laged-videos/lgd_video_4.mp4" type="video/mp4" />
+            </video>
+            <div class="play-btn">
+              <i class="fa-regular fa-circle-play"></i>
+            </div>
+            <span class="badge">Video</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VIDEO MODAL ===== -->
+    <div class="video-modal" id="videoModal" role="dialog" aria-modal="true">
+      <button class="close-modal" id="closeVideoModal" aria-label="Close video">
+        <i class="fa-regular fa-xmark"></i>
+      </button>
+      <video controls autoplay playsinline id="modalVideo">
+        <source src="" type="video/mp4" />
+      </video>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+      <img src="img/footer-bg.jpg" alt="" />
+      <div class="container">
+        <div class="foot-grid">
+          <div class="foot-brand">
+            <a href="index.html" class="brand">
+              <span class="brand-mark">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M20 10 L20 78 L58 78 L58 64 L36 64 L36 10 Z"
+                    fill="url(#goldGrad)"
+                  />
+                  <path d="M66 10 L82 10 L82 90 L66 90 Z" fill="#e8cd8d" />
+                </svg>
+              </span>
+              <span class="brand-text">
+                <span class="name">Lajed Interiors</span>
+                <span class="tag">Design. Create. Inspire.</span>
+              </span>
+            </a>
+            <p>
+              A premium interior design studio in Nairobi crafting refined,
+              functional and enduring spaces.
+            </p>
+            <div class="foot-socials">
+              <a href="#" aria-label="TikTok"
+                ><i class="fa-brands fa-tiktok"></i
+              ></a>
+              <a href="#" aria-label="Facebook"
+                ><i class="fa-brands fa-facebook-f"></i
+              ></a>
+              <a href="#" aria-label="Instagram"
+                ><i class="fa-brands fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="LinkedIn"
+                ><i class="fa-brands fa-linkedin-in"></i
+              ></a>
+              <a href="#" aria-label="X"
+                ><i class="fa-brands fa-x-twitter"></i
+              ></a>
+              <a href="#" aria-label="YouTube"
+                ><i class="fa-brands fa-youtube"></i
+              ></a>
+            </div>
+          </div>
+          <div class="foot-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="portfolio.html">Portfolio</a></li>
+              <li><a href="blog.html">Blog</a></li>
+            </ul>
+          </div>
+          <div class="foot-col">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><a href="terms.html">Terms and Conditions</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+              <li><a href="faqs.html">FAQs</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="foot-col contact">
+            <h4>Get In Touch</h4>
+            <p><i class="fa-solid fa-location-dot"></i> 00100 Ruaka, Nairobi</p>
+            <p><i class="fa-solid fa-phone"></i> +254 722 601 669</p>
+            <p>
+              <i class="fa-solid fa-envelope"></i> info@lajedinteriors.co.ke
+            </p>
+            <h4 style="margin-top: 1.8rem">Subscribe</h4>
+            <form class="newsletter-form">
+              <input type="email" placeholder="Your email address" required />
+              <button type="submit">
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="foot-bottom">
+          <span>Copyright Lajed Interiors. All rights reserved.</span>
+          <span
+            >Powered by
+            <a href="https://eontechsystems.com/" target="_blank"
+              >EonTech Systems</a
+            ></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- ===== FLOATING CONTACT DOCK ===== -->
+    <div class="dock" id="dock">
+      <div class="dock-items">
+        <div class="dock-item whatsapp">
+          <a href="https://wa.me/254722601669" target="_blank"
+            ><span class="ic"><i class="fa-brands fa-whatsapp"></i></span
+            ><span class="lbl">WhatsApp</span></a
+          >
+        </div>
+        <div class="dock-item call">
+          <a href="tel:+254722601669"
+            ><span class="ic"><i class="fa-solid fa-phone"></i></span
+            ><span class="lbl">Call Us</span></a
+          >
+        </div>
+        <div class="dock-item email">
+          <a href="mailto:info@lajedinteriors.co.ke"
+            ><span class="ic"><i class="fa-solid fa-envelope"></i></span
+            ><span class="lbl">Email Us</span></a
+          >
+        </div>
+      </div>
+      <button class="dock-toggle" id="dockToggle" aria-label="Contact options">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+    </div>
+
+    <a href="#" class="to-top" id="toTop" aria-label="Back to top"
+      ><i class="fa-solid fa-arrow-up"></i
+    ></a>
+
+    <!-- Scripts (same as homepage) -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Gallery video modal logic -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const videoItems = document.querySelectorAll(".gallery-item.video");
+        const modal = document.getElementById("videoModal");
+        const modalVideo = document.getElementById("modalVideo");
+        const closeBtn = document.getElementById("closeVideoModal");
+
+        function openVideo(src) {
+          modalVideo.querySelector("source").src = src;
+          modalVideo.load();
+          modal.classList.add("active");
+          modalVideo.play();
+        }
+
+        function closeVideo() {
+          modalVideo.pause();
+          modal.classList.remove("active");
+          modalVideo.currentTime = 0;
+        }
+
+        videoItems.forEach((item) => {
+          const videoSrc = item.dataset.video;
+          if (!videoSrc) return;
+
+          // Click on the item opens the modal
+          item.addEventListener("click", function (e) {
+            e.stopPropagation();
+            openVideo(videoSrc);
+          });
+        });
+
+        // Close modal on backdrop click or close button
+        closeBtn.addEventListener("click", closeVideo);
+        modal.addEventListener("click", function (e) {
+          if (e.target === modal) closeVideo();
+        });
+
+        // Close with Escape key
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && modal.classList.contains("active")) {
+            closeVideo();
+          }
+        });
+
+        // Hover preview: play/pause video on hover
+        videoItems.forEach((item) => {
+          const video = item.querySelector("video");
+          if (!video) return;
+          item.addEventListener("mouseenter", () => {
+            video.play();
+          });
+          item.addEventListener("mouseleave", () => {
+            video.pause();
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

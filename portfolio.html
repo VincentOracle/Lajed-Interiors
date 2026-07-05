@@ -1,0 +1,1335 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio · Lajed Interiors</title>
+    <meta
+      name="description"
+      content="Explore residential, commercial, hospitality and transformation projects completed by Lajed Interiors across Nairobi and beyond."
+    />
+
+    <!-- Favicon -->
+    <link href="img/favicon-icon.png" rel="icon" />
+    <link href="img/favicon.ico" rel="shortcut icon" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600;700&family=Oswald:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+    />
+
+    <!-- Custom Styles (same as homepage) -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <style>
+      /* ----- Portfolio page specific overrides ----- */
+      .portfolio-hero {
+        min-height: 55vh;
+        background: var(--charcoal) url("img/portfolio-hero.jpg") center/cover
+          no-repeat;
+        position: relative;
+        display: flex;
+        align-items: center;
+        isolation: isolate;
+      }
+      .portfolio-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(15, 15, 15, 0.4) 0%,
+          rgba(15, 15, 15, 0.82) 100%
+        );
+        z-index: 0;
+      }
+      .portfolio-hero .container {
+        position: relative;
+        z-index: 2;
+        padding: 8rem 0 4rem;
+        color: var(--white);
+      }
+      .portfolio-hero h1 {
+        font-size: clamp(2.8rem, 6vw, 4.8rem);
+        color: var(--white);
+      }
+      .portfolio-hero p.sub {
+        max-width: 560px;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 1.1rem;
+        margin-top: 1.2rem;
+      }
+      .portfolio-hero .hero-stats {
+        display: flex;
+        gap: 2.4rem;
+        margin-top: 2.2rem;
+        flex-wrap: wrap;
+      }
+      .portfolio-hero .hero-stats div {
+        display: flex;
+        flex-direction: column;
+      }
+      .portfolio-hero .hero-stats .n {
+        font-family: var(--font-display);
+        font-size: 2.1rem;
+        color: var(--gold-300);
+        line-height: 1;
+      }
+      .portfolio-hero .hero-stats .l {
+        font-size: 0.7rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.6);
+        margin-top: 0.4rem;
+      }
+
+      /* ----- Filter bar (mega / accordion style) ----- */
+      .portfolio-filter-bar {
+        background: var(--white);
+        border-bottom: 1px solid rgba(15, 15, 15, 0.06);
+        position: sticky;
+        top: 0;
+        z-index: 60;
+      }
+      .filter-bar-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        padding: 1.3rem 0;
+      }
+      .active-filter-display {
+        display: flex;
+        align-items: baseline;
+        gap: 0.7rem;
+      }
+      .active-filter-display .label {
+        font-size: 0.68rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--stone);
+        font-weight: 600;
+      }
+      .active-filter-display .current-filter-name {
+        font-family: var(--font-display);
+        font-size: 1.4rem;
+        color: var(--charcoal);
+      }
+      .active-filter-display .current-count {
+        font-size: 0.75rem;
+        color: var(--gold-700);
+        background: rgba(201, 161, 74, 0.12);
+        padding: 0.2rem 0.7rem;
+        border-radius: 20px;
+      }
+
+      .filter-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.7rem;
+        padding: 0.8rem 1.5rem;
+        border: 1px solid rgba(15, 15, 15, 0.16);
+        border-radius: 30px;
+        background: transparent;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-weight: 600;
+        color: var(--charcoal);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .filter-toggle:hover {
+        border-color: var(--gold-500);
+        color: var(--gold-700);
+        background: rgba(201, 161, 74, 0.06);
+      }
+      .filter-toggle .chev {
+        font-size: 0.62rem;
+        transition: transform 0.35s var(--ease);
+      }
+      .filter-toggle.open .chev {
+        transform: rotate(180deg);
+      }
+
+      .filter-accordion {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition:
+          max-height 0.5s var(--ease),
+          opacity 0.4s ease;
+      }
+      .filter-accordion.open {
+        max-height: 640px;
+        opacity: 1;
+      }
+      .filter-accordion-inner {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1rem;
+        padding: 0.4rem 0 2.2rem;
+      }
+      @media (max-width: 992px) {
+        .filter-accordion-inner {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media (max-width: 600px) {
+        .filter-accordion-inner {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 420px) {
+        .filter-accordion-inner {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .filter-option {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+        padding: 1.5rem 1.3rem;
+        border: 1px solid rgba(15, 15, 15, 0.08);
+        border-radius: 6px;
+        background: var(--white);
+        text-align: left;
+        cursor: pointer;
+        transition: all 0.35s var(--ease);
+      }
+      .filter-option:hover {
+        border-color: var(--gold-500);
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px -24px rgba(201, 161, 74, 0.45);
+      }
+      .filter-option.active {
+        background: var(--charcoal);
+        border-color: var(--charcoal);
+      }
+      .filter-option .fo-icon {
+        font-size: 1.3rem;
+        color: var(--gold-700);
+      }
+      .filter-option.active .fo-icon {
+        color: var(--gold-300);
+      }
+      .filter-option .fo-title {
+        font-family: var(--font-display);
+        font-size: 1.05rem;
+        color: var(--charcoal);
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+      }
+      .filter-option.active .fo-title {
+        color: var(--white);
+      }
+      .filter-option .fo-desc {
+        font-size: 0.76rem;
+        color: var(--stone);
+        line-height: 1.4;
+      }
+      .filter-option.active .fo-desc {
+        color: rgba(255, 255, 255, 0.6);
+      }
+      .filter-option .fo-count {
+        font-size: 0.68rem;
+        color: var(--gold-700);
+        margin-top: 0.1rem;
+      }
+      .filter-option.active .fo-count {
+        color: var(--gold-300);
+      }
+
+      /* ----- Masonry grid ----- */
+      .portfolio-grid-section {
+        padding: var(--gap-lg) 0 2rem;
+        background: var(--ivory);
+      }
+      .portfolio-masonry {
+        column-count: 3;
+        column-gap: 1.6rem;
+      }
+      @media (max-width: 1100px) {
+        .portfolio-masonry {
+          column-count: 2;
+        }
+      }
+      @media (max-width: 600px) {
+        .portfolio-masonry {
+          column-count: 1;
+        }
+      }
+
+      .port-card {
+        break-inside: avoid;
+        margin-bottom: 1.6rem;
+        position: relative;
+        border-radius: 4px;
+        overflow: hidden;
+        cursor: pointer;
+        box-shadow: 0 20px 45px -30px rgba(15, 15, 15, 0.4);
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        transition:
+          opacity 0.45s var(--ease),
+          transform 0.45s var(--ease);
+      }
+      .port-card.is-hidden {
+        opacity: 0;
+        transform: scale(0.86) translateY(10px);
+        pointer-events: none;
+      }
+      .port-card .img-wrap {
+        position: relative;
+        overflow: hidden;
+        background: #eae7e1;
+      }
+      .port-card.ar-tall .img-wrap {
+        aspect-ratio: 3 / 4.3;
+      }
+      .port-card.ar-square .img-wrap {
+        aspect-ratio: 1 / 1;
+      }
+      .port-card.ar-wide .img-wrap {
+        aspect-ratio: 4 / 3;
+      }
+      .port-card.ar-portrait .img-wrap {
+        aspect-ratio: 3 / 4;
+      }
+      .port-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.9s var(--ease);
+      }
+      .port-card:hover img {
+        transform: scale(1.08);
+      }
+      .port-card .cat-pill {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        background: var(--gold-500);
+        color: var(--charcoal);
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        padding: 0.25rem 1rem;
+        border-radius: 20px;
+        font-weight: 600;
+        z-index: 2;
+      }
+      .port-card .overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          0deg,
+          rgba(10, 9, 7, 0.92) 0%,
+          rgba(10, 9, 7, 0.25) 60%,
+          rgba(10, 9, 7, 0) 100%
+        );
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 1.4rem;
+        opacity: 0;
+        transform: translateY(8px);
+        transition:
+          opacity 0.4s var(--ease),
+          transform 0.4s var(--ease);
+      }
+      .port-card:hover .overlay {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .port-card .overlay .p-title {
+        font-family: var(--font-display);
+        font-size: 1.3rem;
+        color: var(--white);
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+      }
+      .port-card .overlay .p-desc {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.75);
+        margin-top: 0.35rem;
+        line-height: 1.5;
+      }
+      .port-card .overlay .p-view {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        margin-top: 0.9rem;
+        font-size: 0.66rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--gold-300);
+        font-weight: 600;
+      }
+
+      .no-projects {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: var(--stone);
+        font-size: 1.05rem;
+      }
+
+      /* ----- Promo banners ----- */
+      .promo-inline {
+        margin: 0 0 var(--gap-lg);
+        border-radius: 8px;
+        background: linear-gradient(120deg, #171512, #201c17 60%);
+        color: var(--white);
+        padding: 2.6rem 2.6rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        flex-wrap: wrap;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(201, 161, 74, 0.25);
+      }
+      .promo-inline::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          circle at 85% 30%,
+          rgba(201, 161, 74, 0.18),
+          transparent 60%
+        );
+      }
+      .promo-inline .promo-text {
+        position: relative;
+        z-index: 1;
+        max-width: 560px;
+      }
+      .promo-inline .promo-text h3 {
+        font-size: clamp(1.5rem, 3vw, 2.1rem);
+        color: var(--white);
+        margin-top: 0.5rem;
+        text-transform: uppercase;
+      }
+      .promo-inline .promo-text p {
+        font-size: 0.92rem;
+        color: rgba(255, 255, 255, 0.68);
+        margin-top: 0.7rem;
+      }
+      .promo-inline .btn {
+        position: relative;
+        z-index: 1;
+        flex: none;
+      }
+      @media (max-width: 700px) {
+        .promo-inline {
+          padding: 2rem 1.6rem;
+        }
+      }
+
+      .promo-feature {
+        position: relative;
+        padding: calc(var(--gap-xl) + 1rem) 0;
+        text-align: center;
+        color: var(--white);
+        overflow: hidden;
+        background: linear-gradient(160deg, #171512, #0f0f0f 60%);
+      }
+      .promo-feature img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.32;
+        z-index: 0;
+      }
+      .promo-feature::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(15, 15, 15, 0.4),
+          rgba(15, 15, 15, 0.92)
+        );
+        z-index: 1;
+      }
+      .promo-feature .container {
+        position: relative;
+        z-index: 2;
+      }
+      .promo-feature h2 {
+        font-size: clamp(2rem, 5vw, 3.4rem);
+        color: var(--white);
+        max-width: 18ch;
+        margin: 1rem auto 0;
+        text-transform: uppercase;
+      }
+      .promo-feature .btn {
+        margin-top: 2.2rem;
+      }
+
+      /* ----- Detail popup (shares blog popup visual language) ----- */
+      .port-popup {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: rgba(15, 15, 15, 0.85);
+        backdrop-filter: blur(8px);
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+      .port-popup.active {
+        display: flex;
+      }
+      .port-popup .popup-card {
+        max-width: 720px;
+        width: 100%;
+        background: var(--white);
+        border-radius: 8px;
+        overflow: hidden;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.6);
+        position: relative;
+      }
+      .port-popup .close-popup {
+        position: sticky;
+        top: 0;
+        right: 0;
+        float: right;
+        background: rgba(15, 15, 15, 0.8);
+        color: var(--white);
+        border: none;
+        width: 44px;
+        height: 44px;
+        font-size: 1.3rem;
+        cursor: pointer;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0 0 0 8px;
+        transition: 0.3s;
+      }
+      .port-popup .close-popup:hover {
+        background: var(--gold-500);
+        color: var(--charcoal);
+      }
+      .port-popup img.main-img {
+        width: 100%;
+        aspect-ratio: 16/9;
+        object-fit: cover;
+        background: #eae7e1;
+      }
+      .port-popup .popup-body {
+        padding: 2rem 2rem 2.2rem;
+      }
+      .port-popup .popup-body .p-cat {
+        display: inline-block;
+        background: var(--gold-500);
+        color: var(--charcoal);
+        font-size: 0.62rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        padding: 0.25rem 1rem;
+        border-radius: 20px;
+        font-weight: 600;
+        margin-bottom: 0.9rem;
+      }
+      .port-popup .popup-body h2 {
+        font-family: var(--font-display);
+        font-size: 2rem;
+        margin-bottom: 0.6rem;
+        text-transform: uppercase;
+      }
+      .port-popup .popup-body p {
+        color: var(--stone);
+        line-height: 1.8;
+      }
+      .port-popup .popup-body .popup-cta {
+        margin-top: 1.6rem;
+      }
+
+      @media (max-width: 600px) {
+        .port-popup .popup-body {
+          padding: 1.2rem;
+        }
+        .port-popup .popup-body h2 {
+          font-size: 1.4rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== TOP BAR ===== -->
+    <div class="top-bar">
+      <div class="container">
+        <div class="top-bar-inner">
+          <div class="top-bar-left">
+            <a href="mailto:info@lajedinteriors.co.ke"
+              ><i class="fas fa-envelope"></i> info@lajedinteriors.co.ke</a
+            >
+            <a href="tel:+254722601669"
+              ><i class="fas fa-phone-alt"></i> +254 722 601 669</a
+            >
+            <span
+              ><i class="fas fa-map-marker-alt"></i> 00100 Ruaka, Nairobi</span
+            >
+          </div>
+          <div class="top-bar-right">
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" aria-label="LinkedIn"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="navbar" id="navbar">
+      <div class="container">
+        <a href="index.html" class="brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#e8cd8d" />
+                  <stop offset="100%" stop-color="#9b7a2f" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M20 10 L20 78 L58 78 L58 64 L36 64 L36 10 Z"
+                fill="url(#goldGrad)"
+              />
+              <path d="M66 10 L82 10 L82 90 L66 90 Z" fill="#0f0f0f" />
+            </svg>
+          </span>
+          <span class="brand-text">
+            <span class="name">Lajed Interiors</span>
+            <span class="tag">Design. Create. Inspire.</span>
+          </span>
+        </a>
+
+        <nav>
+          <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li class="has-dd">
+              <a href="services.html"
+                >Services <i class="fa-solid fa-chevron-down"></i
+              ></a>
+              <div class="mega">
+                <a href="services-epoxy.html"
+                  ><div class="mega-title">Epoxy Flooring</div>
+                  <div class="mega-desc">
+                    Durable, seamless and glossy finishes
+                  </div></a
+                >
+                <a href="services-kitchens.html"
+                  ><div class="mega-title">Modern Kitchens</div>
+                  <div class="mega-desc">
+                    Stylish layouts made for how you cook and live
+                  </div></a
+                >
+                <a href="services-wardrobes.html"
+                  ><div class="mega-title">Wardrobes and Closets</div>
+                  <div class="mega-desc">
+                    Smart storage with elegant detailing
+                  </div></a
+                >
+                <a href="services-gypsum.html"
+                  ><div class="mega-title">Gypsum Ceiling</div>
+                  <div class="mega-desc">
+                    Modern ceiling designs with perfect finishes
+                  </div></a
+                >
+                <a href="services-spc.html"
+                  ><div class="mega-title">SPC and Laminate Flooring</div>
+                  <div class="mega-desc">
+                    Strong, stylish and easy to maintain
+                  </div></a
+                >
+                <a href="services-partitioning.html"
+                  ><div class="mega-title">Office Partitioning</div>
+                  <div class="mega-desc">
+                    Functional spaces for modern workplaces
+                  </div></a
+                >
+              </div>
+            </li>
+            <li class="has-dd">
+              <a href="portfolio.html" class="active"
+                >Portfolio <i class="fa-solid fa-chevron-down"></i
+              ></a>
+              <div class="mega portfolio-mega">
+                <a href="residential_design.html"
+                  ><div class="mega-title">Residential Interior Design</div>
+                  <div class="mega-desc">Completed residential projects</div></a
+                >
+                <a href="commercial.html"
+                  ><div class="mega-title">Commercial Interior Design</div>
+                  <div class="mega-desc">
+                    Commercial spaces we've transformed
+                  </div></a
+                >
+                <a href="hospitality.html"
+                  ><div class="mega-title">Hospitality Interior Design</div>
+                  <div class="mega-desc">Hotels, restaurants, and more</div></a
+                >
+                <a href="transformations.html"
+                  ><div class="mega-title">Transformations</div>
+                  <div class="mega-desc">Before and after renovations</div></a
+                >
+              </div>
+            </li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-cta">
+          <a href="tel:+254722601669" class="btn btn-outline">Call Now</a>
+          <button
+            class="nav-toggle"
+            id="navToggle"
+            aria-label="Menu"
+            aria-expanded="false"
+            aria-controls="navLinks"
+          >
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== PORTFOLIO HERO ===== -->
+    <section class="portfolio-hero">
+      <div class="container">
+        <span class="eyebrow" style="color: var(--gold-300)"
+          >Our Body Of Work</span
+        >
+        <h1>
+          Our
+          <span class="accent" style="color: var(--gold-300)">Portfolio</span>
+        </h1>
+        <p class="sub">
+          A curated look at the residential, commercial, hospitality and
+          transformation projects we have brought to life across Nairobi and
+          beyond.
+        </p>
+        <div class="hero-stats">
+          <div>
+            <span class="n">18</span><span class="l">Projects Shown</span>
+          </div>
+          <div><span class="n">4</span><span class="l">Categories</span></div>
+          <div>
+            <span class="n">20+</span
+            ><span class="l">Years Combined Experience</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FILTER BAR (accordion / mega style) ===== -->
+    <section class="portfolio-filter-bar">
+      <div class="container">
+        <div class="filter-bar-row">
+          <div class="active-filter-display">
+            <span class="label">Showing</span>
+            <span class="current-filter-name" id="currentFilterName"
+              >All Projects</span
+            >
+            <span class="current-count" id="currentCount">18</span>
+          </div>
+          <button class="filter-toggle" id="filterToggle">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Filter Projects</span>
+            <i class="fa-solid fa-chevron-down chev"></i>
+          </button>
+        </div>
+
+        <div class="filter-accordion" id="filterAccordion">
+          <div class="filter-accordion-inner">
+            <button class="filter-option active" data-filter="all">
+              <span class="fo-icon"
+                ><i class="fa-solid fa-border-all"></i
+              ></span>
+              <span class="fo-title">All Projects</span>
+              <span class="fo-desc">Browse our complete body of work</span>
+              <span class="fo-count">18 projects</span>
+            </button>
+            <button class="filter-option" data-filter="residential">
+              <span class="fo-icon"><i class="fa-solid fa-house"></i></span>
+              <span class="fo-title">Residential</span>
+              <span class="fo-desc">Homes, apartments and private estates</span>
+              <span class="fo-count">9 projects</span>
+            </button>
+            <button class="filter-option" data-filter="commercial">
+              <span class="fo-icon"><i class="fa-solid fa-building"></i></span>
+              <span class="fo-title">Commercial</span>
+              <span class="fo-desc">Offices, retail and business parks</span>
+              <span class="fo-count">3 projects</span>
+            </button>
+            <button class="filter-option" data-filter="hospitality">
+              <span class="fo-icon"
+                ><i class="fa-solid fa-champagne-glasses"></i
+              ></span>
+              <span class="fo-title">Hospitality</span>
+              <span class="fo-desc">Hotels, lounges and guest spaces</span>
+              <span class="fo-count">3 projects</span>
+            </button>
+            <button class="filter-option" data-filter="transformations">
+              <span class="fo-icon"
+                ><i class="fa-solid fa-arrows-rotate"></i
+              ></span>
+              <span class="fo-title">Transformations</span>
+              <span class="fo-desc">Complete before and after renovations</span>
+              <span class="fo-count">3 projects</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MASONRY GRID, PART ONE ===== -->
+    <section class="portfolio-grid-section">
+      <div class="container">
+        <div class="portfolio-masonry" id="masonryOne"></div>
+      </div>
+    </section>
+
+    <!-- ===== PROMO BANNER (inline) ===== -->
+    <section class="portfolio-grid-section" style="padding-top: 0">
+      <div class="container">
+        <div class="promo-inline reveal">
+          <div class="promo-text">
+            <span class="eyebrow" style="color: var(--gold-300)"
+              >Limited Slots This Month</span
+            >
+            <h3>Free Site Visit and Quotation</h3>
+            <p>
+              Book a consultation this month and our team will assess your
+              space, walk you through material options, and prepare a detailed
+              quotation at no cost.
+            </p>
+          </div>
+          <a href="contact.html" class="btn btn-gold">Book Your Free Visit</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MASONRY GRID, PART TWO ===== -->
+    <section class="portfolio-grid-section" style="padding-top: 0">
+      <div class="container">
+        <div class="portfolio-masonry" id="masonryTwo"></div>
+        <div class="no-projects" id="noProjects" style="display: none">
+          No projects found in this category yet, please check back soon.
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROMO BANNER (featured project) ===== -->
+    <section class="promo-feature">
+      <img
+        src="img/portfolio-featured-banner.jpg"
+        alt="Pax Manor featured project"
+      />
+      <div class="container">
+        <span class="eyebrow" style="color: var(--gold-300)"
+          >Featured Project</span
+        >
+        <h2>Pax Manor, A Study In Warm Minimalism</h2>
+        <a href="contact.html" class="btn btn-gold">Start Your Own Project</a>
+      </div>
+    </section>
+
+    <!-- ===== PROJECT DETAIL POPUP ===== -->
+    <div class="port-popup" id="portPopup">
+      <div class="popup-card">
+        <button class="close-popup" id="closePortPopup">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <img class="main-img" src="" alt="" id="popupMainImg" />
+        <div class="popup-body">
+          <span class="p-cat" id="popupCat"></span>
+          <h2 id="popupPortTitle"></h2>
+          <p id="popupPortDesc"></p>
+          <div class="popup-cta">
+            <a href="contact.html" class="btn btn-outline on-light"
+              >Enquire About A Similar Project</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+      <img src="img/footer-bg.jpg" alt="" />
+      <div class="container">
+        <div class="foot-grid">
+          <div class="foot-brand">
+            <a href="index.html" class="brand">
+              <span class="brand-mark">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M20 10 L20 78 L58 78 L58 64 L36 64 L36 10 Z"
+                    fill="url(#goldGrad)"
+                  />
+                  <path d="M66 10 L82 10 L82 90 L66 90 Z" fill="#e8cd8d" />
+                </svg>
+              </span>
+              <span class="brand-text">
+                <span class="name">Lajed Interiors</span>
+                <span class="tag">Design. Create. Inspire.</span>
+              </span>
+            </a>
+            <p>
+              A premium interior design studio in Nairobi crafting refined,
+              functional and enduring spaces.
+            </p>
+            <div class="foot-socials">
+              <a href="#" aria-label="TikTok"
+                ><i class="fa-brands fa-tiktok"></i
+              ></a>
+              <a href="#" aria-label="Facebook"
+                ><i class="fa-brands fa-facebook-f"></i
+              ></a>
+              <a href="#" aria-label="Instagram"
+                ><i class="fa-brands fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="LinkedIn"
+                ><i class="fa-brands fa-linkedin-in"></i
+              ></a>
+              <a href="#" aria-label="X"
+                ><i class="fa-brands fa-x-twitter"></i
+              ></a>
+              <a href="#" aria-label="YouTube"
+                ><i class="fa-brands fa-youtube"></i
+              ></a>
+            </div>
+          </div>
+          <div class="foot-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="portfolio.html">Portfolio</a></li>
+              <li><a href="blog.html">Blog</a></li>
+            </ul>
+          </div>
+          <div class="foot-col">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><a href="terms.html">Terms and Conditions</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+              <li><a href="faqs.html">FAQs</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="foot-col contact">
+            <h4>Get In Touch</h4>
+            <p><i class="fa-solid fa-location-dot"></i> 00100 Ruaka, Nairobi</p>
+            <p><i class="fa-solid fa-phone"></i> +254 722 601 669</p>
+            <p>
+              <i class="fa-solid fa-envelope"></i> info@lajedinteriors.co.ke
+            </p>
+            <h4 style="margin-top: 1.8rem">Subscribe</h4>
+            <form class="newsletter-form">
+              <input type="email" placeholder="Your email address" required />
+              <button type="submit">
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="foot-bottom">
+          <span>Copyright Lajed Interiors. All rights reserved.</span>
+          <span
+            >Powered by
+            <a href="https://eontechsystems.com/" target="_blank"
+              >EonTech Systems</a
+            ></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- ===== FLOATING CONTACT DOCK ===== -->
+    <div class="dock" id="dock">
+      <div class="dock-items">
+        <div class="dock-item whatsapp">
+          <a href="https://wa.me/254722601669" target="_blank"
+            ><span class="ic"><i class="fa-brands fa-whatsapp"></i></span
+            ><span class="lbl">WhatsApp</span></a
+          >
+        </div>
+        <div class="dock-item call">
+          <a href="tel:+254722601669"
+            ><span class="ic"><i class="fa-solid fa-phone"></i></span
+            ><span class="lbl">Call Us</span></a
+          >
+        </div>
+        <div class="dock-item email">
+          <a href="mailto:info@lajedinteriors.co.ke"
+            ><span class="ic"><i class="fa-solid fa-envelope"></i></span
+            ><span class="lbl">Email Us</span></a
+          >
+        </div>
+      </div>
+      <button class="dock-toggle" id="dockToggle" aria-label="Contact options">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+    </div>
+
+    <a href="#" class="to-top" id="toTop" aria-label="Back to top"
+      ><i class="fa-solid fa-arrow-up"></i
+    ></a>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Portfolio data and logic, self-contained -->
+    <script>
+      (function () {
+        "use strict";
+
+        var projects = [
+          {
+            id: 1,
+            title: "Pax Manor",
+            category: "residential",
+            image: "img/pax-manor.jpg",
+            ar: "ar-tall",
+            desc: "A serene family residence balancing warm wood tones with sculptural lighting and quiet, considered spaces.",
+          },
+          {
+            id: 2,
+            title: "Macadamia",
+            category: "residential",
+            image: "img/macadamia.jpg",
+            ar: "ar-square",
+            desc: "A bright, garden facing home built around natural materials and soft, layered textures.",
+          },
+          {
+            id: 3,
+            title: "North House",
+            category: "residential",
+            image: "img/north-house.jpg",
+            ar: "ar-wide",
+            desc: "An open plan family home designed for easy living, with generous sightlines between rooms.",
+          },
+          {
+            id: 4,
+            title: "Stanley Nairobi Manor",
+            category: "residential",
+            image: "img/stanley-nairobi-manor.jpg",
+            ar: "ar-portrait",
+            desc: "A refined manor interior pairing classic proportions with a contemporary material palette.",
+          },
+          {
+            id: 5,
+            title: "Deerpark",
+            category: "residential",
+            image: "img/deerpark.jpg",
+            ar: "ar-tall",
+            desc: "A quiet, nature facing residence where every room was designed around the view outside.",
+          },
+          {
+            id: 6,
+            title: "Gitanga Duplexes",
+            category: "residential",
+            image: "img/gitanga-duplexes.jpg",
+            ar: "ar-square",
+            desc: "A pair of duplex units unified by a shared material language and warm, gallery style lighting.",
+          },
+          {
+            id: 7,
+            title: "Elegant Nairobi Apartment",
+            category: "residential",
+            image: "img/elegant-nairobi-apartment.jpg",
+            ar: "ar-wide",
+            desc: "A compact city apartment reworked with smart storage and a considered, elegant finish.",
+          },
+          {
+            id: 8,
+            title: "Warm Runda Estate",
+            category: "residential",
+            image: "img/warm-runda-estate.jpg",
+            ar: "ar-portrait",
+            desc: "An expansive family estate brought together with warm timber, brass accents and soft lighting.",
+          },
+          {
+            id: 9,
+            title: "Elegant Kilimani Estate",
+            category: "residential",
+            image: "img/elegant-kilimani-estate.jpg",
+            ar: "ar-tall",
+            desc: "A modern estate interior finished in a restrained palette of stone, oak and brushed brass.",
+          },
+
+          {
+            id: 10,
+            title: "Westlands Corporate Suites",
+            category: "commercial",
+            image: "img/westlands-corporate-suites.jpg",
+            ar: "ar-wide",
+            desc: "A full office fit out built for focus and collaboration, with flexible meeting suites throughout.",
+          },
+          {
+            id: 11,
+            title: "Karen Retail Atrium",
+            category: "commercial",
+            image: "img/karen-retail-atrium.jpg",
+            ar: "ar-square",
+            desc: "A retail atrium designed to guide footfall naturally while showcasing every storefront.",
+          },
+          {
+            id: 12,
+            title: "Riverside Business Park",
+            category: "commercial",
+            image: "img/riverside-business-park.jpg",
+            ar: "ar-portrait",
+            desc: "A business park interior combining efficient partitioning with a calm, professional finish.",
+          },
+
+          {
+            id: 13,
+            title: "Nyali Boutique Hotel",
+            category: "hospitality",
+            image: "img/nyali-boutique-hotel.jpg",
+            ar: "ar-tall",
+            desc: "A coastal boutique hotel interior designed around light, texture and a relaxed sense of arrival.",
+          },
+          {
+            id: 14,
+            title: "Two Rivers Lounge",
+            category: "hospitality",
+            image: "img/two-rivers-lounge.jpg",
+            ar: "ar-wide",
+            desc: "A lounge and bar concept built for long evenings, with layered lighting and plush seating.",
+          },
+          {
+            id: 15,
+            title: "Serena Poolside Bar",
+            category: "hospitality",
+            image: "img/serena-poolside-bar.jpg",
+            ar: "ar-square",
+            desc: "A poolside bar finished in weather resistant materials without compromising on style.",
+          },
+
+          {
+            id: 16,
+            title: "Lavington Bungalow Revamp",
+            category: "transformations",
+            image: "img/lavington-bungalow-revamp.jpg",
+            ar: "ar-portrait",
+            desc: "A dated bungalow reimagined into a bright, modern family home from the ground up.",
+          },
+          {
+            id: 17,
+            title: "Kilimani Studio Makeover",
+            category: "transformations",
+            image: "img/kilimani-studio-makeover.jpg",
+            ar: "ar-tall",
+            desc: "A compact studio transformed with smart joinery and a completely reworked layout.",
+          },
+          {
+            id: 18,
+            title: "Spring Valley Kitchen Redo",
+            category: "transformations",
+            image: "img/spring-valley-kitchen-redo.jpg",
+            ar: "ar-wide",
+            desc: "A closed off, dated kitchen opened up into the bright, functional heart of the home.",
+          },
+        ];
+
+        var categoryNames = {
+          all: "All Projects",
+          residential: "Residential",
+          commercial: "Commercial",
+          hospitality: "Hospitality",
+          transformations: "Transformations",
+        };
+
+        var masonryOne = document.getElementById("masonryOne");
+        var masonryTwo = document.getElementById("masonryTwo");
+        var noProjectsEl = document.getElementById("noProjects");
+        var currentFilterNameEl = document.getElementById("currentFilterName");
+        var currentCountEl = document.getElementById("currentCount");
+
+        function buildCard(project, index) {
+          var card = document.createElement("div");
+          card.className = "port-card " + project.ar;
+          card.dataset.category = project.category;
+          card.dataset.id = project.id;
+          card.style.transitionDelay = (index % 6) * 0.05 + "s";
+
+          card.innerHTML =
+            '<div class="img-wrap">' +
+            '<img src="' +
+            project.image +
+            '" alt="' +
+            project.title +
+            '" loading="lazy" />' +
+            '<span class="cat-pill">' +
+            project.category +
+            "</span>" +
+            '<div class="overlay">' +
+            '<span class="p-title">' +
+            project.title +
+            "</span>" +
+            '<span class="p-desc">' +
+            project.desc +
+            "</span>" +
+            '<span class="p-view"><i class="fa-solid fa-arrow-right"></i> View Project</span>' +
+            "</div>" +
+            "</div>";
+          return card;
+        }
+
+        function renderAll() {
+          projects.forEach(function (p, i) {
+            var target = i % 2 === 0 ? masonryOne : masonryTwo;
+            target.appendChild(buildCard(p, i));
+          });
+        }
+        renderAll();
+
+        var allCards = document.querySelectorAll(".port-card");
+
+        function applyFilter(filter) {
+          var visibleCount = 0;
+          allCards.forEach(function (card) {
+            var match = filter === "all" || card.dataset.category === filter;
+            card.classList.toggle("is-hidden", !match);
+            if (match) visibleCount++;
+          });
+          if (currentFilterNameEl)
+            currentFilterNameEl.textContent = categoryNames[filter];
+          if (currentCountEl) currentCountEl.textContent = visibleCount;
+          if (noProjectsEl)
+            noProjectsEl.style.display = visibleCount === 0 ? "block" : "none";
+        }
+
+        // ---------- Accordion filter toggle ----------
+        var filterToggle = document.getElementById("filterToggle");
+        var filterAccordion = document.getElementById("filterAccordion");
+        if (filterToggle && filterAccordion) {
+          filterToggle.addEventListener("click", function () {
+            var isOpen = filterAccordion.classList.toggle("open");
+            filterToggle.classList.toggle("open", isOpen);
+          });
+        }
+
+        var filterOptions = document.querySelectorAll(".filter-option");
+        filterOptions.forEach(function (opt) {
+          opt.addEventListener("click", function () {
+            filterOptions.forEach(function (o) {
+              o.classList.remove("active");
+            });
+            this.classList.add("active");
+            applyFilter(this.getAttribute("data-filter"));
+            if (filterAccordion) filterAccordion.classList.remove("open");
+            if (filterToggle) filterToggle.classList.remove("open");
+          });
+        });
+
+        // ---------- Detail popup ----------
+        var popup = document.getElementById("portPopup");
+        var popupMainImg = document.getElementById("popupMainImg");
+        var popupCat = document.getElementById("popupCat");
+        var popupTitle = document.getElementById("popupPortTitle");
+        var popupDesc = document.getElementById("popupPortDesc");
+        var closePortPopup = document.getElementById("closePortPopup");
+
+        function openProjectPopup(id) {
+          var project = null;
+          for (var i = 0; i < projects.length; i++) {
+            if (projects[i].id === id) {
+              project = projects[i];
+              break;
+            }
+          }
+          if (!project) return;
+
+          if (popupMainImg) {
+            popupMainImg.src = project.image;
+            popupMainImg.alt = project.title;
+          }
+          if (popupCat) popupCat.textContent = project.category;
+          if (popupTitle) popupTitle.textContent = project.title;
+          if (popupDesc) popupDesc.textContent = project.desc;
+
+          if (popup) popup.classList.add("active");
+          document.body.style.overflow = "hidden";
+        }
+
+        function closeProjectPopup() {
+          if (popup) popup.classList.remove("active");
+          document.body.style.overflow = "";
+        }
+
+        [masonryOne, masonryTwo].forEach(function (grid) {
+          if (!grid) return;
+          grid.addEventListener("click", function (e) {
+            var card = e.target.closest(".port-card");
+            if (card) openProjectPopup(parseInt(card.dataset.id, 10));
+          });
+        });
+
+        if (closePortPopup)
+          closePortPopup.addEventListener("click", closeProjectPopup);
+        if (popup) {
+          popup.addEventListener("click", function (e) {
+            if (e.target === popup) closeProjectPopup();
+          });
+        }
+        document.addEventListener("keydown", function (e) {
+          if (
+            e.key === "Escape" &&
+            popup &&
+            popup.classList.contains("active")
+          ) {
+            closeProjectPopup();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

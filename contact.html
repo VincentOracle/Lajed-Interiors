@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact · Lajed Interiors</title>
+    <meta
+      name="description"
+      content="Get in touch with Lajed Interiors — book a consultation, request a quote, or ask us about your project."
+    />
+
+    <!-- Favicon -->
+    <link href="img/favicon-icon.png" rel="icon" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600;700&family=Oswald:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+    />
+
+    <!-- Custom Styles (same as homepage) -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <style>
+      /* ----- Contact page specific overrides ----- */
+      .contact-hero {
+        min-height: 50vh;
+        background: var(--charcoal) url("img/contact-hero.jpg") center/cover
+          no-repeat;
+        position: relative;
+        display: flex;
+        align-items: center;
+        isolation: isolate;
+      }
+      .contact-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(15, 15, 15, 0.4) 0%,
+          rgba(15, 15, 15, 0.8) 100%
+        );
+        z-index: 0;
+      }
+      .contact-hero .container {
+        position: relative;
+        z-index: 2;
+        padding: 8rem 0 4rem;
+        color: var(--white);
+      }
+      .contact-hero h1 {
+        font-size: clamp(2.8rem, 6vw, 4.8rem);
+        color: var(--white);
+      }
+      .contact-hero p.sub {
+        max-width: 520px;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 1.1rem;
+        margin-top: 1.2rem;
+      }
+
+      /* Contact section */
+      .contact-section {
+        padding: var(--gap-xl) 0;
+        background: var(--white);
+      }
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 4rem;
+        align-items: start;
+      }
+
+      /* Contact info cards */
+      .contact-info h3 {
+        font-family: var(--font-display);
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+      }
+      .contact-info > p {
+        color: var(--stone);
+        margin-bottom: 2rem;
+      }
+      .info-card {
+        display: flex;
+        gap: 1.2rem;
+        padding: 1.2rem 0;
+        border-bottom: 1px solid rgba(15, 15, 15, 0.05);
+      }
+      .info-card:last-child {
+        border-bottom: none;
+      }
+      .info-card .icon {
+        width: 48px;
+        height: 48px;
+        flex: none;
+        border-radius: 50%;
+        background: var(--ivory);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gold-500);
+        font-size: 1.1rem;
+      }
+      .info-card .text h5 {
+        font-family: var(--font-body);
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-bottom: 0.1rem;
+      }
+      .info-card .text p,
+      .info-card .text a {
+        color: var(--stone);
+        font-size: 0.95rem;
+        transition: color 0.3s;
+      }
+      .info-card .text a:hover {
+        color: var(--gold-500);
+      }
+
+      /* Form */
+      .contact-form-wrap {
+        background: var(--ivory);
+        padding: 2.8rem 2.8rem 3.2rem;
+        border-radius: 4px;
+      }
+      .contact-form-wrap h3 {
+        font-family: var(--font-display);
+        font-size: 1.8rem;
+        margin-bottom: 0.3rem;
+      }
+      .contact-form-wrap > p {
+        color: var(--stone);
+        margin-bottom: 1.8rem;
+      }
+      .form-group {
+        margin-bottom: 1.4rem;
+      }
+      .form-group label {
+        display: block;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 600;
+        color: var(--charcoal);
+        margin-bottom: 0.4rem;
+      }
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 0.9rem 1.2rem;
+        border: 1px solid rgba(15, 15, 15, 0.1);
+        border-radius: 3px;
+        font-family: var(--font-body);
+        font-size: 0.95rem;
+        background: var(--white);
+        transition:
+          border-color 0.3s ease,
+          box-shadow 0.3s ease;
+        color: var(--charcoal);
+      }
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: var(--gold-500);
+        box-shadow: 0 0 0 3px rgba(201, 161, 74, 0.12);
+      }
+      .form-group textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+      .form-group .error-message {
+        color: #c0392b;
+        font-size: 0.75rem;
+        margin-top: 0.3rem;
+        display: none;
+      }
+      .form-group.has-error input,
+      .form-group.has-error select,
+      .form-group.has-error textarea {
+        border-color: #c0392b;
+      }
+      .form-group.has-error .error-message {
+        display: block;
+      }
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      .btn-submit {
+        width: 100%;
+        padding: 1rem;
+        background: var(--gold-gradient);
+        background-size: 200% 100%;
+        background-position: 0% 0%;
+        border: none;
+        color: var(--charcoal);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 0.8rem;
+        border-radius: 3px;
+        transition: all 0.4s ease;
+        cursor: pointer;
+        margin-top: 0.5rem;
+      }
+      .btn-submit:hover {
+        background-position: 100% 0%;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px -8px rgba(201, 161, 74, 0.4);
+      }
+      .btn-submit:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      /* Map */
+      .map-section {
+        padding: 0 0 var(--gap-xl);
+        background: var(--white);
+      }
+      .map-wrap {
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+      }
+      .map-wrap iframe {
+        width: 100%;
+        height: 380px;
+        border: none;
+        display: block;
+      }
+
+      /* Success message */
+      .form-success {
+        display: none;
+        text-align: center;
+        padding: 2rem 1rem;
+      }
+      .form-success .icon {
+        font-size: 3rem;
+        color: var(--gold-500);
+        margin-bottom: 1rem;
+      }
+      .form-success h4 {
+        font-family: var(--font-display);
+        font-size: 1.6rem;
+      }
+      .form-success p {
+        color: var(--stone);
+        margin-top: 0.4rem;
+      }
+
+      @media (max-width: 992px) {
+        .contact-grid {
+          grid-template-columns: 1fr;
+          gap: 2.5rem;
+        }
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+        .contact-form-wrap {
+          padding: 2rem 1.6rem;
+        }
+      }
+      @media (max-width: 600px) {
+        .contact-form-wrap {
+          padding: 1.6rem 1.2rem;
+        }
+        .map-wrap iframe {
+          height: 260px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== TOP BAR ===== -->
+    <div class="top-bar">
+      <div class="container">
+        <div class="top-bar-inner">
+          <div class="top-bar-left">
+            <a href="mailto:info@lajedinteriors.co.ke"
+              ><i class="fas fa-envelope"></i> info@lajedinteriors.co.ke</a
+            >
+            <a href="tel:+254722601669"
+              ><i class="fas fa-phone-alt"></i> +254 722 601 669</a
+            >
+            <span
+              ><i class="fas fa-map-marker-alt"></i> 00100 Ruaka, Nairobi</span
+            >
+          </div>
+          <div class="top-bar-right">
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" aria-label="LinkedIn"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="navbar" id="navbar">
+      <div class="container">
+        <a href="index.html" class="brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#e8cd8d" />
+                  <stop offset="100%" stop-color="#9b7a2f" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M20 10 L20 78 L58 78 L58 64 L36 64 L36 10 Z"
+                fill="url(#goldGrad)"
+              />
+              <path d="M66 10 L82 10 L82 90 L66 90 Z" fill="#0f0f0f" />
+            </svg>
+          </span>
+          <span class="brand-text">
+            <span class="name">Lajed Interiors</span>
+            <span class="tag">Design. Create. Inspire.</span>
+          </span>
+        </a>
+
+        <nav>
+          <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li class="has-dd">
+              <a href="services.html"
+                >Services <i class="fa-solid fa-chevron-down"></i
+              ></a>
+              <div class="mega">
+                <a href="services-epoxy.html"
+                  ><div class="mega-title">Epoxy Flooring</div>
+                  <div class="mega-desc">
+                    Durable, seamless and glossy finishes
+                  </div></a
+                >
+                <a href="services-kitchens.html"
+                  ><div class="mega-title">Modern Kitchens</div>
+                  <div class="mega-desc">
+                    Stylish layouts made for how you cook and live
+                  </div></a
+                >
+                <a href="services-wardrobes.html"
+                  ><div class="mega-title">Wardrobes and Closets</div>
+                  <div class="mega-desc">
+                    Smart storage with elegant detailing
+                  </div></a
+                >
+                <a href="services-gypsum.html"
+                  ><div class="mega-title">Gypsum Ceiling</div>
+                  <div class="mega-desc">
+                    Modern ceiling designs with perfect finishes
+                  </div></a
+                >
+                <a href="services-spc.html"
+                  ><div class="mega-title">SPC and Laminate Flooring</div>
+                  <div class="mega-desc">
+                    Strong, stylish and easy to maintain
+                  </div></a
+                >
+                <a href="services-partitioning.html"
+                  ><div class="mega-title">Office Partitioning</div>
+                  <div class="mega-desc">
+                    Functional spaces for modern workplaces
+                  </div></a
+                >
+              </div>
+            </li>
+            <li class="has-dd">
+              <a href="portfolio.html"
+                >Portfolio <i class="fa-solid fa-chevron-down"></i
+              ></a>
+              <div class="mega portfolio-mega">
+                <a href="residential_design.html"
+                  ><div class="mega-title">Residential Interior Design</div>
+                  <div class="mega-desc">Completed residential projects</div></a
+                >
+                <a href="commercial.html"
+                  ><div class="mega-title">Commercial Interior Design</div>
+                  <div class="mega-desc">
+                    Commercial spaces we've transformed
+                  </div></a
+                >
+                <a href="hospitality.html"
+                  ><div class="mega-title">Hospitality Interior Design</div>
+                  <div class="mega-desc">Hotels, restaurants, and more</div></a
+                >
+                <a href="transformations.html"
+                  ><div class="mega-title">Transformations</div>
+                  <div class="mega-desc">Before and after renovations</div></a
+                >
+              </div>
+            </li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-cta">
+          <a href="tel:+254722601669" class="btn btn-outline">Call Now</a>
+          <button
+            class="nav-toggle"
+            id="navToggle"
+            aria-label="Menu"
+            aria-expanded="false"
+            aria-controls="navLinks"
+          >
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== CONTACT HERO ===== -->
+    <section class="contact-hero">
+      <div class="container">
+        <span class="eyebrow" style="color: var(--gold-300)">Get In Touch</span>
+        <h1>
+          Let's
+          <span class="accent" style="color: var(--gold-300)">Connect</span>
+        </h1>
+        <p class="sub">
+          Have a project in mind? Reach out — we'd love to hear about your
+          vision and explore how we can bring it to life.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT SECTION ===== -->
+    <section class="contact-section">
+      <div class="container">
+        <div class="contact-grid">
+          <!-- Contact Info -->
+          <div class="contact-info reveal">
+            <span class="eyebrow">Reach Us</span>
+            <h3>We're Here to Help</h3>
+            <p>
+              Whether you're planning a full renovation or a single room
+              refresh, we'll guide you through every step.
+            </p>
+
+            <div class="info-card">
+              <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
+              <div class="text">
+                <h5>Visit Us</h5>
+                <p>00100 Ruaka, Nairobi, Kenya</p>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <div class="icon"><i class="fa-solid fa-phone"></i></div>
+              <div class="text">
+                <h5>Call or WhatsApp</h5>
+                <a href="tel:+254722601669">+254 722 601 669</a>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <div class="icon"><i class="fa-solid fa-envelope"></i></div>
+              <div class="text">
+                <h5>Email Us</h5>
+                <a href="mailto:info@lajedinteriors.co.ke"
+                  >info@lajedinteriors.co.ke</a
+                >
+              </div>
+            </div>
+
+            <div class="info-card">
+              <div class="icon"><i class="fa-regular fa-clock"></i></div>
+              <div class="text">
+                <h5>Working Hours</h5>
+                <p>Mon – Sat: 8:00 AM – 6:00 PM</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="contact-form-wrap reveal reveal-delay-1">
+            <h3>Send a Message</h3>
+            <p>We'll respond within 24 hours.</p>
+
+            <form id="contactForm" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="fullName">Full Name *</label>
+                  <input
+                    type="text"
+                    id="fullName"
+                    placeholder="Your full name"
+                    required
+                  />
+                  <div class="error-message">Please enter your name.</div>
+                </div>
+                <div class="form-group">
+                  <label for="emailAddress">Email Address *</label>
+                  <input
+                    type="email"
+                    id="emailAddress"
+                    placeholder="you@example.com"
+                    required
+                  />
+                  <div class="error-message">
+                    Please enter a valid email address.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="phoneNumber">Phone Number *</label>
+                <input
+                  type="tel"
+                  id="phoneNumber"
+                  placeholder="+254 722 601 669"
+                  required
+                />
+                <div class="error-message">
+                  Please enter a valid phone number.
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="serviceSelect">Service Interested In</label>
+                <select id="serviceSelect">
+                  <option value="">Select a service...</option>
+                  <option value="Epoxy Flooring">Epoxy Flooring</option>
+                  <option value="Modern Kitchens">Modern Kitchens</option>
+                  <option value="Wardrobes and Closets">
+                    Wardrobes and Closets
+                  </option>
+                  <option value="Gypsum Ceiling">Gypsum Ceiling</option>
+                  <option value="SPC and Laminate Flooring">
+                    SPC and Laminate Flooring
+                  </option>
+                  <option value="Office Partitioning">
+                    Office Partitioning
+                  </option>
+                  <option value="Residential Interior Design">
+                    Residential Interior Design
+                  </option>
+                  <option value="Commercial Interior Design">
+                    Commercial Interior Design
+                  </option>
+                  <option value="Hospitality Interior Design">
+                    Hospitality Interior Design
+                  </option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="messageContent">Message *</label>
+                <textarea
+                  id="messageContent"
+                  placeholder="Tell us about your project, your vision, and any specific requirements..."
+                  required
+                ></textarea>
+                <div class="error-message">Please enter your message.</div>
+              </div>
+
+              <button type="submit" class="btn-submit" id="submitBtn">
+                <span class="btn-text">Send via WhatsApp</span>
+                <span class="btn-loading" style="display: none"
+                  ><i class="fa-solid fa-spinner fa-spin"></i> Sending...</span
+                >
+              </button>
+
+              <div class="form-success" id="formSuccess">
+                <div class="icon">
+                  <i class="fa-regular fa-circle-check"></i>
+                </div>
+                <h4>Thank You!</h4>
+                <p>
+                  Your message has been sent. We'll redirect you to WhatsApp to
+                  complete the conversation.
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MAP SECTION ===== -->
+    <section class="map-section">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Location</span>
+          <h2 class="section-title">Find Us in Ruaka</h2>
+          <p class="section-lede">
+            We're conveniently located in Ruaka, Nairobi — reachable from all
+            parts of the city.
+          </p>
+        </div>
+        <div class="map-wrap reveal">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63836.1511190388!2d36.7600147!3d-1.2164242!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f18e6f0a3c3c3%3A0x8c4a3c8c4a3c8c4a!2sRuaka%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1700000000000"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Lajed Interiors location in Ruaka, Nairobi"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+      <img src="img/footer-bg.jpg" alt="" />
+      <div class="container">
+        <div class="foot-grid">
+          <div class="foot-brand">
+            <a href="index.html" class="brand">
+              <span class="brand-mark">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M20 10 L20 78 L58 78 L58 64 L36 64 L36 10 Z"
+                    fill="url(#goldGrad)"
+                  />
+                  <path d="M66 10 L82 10 L82 90 L66 90 Z" fill="#e8cd8d" />
+                </svg>
+              </span>
+              <span class="brand-text">
+                <span class="name">Lajed Interiors</span>
+                <span class="tag">Design. Create. Inspire.</span>
+              </span>
+            </a>
+            <p>
+              A premium interior design studio in Nairobi crafting refined,
+              functional and enduring spaces.
+            </p>
+            <div class="foot-socials">
+              <a href="#" aria-label="TikTok"
+                ><i class="fa-brands fa-tiktok"></i
+              ></a>
+              <a href="#" aria-label="Facebook"
+                ><i class="fa-brands fa-facebook-f"></i
+              ></a>
+              <a href="#" aria-label="Instagram"
+                ><i class="fa-brands fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="LinkedIn"
+                ><i class="fa-brands fa-linkedin-in"></i
+              ></a>
+              <a href="#" aria-label="X"
+                ><i class="fa-brands fa-x-twitter"></i
+              ></a>
+              <a href="#" aria-label="YouTube"
+                ><i class="fa-brands fa-youtube"></i
+              ></a>
+            </div>
+          </div>
+          <div class="foot-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="portfolio.html">Portfolio</a></li>
+              <li><a href="blog.html">Blog</a></li>
+            </ul>
+          </div>
+          <div class="foot-col">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><a href="terms.html">Terms and Conditions</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+              <li><a href="faqs.html">FAQs</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="foot-col contact">
+            <h4>Get In Touch</h4>
+            <p><i class="fa-solid fa-location-dot"></i> 00100 Ruaka, Nairobi</p>
+            <p><i class="fa-solid fa-phone"></i> +254 722 601 669</p>
+            <p>
+              <i class="fa-solid fa-envelope"></i> info@lajedinteriors.co.ke
+            </p>
+            <h4 style="margin-top: 1.8rem">Subscribe</h4>
+            <form class="newsletter-form">
+              <input type="email" placeholder="Your email address" required />
+              <button type="submit">
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="foot-bottom">
+          <span>Copyright Lajed Interiors. All rights reserved.</span>
+          <span
+            >Powered by
+            <a href="https://eontechsystems.com/" target="_blank"
+              >EonTech Systems</a
+            ></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- ===== FLOATING CONTACT DOCK ===== -->
+    <div class="dock" id="dock">
+      <div class="dock-items">
+        <div class="dock-item whatsapp">
+          <a href="https://wa.me/254722601669" target="_blank"
+            ><span class="ic"><i class="fa-brands fa-whatsapp"></i></span
+            ><span class="lbl">WhatsApp</span></a
+          >
+        </div>
+        <div class="dock-item call">
+          <a href="tel:+254722601669"
+            ><span class="ic"><i class="fa-solid fa-phone"></i></span
+            ><span class="lbl">Call Us</span></a
+          >
+        </div>
+        <div class="dock-item email">
+          <a href="mailto:info@lajedinteriors.co.ke"
+            ><span class="ic"><i class="fa-solid fa-envelope"></i></span
+            ><span class="lbl">Email Us</span></a
+          >
+        </div>
+      </div>
+      <button class="dock-toggle" id="dockToggle" aria-label="Contact options">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+    </div>
+
+    <a href="#" class="to-top" id="toTop" aria-label="Back to top"
+      ><i class="fa-solid fa-arrow-up"></i
+    ></a>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Contact form logic -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("contactForm");
+        const submitBtn = document.getElementById("submitBtn");
+        const btnText = submitBtn.querySelector(".btn-text");
+        const btnLoading = submitBtn.querySelector(".btn-loading");
+        const successDiv = document.getElementById("formSuccess");
+
+        // Get form fields
+        const nameInput = document.getElementById("fullName");
+        const emailInput = document.getElementById("emailAddress");
+        const phoneInput = document.getElementById("phoneNumber");
+        const messageInput = document.getElementById("messageContent");
+        const serviceSelect = document.getElementById("serviceSelect");
+
+        // Validation helper
+        function validateField(input, errorMsg) {
+          const group = input.closest(".form-group");
+          if (!input.value.trim()) {
+            group.classList.add("has-error");
+            return false;
+          }
+          // Email validation
+          if (input.type === "email") {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(input.value.trim())) {
+              group.classList.add("has-error");
+              return false;
+            }
+          }
+          // Phone validation (basic)
+          if (input.id === "phoneNumber") {
+            const phoneRegex = /^[\+\d\s\-\(\)]{7,20}$/;
+            if (!phoneRegex.test(input.value.trim())) {
+              group.classList.add("has-error");
+              return false;
+            }
+          }
+          group.classList.remove("has-error");
+          return true;
+        }
+
+        // Real-time validation on blur
+        [nameInput, emailInput, phoneInput, messageInput].forEach((input) => {
+          input.addEventListener("blur", function () {
+            validateField(this);
+          });
+          input.addEventListener("input", function () {
+            const group = this.closest(".form-group");
+            if (group.classList.contains("has-error") && this.value.trim()) {
+              group.classList.remove("has-error");
+            }
+          });
+        });
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Validate all fields
+          const isNameValid = validateField(nameInput);
+          const isEmailValid = validateField(emailInput);
+          const isPhoneValid = validateField(phoneInput);
+          const isMessageValid = validateField(messageInput);
+
+          if (
+            !isNameValid ||
+            !isEmailValid ||
+            !isPhoneValid ||
+            !isMessageValid
+          ) {
+            // Scroll to first error
+            const firstError = document.querySelector(".form-group.has-error");
+            if (firstError) {
+              firstError.scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+              });
+            }
+            return;
+          }
+
+          // Disable button and show loading
+          submitBtn.disabled = true;
+          btnText.style.display = "none";
+          btnLoading.style.display = "inline";
+
+          // Build WhatsApp message
+          const name = nameInput.value.trim();
+          const email = emailInput.value.trim();
+          const phone = phoneInput.value.trim();
+          const service = serviceSelect.value || "Not specified";
+          const message = messageInput.value.trim();
+
+          const whatsappMessage =
+            `Hello Lajed Interiors!%0A%0A` +
+            `My name is ${encodeURIComponent(name)}%0A` +
+            `Email: ${encodeURIComponent(email)}%0A` +
+            `Phone: ${encodeURIComponent(phone)}%0A` +
+            `Service interested in: ${encodeURIComponent(service)}%0A%0A` +
+            `Message:%0A${encodeURIComponent(message)}`;
+
+          const whatsappNumber = "254722601669";
+          const whatsappURL = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+
+          // Simulate sending, then redirect
+          setTimeout(function () {
+            // Show success
+            form
+              .querySelectorAll(".form-group")
+              .forEach((g) => (g.style.display = "none"));
+            successDiv.style.display = "block";
+            submitBtn.style.display = "none";
+
+            // Open WhatsApp in new tab
+            window.open(whatsappURL, "_blank");
+
+            // Re-enable button after a moment (reset state)
+            setTimeout(function () {
+              submitBtn.disabled = false;
+              btnText.style.display = "inline";
+              btnLoading.style.display = "none";
+            }, 2000);
+          }, 800);
+        });
+      });
+    </script>
+  </body>
+</html>

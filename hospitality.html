@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hospitality Interior Design · Lajed Interiors</title>
+    <meta
+      name="description"
+      content="Hospitality interior design projects by Lajed Interiors — hotels, restaurants, lounges, and guest experiences crafted with warmth and sophistication."
+    />
+
+    <!-- Favicon -->
+    <link href="img/favicon-icon.png" rel="icon" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600;700&family=Oswald:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+    />
+
+    <!-- Owl Carousel / Lightbox -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
+
+    <!-- Custom Styles (same as homepage) -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <style>
+      /* ----- Portfolio page specific overrides (hospitality) ----- */
+      .portfolio-hero {
+        min-height: 80vh;
+        background: var(--charcoal) url("img/hospitality-hero.jpg") center/cover
+          no-repeat;
+        position: relative;
+        display: flex;
+        align-items: center;
+        isolation: isolate;
+      }
+      .portfolio-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(15, 15, 15, 0.3) 0%,
+          rgba(15, 15, 15, 0.7) 100%
+        );
+        z-index: 0;
+      }
+      .portfolio-hero .container {
+        position: relative;
+        z-index: 2;
+        padding: 8rem 0 4rem;
+        color: var(--white);
+      }
+      .portfolio-hero h1 {
+        font-size: clamp(2.8rem, 6vw, 4.8rem);
+        color: var(--white);
+        max-width: 14ch;
+        line-height: 1.05;
+      }
+      .portfolio-hero h1 .accent {
+        color: var(--gold-300);
+        font-style: italic;
+      }
+      .portfolio-hero p.sub {
+        max-width: 520px;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.1rem;
+        margin-top: 1.2rem;
+      }
+
+      /* Immersive gallery */
+      .immersive {
+        padding: var(--gap-xl) 0;
+        background: var(--white);
+      }
+      .immersive-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.2rem;
+        margin-top: 2rem;
+      }
+      .immersive-item {
+        border-radius: 4px;
+        overflow: hidden;
+        position: relative;
+        aspect-ratio: 4/3;
+      }
+      .immersive-item:first-child {
+        grid-column: span 2;
+        aspect-ratio: 16/7;
+      }
+      .immersive-item:nth-child(3) {
+        aspect-ratio: 3/4;
+        grid-row: span 2;
+      }
+      .immersive-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 1.2s ease;
+      }
+      .immersive-item:hover img {
+        transform: scale(1.06);
+      }
+      .immersive-item .overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          0deg,
+          rgba(15, 15, 15, 0.5) 0%,
+          transparent 60%
+        );
+        opacity: 0;
+        transition: opacity 0.6s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 1.8rem;
+        color: var(--white);
+      }
+      .immersive-item:hover .overlay {
+        opacity: 1;
+      }
+      .immersive-item .overlay .name {
+        font-family: var(--font-display);
+        font-size: 1.4rem;
+        font-weight: 600;
+      }
+      .immersive-item .overlay .type {
+        font-size: 0.7rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--gold-300);
+        margin-top: 0.2rem;
+      }
+      @media (max-width: 992px) {
+        .immersive-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .immersive-item:first-child {
+          grid-column: span 2;
+          aspect-ratio: 16/9;
+        }
+        .immersive-item:nth-child(3) {
+          aspect-ratio: 4/3;
+          grid-row: span 1;
+        }
+      }
+      @media (max-width: 600px) {
+        .immersive-grid {
+          grid-template-columns: 1fr;
+        }
+        .immersive-item:first-child {
+          grid-column: span 1;
+          aspect-ratio: 4/3;
+        }
+      }
+
+      /* Experience text */
+      .experience {
+        padding: var(--gap-xl) 0;
+        background: var(--ivory);
+        text-align: center;
+      }
+      .experience .container {
+        max-width: 780px;
+      }
+      .experience h2 {
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        line-height: 1.1;
+      }
+      .experience p {
+        color: var(--stone);
+        font-size: 1.05rem;
+        margin-top: 1.4rem;
+      }
+
+      /* Feature strip (hospitality) */
+      .strip-hosp {
+        padding: var(--gap-xl) 0;
+        background: var(--white);
+        overflow: hidden;
+      }
+      .strip-hosp-track {
+        display: flex;
+        gap: 2rem;
+        width: max-content;
+        will-change: transform;
+        padding: 1rem 0;
+      }
+      .strip-hosp-card {
+        width: min(70vw, 340px);
+        flex: none;
+        border-radius: 4px;
+        overflow: hidden;
+        position: relative;
+        aspect-ratio: 3/4;
+        box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.2);
+      }
+      .strip-hosp-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s ease;
+      }
+      .strip-hosp-card:hover img {
+        transform: scale(1.08);
+      }
+      .strip-hosp-card .label {
+        position: absolute;
+        bottom: 1.6rem;
+        left: 1.6rem;
+        color: var(--white);
+        z-index: 2;
+      }
+      .strip-hosp-card .label h4 {
+        font-size: 1.2rem;
+        color: var(--white);
+      }
+      .strip-hosp-card .label span {
+        font-size: 0.7rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--gold-300);
+      }
+      .strip-hosp-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(0deg, rgba(10, 9, 7, 0.7), transparent 60%);
+        z-index: 1;
+      }
+
+      /* closing banner */
+      .closing-banner {
+        padding: var(--gap-xl) 0;
+        background: var(--charcoal) url("img/hospitality-closing.jpg")
+          center/cover no-repeat;
+        position: relative;
+        text-align: center;
+        color: var(--white);
+        isolation: isolate;
+      }
+      .closing-banner::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(15, 15, 15, 0.82);
+        z-index: 0;
+      }
+      .closing-banner .container {
+        position: relative;
+        z-index: 1;
+      }
+      .closing-banner h2 {
+        font-size: clamp(2.2rem, 5vw, 3.8rem);
+        color: var(--white);
+        max-width: 16ch;
+        margin: 0 auto;
+      }
+      .closing-banner .btn {
+        margin-top: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== TOP BAR ===== -->
+    <div class="top-bar">
+      <div class="container">
+        <div class="top-bar-inner">
+          <div class="top-bar-left">
+            <a href="mailto:info@lajedinteriors.co.ke"
+              ><i class="fas fa-envelope"></i> info@lajedinteriors.co.ke</a
+            >
+            <a href="tel:+254722601669"
+              ><i class="fas fa-phone-alt"></i> +254 722 601 669</a
+            >
+            <span
+              ><i class="fas fa-map-marker-alt"></i> 00100 Ruaka, Nairobi</span
+            >
+          </div>
+          <div class="top-bar-right">
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" aria-label="LinkedIn"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="navbar" id="navbar">
+      <div class="container">
+        <a href="index.html" class="brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#e8cd8d" />
+                  <stop offset="100%" stop-color="#9b7a2f" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M20 10 L20 78 L58 78 L58 64 L36 64 L36 10 Z"
+                fill="url(#goldGrad)"
+              />
+              <path d="M66 10 L82 10 L82 90 L66 90 Z" fill="#0f0f0f" />
+            </svg>
+          </span>
+          <span class="brand-text">
+            <span class="name">Lajed Interiors</span>
+            <span class="tag">Design. Create. Inspire.</span>
+          </span>
+        </a>
+
+        <nav>
+          <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li class="has-dd">
+              <a href="services.html"
+                >Services <i class="fa-solid fa-chevron-down"></i
+              ></a>
+              <div class="mega">
+                <a href="services-epoxy.html"
+                  ><div class="mega-title">Epoxy Flooring</div>
+                  <div class="mega-desc">
+                    Durable, seamless and glossy finishes
+                  </div></a
+                >
+                <a href="services-kitchens.html"
+                  ><div class="mega-title">Modern Kitchens</div>
+                  <div class="mega-desc">
+                    Stylish layouts made for how you cook and live
+                  </div></a
+                >
+                <a href="services-wardrobes.html"
+                  ><div class="mega-title">Wardrobes and Closets</div>
+                  <div class="mega-desc">
+                    Smart storage with elegant detailing
+                  </div></a
+                >
+                <a href="services-gypsum.html"
+                  ><div class="mega-title">Gypsum Ceiling</div>
+                  <div class="mega-desc">
+                    Modern ceiling designs with perfect finishes
+                  </div></a
+                >
+                <a href="services-spc.html"
+                  ><div class="mega-title">SPC and Laminate Flooring</div>
+                  <div class="mega-desc">
+                    Strong, stylish and easy to maintain
+                  </div></a
+                >
+                <a href="services-partitioning.html"
+                  ><div class="mega-title">Office Partitioning</div>
+                  <div class="mega-desc">
+                    Functional spaces for modern workplaces
+                  </div></a
+                >
+              </div>
+            </li>
+            <li class="has-dd">
+              <a href="portfolio.html"
+                >Portfolio <i class="fa-solid fa-chevron-down"></i
+              ></a>
+              <div class="mega portfolio-mega">
+                <a href="residential_design.html"
+                  ><div class="mega-title">Residential Interior Design</div>
+                  <div class="mega-desc">Completed residential projects</div></a
+                >
+                <a href="commercial.html"
+                  ><div class="mega-title">Commercial Interior Design</div>
+                  <div class="mega-desc">
+                    Commercial spaces we've transformed
+                  </div></a
+                >
+                <a href="hospitality.html" class="active"
+                  ><div class="mega-title">Hospitality Interior Design</div>
+                  <div class="mega-desc">Hotels, restaurants, and more</div></a
+                >
+                <a href="transformations.html"
+                  ><div class="mega-title">Transformations</div>
+                  <div class="mega-desc">Before and after renovations</div></a
+                >
+              </div>
+            </li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-cta">
+          <a href="tel:+254722601669" class="btn btn-outline">Call Now</a>
+          <button
+            class="nav-toggle"
+            id="navToggle"
+            aria-label="Menu"
+            aria-expanded="false"
+            aria-controls="navLinks"
+          >
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== HOSPITALITY HERO ===== -->
+    <section class="portfolio-hero">
+      <div class="container">
+        <span class="eyebrow" style="color: var(--gold-300)"
+          >Hospitality Portfolio</span
+        >
+        <h1>Designing Experiences <span class="accent">Through Space</span></h1>
+        <p class="sub">
+          Hotels, restaurants, and hospitality spaces crafted to leave lasting
+          impressions — where every detail shapes the guest journey.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== IMMERSIVE GALLERY ===== -->
+    <section class="immersive">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Projects</span>
+          <h2 class="section-title">Hospitality Spaces</h2>
+          <p class="section-lede">
+            Designs that captivate, comfort, and inspire.
+          </p>
+        </div>
+        <div class="immersive-grid">
+          <div class="immersive-item reveal">
+            <img src="img/hosp-1.jpg" alt="Boutique Hotel Nairobi" />
+            <div class="overlay">
+              <div class="name">Boutique Hotel Nairobi</div>
+              <div class="type">Hotel Lobby</div>
+            </div>
+          </div>
+          <div class="immersive-item reveal reveal-delay-1">
+            <img src="img/hosp-2.jpg" alt="Coastal Resort Interiors" />
+            <div class="overlay">
+              <div class="name">Coastal Resort Interiors</div>
+              <div class="type">Resort</div>
+            </div>
+          </div>
+          <div class="immersive-item reveal reveal-delay-2">
+            <img src="img/hosp-3.jpg" alt="Fine Dining Experience Lounge" />
+            <div class="overlay">
+              <div class="name">Fine Dining Experience Lounge</div>
+              <div class="type">Restaurant</div>
+            </div>
+          </div>
+          <div class="immersive-item reveal reveal-delay-3">
+            <img src="img/hosp-4.jpg" alt="Luxury Guest Suites" />
+            <div class="overlay">
+              <div class="name">Luxury Guest Suites</div>
+              <div class="type">Hotel Suite</div>
+            </div>
+          </div>
+          <div class="immersive-item reveal">
+            <img src="img/hosp-5.jpg" alt="Rooftop Lounge" />
+            <div class="overlay">
+              <div class="name">Rooftop Lounge</div>
+              <div class="type">Lounge</div>
+            </div>
+          </div>
+          <div class="immersive-item reveal">
+            <img src="img/hosp-6.jpg" alt="Cozy Space" />
+            <div class="overlay">
+              <div class="name">Cozy Space</div>
+              <div class="type">Serenity</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EXPERIENCE TEXT ===== -->
+    <section class="experience">
+      <div class="container reveal">
+        <span class="eyebrow">The Art of Hospitality</span>
+        <h2>Every Detail Shapes the Experience</h2>
+        <p>
+          In hospitality design, every detail shapes the guest experience. From
+          ambiance and lighting to layout and flow, we create environments that
+          captivate, comfort, and inspire. Our work is about more than
+          aesthetics — it's about creating moments that people remember.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== FEATURE STRIP ===== -->
+    <section class="strip-hosp">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Signature Elements</span>
+          <h2 class="section-title">Crafting Atmosphere</h2>
+        </div>
+      </div>
+      <div class="strip-hosp-track" id="hospStrip">
+        <div class="strip-hosp-card">
+          <img src="img/hosp-strip-1.jpg" alt="Guest comfort" />
+          <div class="label">
+            <h4>Guest Comfort</h4>
+            <span>Warmth &amp; Relaxation</span>
+          </div>
+        </div>
+        <div class="strip-hosp-card">
+          <img src="img/hosp-strip-2.jpg" alt="Brand storytelling" />
+          <div class="label">
+            <h4>Brand Storytelling</h4>
+            <span>Identity &amp; Experience</span>
+          </div>
+        </div>
+        <div class="strip-hosp-card">
+          <img src="img/hosp-strip-3.jpg" alt="Atmosphere creation" />
+          <div class="label">
+            <h4>Atmosphere Creation</h4>
+            <span>Lighting &amp; Mood</span>
+          </div>
+        </div>
+        <div class="strip-hosp-card">
+          <img src="img/hosp-strip-4.jpg" alt="Bespoke furnishings" />
+          <div class="label">
+            <h4>Bespoke Furnishings</h4>
+            <span>Tailored &amp; Unique</span>
+          </div>
+        </div>
+        <div class="strip-hosp-card">
+          <img src="img/hosp-strip-5.jpg" alt="Sensory design" />
+          <div class="label">
+            <h4>Sensory Design</h4>
+            <span>Sight, Sound &amp; Texture</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CLOSING BANNER ===== -->
+    <section class="closing-banner">
+      <div class="container">
+        <span class="eyebrow" style="color: var(--gold-300)"
+          >Let's Create Together</span
+        >
+        <h2>Create Spaces Guests Remember</h2>
+        <a
+          href="https://wa.me/254722601669"
+          target="_blank"
+          class="btn btn-gold"
+          ><i class="fa-brands fa-whatsapp"></i> Start Your Project</a
+        >
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+      <img src="img/footer-bg.jpg" alt="" />
+      <div class="container">
+        <div class="foot-grid">
+          <div class="foot-brand">
+            <a href="index.html" class="brand">
+              <span class="brand-mark">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M20 10 L20 78 L58 78 L58 64 L36 64 L36 10 Z"
+                    fill="url(#goldGrad)"
+                  />
+                  <path d="M66 10 L82 10 L82 90 L66 90 Z" fill="#e8cd8d" />
+                </svg>
+              </span>
+              <span class="brand-text">
+                <span class="name">Lajed Interiors</span>
+                <span class="tag">Design. Create. Inspire.</span>
+              </span>
+            </a>
+            <p>
+              A premium interior design studio in Nairobi crafting refined,
+              functional and enduring spaces.
+            </p>
+            <div class="foot-socials">
+              <a href="#" aria-label="TikTok"
+                ><i class="fa-brands fa-tiktok"></i
+              ></a>
+              <a href="#" aria-label="Facebook"
+                ><i class="fa-brands fa-facebook-f"></i
+              ></a>
+              <a href="#" aria-label="Instagram"
+                ><i class="fa-brands fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="LinkedIn"
+                ><i class="fa-brands fa-linkedin-in"></i
+              ></a>
+              <a href="#" aria-label="X"
+                ><i class="fa-brands fa-x-twitter"></i
+              ></a>
+              <a href="#" aria-label="YouTube"
+                ><i class="fa-brands fa-youtube"></i
+              ></a>
+            </div>
+          </div>
+          <div class="foot-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="portfolio.html">Portfolio</a></li>
+              <li><a href="blog.html">Blog</a></li>
+            </ul>
+          </div>
+          <div class="foot-col">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><a href="terms.html">Terms and Conditions</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+              <li><a href="faqs.html">FAQs</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="foot-col contact">
+            <h4>Get In Touch</h4>
+            <p><i class="fa-solid fa-location-dot"></i> 00100 Ruaka, Nairobi</p>
+            <p><i class="fa-solid fa-phone"></i> +254 722 601 669</p>
+            <p>
+              <i class="fa-solid fa-envelope"></i> info@lajedinteriors.co.ke
+            </p>
+            <h4 style="margin-top: 1.8rem">Subscribe</h4>
+            <form class="newsletter-form">
+              <input type="email" placeholder="Your email address" required />
+              <button type="submit">
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="foot-bottom">
+          <span>Copyright Lajed Interiors. All rights reserved.</span>
+          <span
+            >Powered by
+            <a href="https://eontechsystems.com/" target="_blank"
+              >EonTech Systems</a
+            ></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- ===== FLOATING CONTACT DOCK ===== -->
+    <div class="dock" id="dock">
+      <div class="dock-items">
+        <div class="dock-item whatsapp">
+          <a href="https://wa.me/254722601669" target="_blank"
+            ><span class="ic"><i class="fa-brands fa-whatsapp"></i></span
+            ><span class="lbl">WhatsApp</span></a
+          >
+        </div>
+        <div class="dock-item call">
+          <a href="tel:+254722601669"
+            ><span class="ic"><i class="fa-solid fa-phone"></i></span
+            ><span class="lbl">Call Us</span></a
+          >
+        </div>
+        <div class="dock-item email">
+          <a href="mailto:info@lajedinteriors.co.ke"
+            ><span class="ic"><i class="fa-solid fa-envelope"></i></span
+            ><span class="lbl">Email Us</span></a
+          >
+        </div>
+      </div>
+      <button class="dock-toggle" id="dockToggle" aria-label="Contact options">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+    </div>
+
+    <a href="#" class="to-top" id="toTop" aria-label="Back to top"
+      ><i class="fa-solid fa-arrow-up"></i
+    ></a>
+
+    <!-- Scripts (same as homepage) -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Horizontal strip auto-scroll -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const track = document.getElementById("hospStrip");
+        if (track) {
+          let pos = 0;
+          const speed = 0.35;
+          let paused = false;
+          const cards = Array.from(track.children);
+          cards.forEach((c) => track.appendChild(c.cloneNode(true)));
+
+          track.addEventListener("mouseenter", () => {
+            paused = true;
+          });
+          track.addEventListener("mouseleave", () => {
+            paused = false;
+          });
+
+          function animateStrip() {
+            if (!paused) {
+              pos -= speed;
+              const loopWidth = track.scrollWidth / 2;
+              if (Math.abs(pos) >= loopWidth) pos = 0;
+              track.style.transform = "translateX(" + pos + "px)";
+            }
+            requestAnimationFrame(animateStrip);
+          }
+          requestAnimationFrame(animateStrip);
+        }
+      });
+    </script>
+  </body>
+</html>

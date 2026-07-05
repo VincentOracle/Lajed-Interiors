@@ -1,0 +1,900 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Epoxy Flooring · Lajed Interiors</title>
+    <meta
+      name="description"
+      content="Durable, seamless, and glossy epoxy flooring solutions by Lajed Interiors. Residential, commercial, and industrial applications."
+    />
+
+    <!-- Favicon -->
+    <link href="img/favicon-icon.png" rel="icon" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600;700&family=Oswald:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+    />
+
+    <!-- Owl Carousel / Lightbox -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
+
+    <!-- Custom Styles (same as homepage) -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <style>
+      /* ----- Service page specific overrides ----- */
+      .service-hero {
+        min-height: 80vh;
+        background: var(--charcoal) url("img/epoxy-hero.jpg") center/cover
+          no-repeat;
+        position: relative;
+        display: flex;
+        align-items: center;
+        isolation: isolate;
+      }
+      .service-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(15, 15, 15, 0.5) 0%,
+          rgba(15, 15, 15, 0.85) 100%
+        );
+        z-index: 0;
+      }
+      .service-hero .container {
+        position: relative;
+        z-index: 2;
+        padding: 8rem 0 4rem;
+        color: var(--white);
+      }
+      .service-hero h1 {
+        font-size: clamp(2.8rem, 6vw, 4.8rem);
+        color: var(--white);
+        max-width: 14ch;
+        line-height: 1.05;
+      }
+      .service-hero h1 .accent {
+        color: var(--gold-300);
+        font-style: italic;
+      }
+      .service-hero p.sub {
+        max-width: 520px;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 1.1rem;
+        margin-top: 1.2rem;
+      }
+      .service-hero .hero-actions {
+        margin-top: 2.2rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .service-hero .badge-urgency {
+        margin-top: 1.6rem;
+      }
+
+      /* Benefits grid */
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.8rem;
+        margin-top: 2rem;
+      }
+      .benefit-card {
+        background: var(--white);
+        padding: 2rem 1.4rem 1.6rem;
+        border-radius: 4px;
+        text-align: center;
+        border: 1px solid rgba(15, 15, 15, 0.06);
+        transition: all 0.5s ease;
+      }
+      .benefit-card:hover {
+        transform: translateY(-6px);
+        border-color: var(--gold-500);
+        box-shadow: 0 20px 40px -20px rgba(201, 161, 74, 0.25);
+      }
+      .benefit-card .icon {
+        font-size: 2.2rem;
+        color: var(--gold-500);
+        margin-bottom: 0.8rem;
+      }
+      .benefit-card h4 {
+        font-family: var(--font-body);
+        font-weight: 600;
+        font-size: 0.95rem;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+      .benefit-card p {
+        font-size: 0.85rem;
+        color: var(--stone);
+        margin-top: 0.4rem;
+      }
+      @media (max-width: 992px) {
+        .benefits-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 600px) {
+        .benefits-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Gallery masonry */
+      .epoxy-gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.2rem;
+        margin-top: 2rem;
+      }
+      .epoxy-gallery .g-item {
+        border-radius: 4px;
+        overflow: hidden;
+        position: relative;
+        aspect-ratio: 4/3;
+      }
+      .epoxy-gallery .g-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.7s ease;
+      }
+      .epoxy-gallery .g-item:hover img {
+        transform: scale(1.08);
+      }
+      .epoxy-gallery .g-item .overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          0deg,
+          rgba(15, 15, 15, 0.6) 0%,
+          transparent 60%
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        display: flex;
+        align-items: flex-end;
+        padding: 1.2rem;
+        color: var(--white);
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+      .epoxy-gallery .g-item:hover .overlay {
+        opacity: 1;
+      }
+      @media (max-width: 768px) {
+        .epoxy-gallery {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 480px) {
+        .epoxy-gallery {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Before / After slider (simple interactive) */
+      .ba-container {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+        margin-top: 2rem;
+        flex-wrap: wrap;
+      }
+      .ba-image {
+        flex: 1;
+        min-width: 260px;
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.3);
+        position: relative;
+      }
+      .ba-image img {
+        width: 100%;
+        display: block;
+        aspect-ratio: 4/3;
+        object-fit: cover;
+      }
+      .ba-image .label {
+        position: absolute;
+        bottom: 1rem;
+        left: 1rem;
+        background: rgba(15, 15, 15, 0.7);
+        color: var(--white);
+        padding: 0.3rem 1.2rem;
+        font-size: 0.7rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        border-radius: 2px;
+      }
+      .ba-slider {
+        flex: 1;
+        min-width: 200px;
+        display: flex;
+        flex-direction: column;
+        gap: 1.4rem;
+      }
+      .ba-slider input[type="range"] {
+        width: 100%;
+        height: 4px;
+        -webkit-appearance: none;
+        background: var(--gold-500);
+        border-radius: 2px;
+        outline: none;
+      }
+      .ba-slider input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--gold-500);
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(201, 161, 74, 0.4);
+      }
+      .ba-slider .labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.8rem;
+        color: var(--stone);
+        letter-spacing: 0.05em;
+      }
+      .ba-slider .labels span:first-child {
+        font-weight: 600;
+        color: var(--charcoal);
+      }
+      .ba-slider .labels span:last-child {
+        font-weight: 600;
+        color: var(--gold-700);
+      }
+
+      /* Steps */
+      .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.8rem;
+        margin-top: 2rem;
+      }
+      .step {
+        text-align: center;
+        padding: 1.6rem 0.8rem;
+        border-top: 2px solid var(--gold-300);
+      }
+      .step .num {
+        font-family: var(--font-display);
+        font-size: 2.2rem;
+        color: var(--gold-500);
+        line-height: 1;
+      }
+      .step h5 {
+        font-family: var(--font-body);
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-top: 0.6rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .step p {
+        font-size: 0.8rem;
+        color: var(--stone);
+        margin-top: 0.3rem;
+      }
+      @media (max-width: 768px) {
+        .steps-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 480px) {
+        .steps-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* closing banner */
+      .closing-banner {
+        padding: var(--gap-xl) 0;
+        background: var(--charcoal) url("img/epoxy-closing.jpg") center/cover
+          no-repeat;
+        position: relative;
+        text-align: center;
+        color: var(--white);
+        isolation: isolate;
+      }
+      .closing-banner::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(15, 15, 15, 0.82);
+        z-index: 0;
+      }
+      .closing-banner .container {
+        position: relative;
+        z-index: 1;
+      }
+      .closing-banner h2 {
+        font-size: clamp(2.2rem, 5vw, 3.8rem);
+        color: var(--white);
+        max-width: 14ch;
+        margin: 0 auto;
+      }
+      .closing-banner .btn {
+        margin-top: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== TOP BAR ===== -->
+    <div class="top-bar">
+      <div class="container">
+        <div class="top-bar-inner">
+          <div class="top-bar-left">
+            <a href="mailto:info@lajedinteriors.co.ke"
+              ><i class="fas fa-envelope"></i> info@lajedinteriors.co.ke</a
+            >
+            <a href="tel:+254722601669"
+              ><i class="fas fa-phone-alt"></i> +254 722 601 669</a
+            >
+            <span
+              ><i class="fas fa-map-marker-alt"></i> 00100 Ruaka, Nairobi</span
+            >
+          </div>
+          <div class="top-bar-right">
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" aria-label="LinkedIn"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="navbar" id="navbar">
+      <div class="container">
+        <a href="index.html" class="brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#e8cd8d" />
+                  <stop offset="100%" stop-color="#9b7a2f" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M20 10 L20 78 L58 78 L58 64 L36 64 L36 10 Z"
+                fill="url(#goldGrad)"
+              />
+              <path d="M66 10 L82 10 L82 90 L66 90 Z" fill="#0f0f0f" />
+            </svg>
+          </span>
+          <span class="brand-text">
+            <span class="name">Lajed Interiors</span>
+            <span class="tag">Design. Create. Inspire.</span>
+          </span>
+        </a>
+
+        <nav>
+          <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li class="has-dd">
+              <a href="services.html"
+                >Services <i class="fa-solid fa-chevron-down"></i
+              ></a>
+              <div class="mega">
+                <a href="services-epoxy.html" class="active"
+                  ><div class="mega-title">Epoxy Flooring</div>
+                  <div class="mega-desc">
+                    Durable, seamless and glossy finishes
+                  </div></a
+                >
+                <a href="services-kitchens.html"
+                  ><div class="mega-title">Modern Kitchens</div>
+                  <div class="mega-desc">
+                    Stylish layouts made for how you cook and live
+                  </div></a
+                >
+                <a href="services-wardrobes.html"
+                  ><div class="mega-title">Wardrobes and Closets</div>
+                  <div class="mega-desc">
+                    Smart storage with elegant detailing
+                  </div></a
+                >
+                <a href="services-gypsum.html"
+                  ><div class="mega-title">Gypsum Ceiling</div>
+                  <div class="mega-desc">
+                    Modern ceiling designs with perfect finishes
+                  </div></a
+                >
+                <a href="services-spc.html"
+                  ><div class="mega-title">SPC and Laminate Flooring</div>
+                  <div class="mega-desc">
+                    Strong, stylish and easy to maintain
+                  </div></a
+                >
+                <a href="services-partitioning.html"
+                  ><div class="mega-title">Office Partitioning</div>
+                  <div class="mega-desc">
+                    Functional spaces for modern workplaces
+                  </div></a
+                >
+              </div>
+            </li>
+            <li class="has-dd">
+              <a href="portfolio.html"
+                >Portfolio <i class="fa-solid fa-chevron-down"></i
+              ></a>
+              <div class="mega portfolio-mega">
+                <a href="residential_design.html"
+                  ><div class="mega-title">Residential Interior Design</div>
+                  <div class="mega-desc">Completed residential projects</div></a
+                >
+                <a href="commercial.html"
+                  ><div class="mega-title">Commercial Interior Design</div>
+                  <div class="mega-desc">
+                    Commercial spaces we've transformed
+                  </div></a
+                >
+                <a href="hospitality.html"
+                  ><div class="mega-title">Hospitality Interior Design</div>
+                  <div class="mega-desc">Hotels, restaurants, and more</div></a
+                >
+                <a href="transformations.html"
+                  ><div class="mega-title">Transformations</div>
+                  <div class="mega-desc">Before and after renovations</div></a
+                >
+              </div>
+            </li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-cta">
+          <a href="tel:+254722601669" class="btn btn-outline">Call Now</a>
+          <button
+            class="nav-toggle"
+            id="navToggle"
+            aria-label="Menu"
+            aria-expanded="false"
+            aria-controls="navLinks"
+          >
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== EPOXY HERO ===== -->
+    <section class="service-hero">
+      <div class="container">
+        <span class="eyebrow" style="color: var(--gold-300)"
+          >Epoxy Flooring</span
+        >
+        <h1>
+          Durable, Seamless, <span class="accent">Glossy Perfection</span>
+        </h1>
+        <p class="sub">
+          Long-lasting, hygienic, and visually striking flooring solutions for
+          residential, commercial, and industrial spaces.
+        </p>
+        <div class="hero-actions">
+          <a
+            href="https://wa.me/254722601669"
+            target="_blank"
+            class="btn btn-gold"
+            ><i class="fa-brands fa-whatsapp"></i> Call or WhatsApp Now</a
+          >
+          <a href="contact.html" class="btn btn-outline"
+            >Book Free Site Visit</a
+          >
+        </div>
+        <div class="badge-urgency">
+          <span class="dot"></span> Limited Installation Slots Available
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== BENEFITS ===== -->
+    <section class="split-section">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Why Epoxy</span>
+          <h2 class="section-title">Engineered for Performance</h2>
+          <p class="section-lede">
+            Epoxy flooring delivers unmatched durability, safety, and aesthetic
+            appeal. Here’s why it’s the smart choice.
+          </p>
+        </div>
+        <div class="benefits-grid">
+          <div class="benefit-card reveal">
+            <div class="icon"><i class="fa-solid fa-infinity"></i></div>
+            <h4>Lifetime Durability</h4>
+            <p>
+              Withstands heavy foot traffic, machinery, and impact without wear.
+            </p>
+          </div>
+          <div class="benefit-card reveal reveal-delay-1">
+            <div class="icon"><i class="fa-solid fa-shoe-prints"></i></div>
+            <h4>Non Slip</h4>
+            <p>
+              Enhanced safety with textured finishes that provide superior grip.
+            </p>
+          </div>
+          <div class="benefit-card reveal reveal-delay-2">
+            <div class="icon"><i class="fa-solid fa-arrows-to-dot"></i></div>
+            <h4>Zero Joints</h4>
+            <p>
+              Seamless surface eliminates dirt traps and creates a unified look.
+            </p>
+          </div>
+          <div class="benefit-card reveal reveal-delay-3">
+            <div class="icon"><i class="fa-solid fa-broom"></i></div>
+            <h4>Easy to Clean</h4>
+            <p>
+              Smooth, non-porous surface repels dust and stains — just wipe and
+              go.
+            </p>
+          </div>
+          <div class="benefit-card reveal">
+            <div class="icon"><i class="fa-solid fa-wrench"></i></div>
+            <h4>Zero Maintenance</h4>
+            <p>
+              No waxing, polishing, or special care required. Saves time and
+              money.
+            </p>
+          </div>
+          <div class="benefit-card reveal reveal-delay-1">
+            <div class="icon"><i class="fa-solid fa-bacteria"></i></div>
+            <h4>Doesn't Rear Bacteria</h4>
+            <p>
+              Hygienic, antimicrobial surface ideal for healthcare and food
+              environments.
+            </p>
+          </div>
+          <div class="benefit-card reveal reveal-delay-2">
+            <div class="icon">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </div>
+            <h4>Shiny / Glossy Finish</h4>
+            <p>
+              High-gloss or satin options that reflect light and elevate any
+              space.
+            </p>
+          </div>
+          <div class="benefit-card reveal reveal-delay-3">
+            <div class="icon"><i class="fa-solid fa-droplet-slash"></i></div>
+            <h4>Doesn't Stain</h4>
+            <p>
+              Resists chemicals, oils, and spills — maintains its pristine look
+              for years.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VISUAL SHOWCASE (Gallery) ===== -->
+    <section class="split-section" style="background: var(--ivory)">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Portfolio</span>
+          <h2 class="section-title">Epoxy in Action</h2>
+          <p class="section-lede">
+            From sleek residential floors to heavy-duty industrial applications.
+          </p>
+        </div>
+        <div class="epoxy-gallery">
+          <div class="g-item reveal">
+            <img src="img/epoxy-1.jpg" alt="Epoxy floor residential" />
+            <div class="overlay">Residential Living</div>
+          </div>
+          <div class="g-item reveal reveal-delay-1">
+            <img src="img/epoxy-2.jpg" alt="Epoxy floor commercial" />
+            <div class="overlay">Commercial Showroom</div>
+          </div>
+          <div class="g-item reveal reveal-delay-2">
+            <img src="img/epoxy-3.jpg" alt="Epoxy floor industrial" />
+            <div class="overlay">Industrial Warehouse</div>
+          </div>
+          <div class="g-item reveal reveal-delay-3">
+            <img src="img/epoxy-4.jpg" alt="Epoxy floor kitchen" />
+            <div class="overlay">Modern Kitchen</div>
+          </div>
+          <div class="g-item reveal">
+            <img src="img/epoxy-5.jpg" alt="Epoxy floor office" />
+            <div class="overlay">Office Space</div>
+          </div>
+          <div class="g-item reveal reveal-delay-1">
+            <img src="img/epoxy-6.jpg" alt="Epoxy floor garage" />
+            <div class="overlay">Garage Floor</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== BEFORE / AFTER SLIDER ===== -->
+    <section class="split-section">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Transformation</span>
+          <h2 class="section-title">Before &amp; After</h2>
+          <p class="section-lede">
+            See the dramatic difference epoxy flooring makes.
+          </p>
+        </div>
+        <div class="ba-container">
+          <div class="ba-image reveal">
+            <img
+              src="img/epoxy-before.jpg"
+              alt="Before epoxy installation"
+              id="baBefore"
+            />
+            <span class="label">Before</span>
+          </div>
+          <div class="ba-image reveal reveal-delay-1">
+            <img
+              src="img/epoxy-after.jpg"
+              alt="After epoxy installation"
+              id="baAfter"
+            />
+            <span class="label">After</span>
+          </div>
+          <div class="ba-slider reveal reveal-delay-2">
+            <div class="labels"><span>Before</span><span>After</span></div>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value="50"
+              id="baSlider"
+              aria-label="Before and after slider"
+            />
+            <p
+              style="font-size: 0.8rem; color: var(--stone); text-align: center"
+            >
+              Drag to reveal the transformation
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== INSTALLATION STEPS ===== -->
+    <section class="split-section" style="background: var(--ivory)">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Process</span>
+          <h2 class="section-title">How It Works</h2>
+          <p class="section-lede">
+            A straightforward, professional installation from start to finish.
+          </p>
+        </div>
+        <div class="steps-grid">
+          <div class="step reveal">
+            <div class="num">01</div>
+            <h5>Site Assessment</h5>
+            <p>We evaluate your space, surface condition, and requirements.</p>
+          </div>
+          <div class="step reveal reveal-delay-1">
+            <div class="num">02</div>
+            <h5>Surface Preparation</h5>
+            <p>Floor is cleaned, ground, and primed for optimal adhesion.</p>
+          </div>
+          <div class="step reveal reveal-delay-2">
+            <div class="num">03</div>
+            <h5>Application</h5>
+            <p>
+              Epoxy is expertly applied in layers for a seamless, flawless
+              finish.
+            </p>
+          </div>
+          <div class="step reveal reveal-delay-3">
+            <div class="num">04</div>
+            <h5>Curing &amp; Handover</h5>
+            <p>
+              Your new floor cures and is ready to use with full warranty
+              support.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CLOSING BANNER ===== -->
+    <section class="closing-banner">
+      <div class="container">
+        <span class="eyebrow" style="color: var(--gold-300)"
+          >Lajed Interiors</span
+        >
+        <h2>Engineered for Strength. Designed for Elegance.</h2>
+        <a
+          href="https://wa.me/254722601669"
+          target="_blank"
+          class="btn btn-gold"
+          ><i class="fa-brands fa-whatsapp"></i> Get Your Free Quotation</a
+        >
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+      <img src="img/footer-bg.jpg" alt="" />
+      <div class="container">
+        <div class="foot-grid">
+          <div class="foot-brand">
+            <a href="index.html" class="brand">
+              <span class="brand-mark">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M20 10 L20 78 L58 78 L58 64 L36 64 L36 10 Z"
+                    fill="url(#goldGrad)"
+                  />
+                  <path d="M66 10 L82 10 L82 90 L66 90 Z" fill="#e8cd8d" />
+                </svg>
+              </span>
+              <span class="brand-text">
+                <span class="name">Lajed Interiors</span>
+                <span class="tag">Design. Create. Inspire.</span>
+              </span>
+            </a>
+            <p>
+              A premium interior design studio in Nairobi crafting refined,
+              functional and enduring spaces.
+            </p>
+            <div class="foot-socials">
+              <a href="#" aria-label="TikTok"
+                ><i class="fa-brands fa-tiktok"></i
+              ></a>
+              <a href="#" aria-label="Facebook"
+                ><i class="fa-brands fa-facebook-f"></i
+              ></a>
+              <a href="#" aria-label="Instagram"
+                ><i class="fa-brands fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="LinkedIn"
+                ><i class="fa-brands fa-linkedin-in"></i
+              ></a>
+              <a href="#" aria-label="X"
+                ><i class="fa-brands fa-x-twitter"></i
+              ></a>
+              <a href="#" aria-label="YouTube"
+                ><i class="fa-brands fa-youtube"></i
+              ></a>
+            </div>
+          </div>
+          <div class="foot-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="portfolio.html">Portfolio</a></li>
+              <li><a href="blog.html">Blog</a></li>
+            </ul>
+          </div>
+          <div class="foot-col">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><a href="terms.html">Terms and Conditions</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+              <li><a href="faqs.html">FAQs</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="foot-col contact">
+            <h4>Get In Touch</h4>
+            <p><i class="fa-solid fa-location-dot"></i> 00100 Ruaka, Nairobi</p>
+            <p><i class="fa-solid fa-phone"></i> +254 722 601 669</p>
+            <p>
+              <i class="fa-solid fa-envelope"></i> info@lajedinteriors.co.ke
+            </p>
+            <h4 style="margin-top: 1.8rem">Subscribe</h4>
+            <form class="newsletter-form">
+              <input type="email" placeholder="Your email address" required />
+              <button type="submit">
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="foot-bottom">
+          <span>Copyright Lajed Interiors. All rights reserved.</span>
+          <span
+            >Powered by
+            <a href="https://eontechsystems.com/" target="_blank"
+              >EonTech Systems</a
+            ></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- ===== FLOATING CONTACT DOCK ===== -->
+    <div class="dock" id="dock">
+      <div class="dock-items">
+        <div class="dock-item whatsapp">
+          <a href="https://wa.me/254722601669" target="_blank"
+            ><span class="ic"><i class="fa-brands fa-whatsapp"></i></span
+            ><span class="lbl">WhatsApp</span></a
+          >
+        </div>
+        <div class="dock-item call">
+          <a href="tel:+254722601669"
+            ><span class="ic"><i class="fa-solid fa-phone"></i></span
+            ><span class="lbl">Call Us</span></a
+          >
+        </div>
+        <div class="dock-item email">
+          <a href="mailto:info@lajedinteriors.co.ke"
+            ><span class="ic"><i class="fa-solid fa-envelope"></i></span
+            ><span class="lbl">Email Us</span></a
+          >
+        </div>
+      </div>
+      <button class="dock-toggle" id="dockToggle" aria-label="Contact options">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+    </div>
+
+    <a href="#" class="to-top" id="toTop" aria-label="Back to top"
+      ><i class="fa-solid fa-arrow-up"></i
+    ></a>
+
+    <!-- Scripts (same as homepage) -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Simple before/after slider interaction -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const slider = document.getElementById("baSlider");
+        const beforeImg = document.getElementById("baBefore");
+        const afterImg = document.getElementById("baAfter");
+        if (slider && beforeImg && afterImg) {
+          slider.addEventListener("input", function () {
+            const val = this.value / 100;
+            // simple cross-fade: adjust opacity of before image
+            beforeImg.style.opacity = 1 - val;
+            afterImg.style.opacity = val;
+          });
+          // initial state: 50/50
+          beforeImg.style.opacity = 0.5;
+          afterImg.style.opacity = 0.5;
+        }
+      });
+    </script>
+  </body>
+</html>
