@@ -1,15 +1,44 @@
 /* ==========================================================
    LAJED INTERIORS — main.js
-   Rewritten: fixes an invalid `querySelector('> a')` call that
-   threw a DOMException and stopped every line of code after it
-   from ever running (mega menu setup used to sit in the middle
-   of the file, which is why sections below it, like Services,
-   Why Choose Us, Featured Projects and Testimonials, never
-   received their `.in` reveal class and stayed invisible).
+   FIX LOG (this revision):
+   1) Mega-menu race condition on touch devices: tapping a link
+      fires a synthetic `mouseenter`/`focusin` just before `click`.
+      The old code opened the panel on hover/focus AND toggled it
+      on click, so a tap opened it (via mouseenter) and then the
+      click handler immediately read "already open" and closed it
+      again — the sub-menu flashed and vanished. Hover/focus based
+      opening is now gated to desktop widths only; mobile is
+      driven exclusively by the explicit click toggle.
+   2) Top bar / navbar overlap on mobile: the navbar used a
+      hardcoded --topbar-h-mobile (56px) offset, but the top bar
+      wraps onto more lines than that on narrow screens, so the
+      navbar sat on top of it. We now measure the real top bar
+      height on load/resize and write it into --topbar-h, which
+      the navbar always reads from (see style.css).
+   3) Closing the mobile nav drawer (via the toggle button, a
+      plain link, or an outside click) now also closes any open
+      mega submenus, so re-opening the drawer starts clean.
    ========================================================== */
 
 document.addEventListener('DOMContentLoaded', function () {
     'use strict';
+
+    /* ---------- Keep the navbar's top offset in sync with the
+       top bar's real (possibly multi-line) height ---------- */
+    var topBarEl = document.querySelector('.top-bar');
+    function syncTopBarHeight() {
+        if (!topBarEl) return;
+        var h = Math.ceil(topBarEl.getBoundingClientRect().height);
+        document.documentElement.style.setProperty('--topbar-h', h + 'px');
+    }
+    syncTopBarHeight();
+    window.addEventListener('load', syncTopBarHeight);
+    window.addEventListener('resize', syncTopBarHeight);
+    // top bar content can reflow shortly after fonts load
+    setTimeout(syncTopBarHeight, 300);
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(syncTopBarHeight);
+    }
 
     /* ---------- Sticky top bar + navbar ---------- */
     var navbar = document.querySelector('.navbar');
@@ -35,47 +64,75 @@ document.addEventListener('DOMContentLoaded', function () {
     /* ---------- Mobile nav toggle ---------- */
     var navToggle = document.querySelector('.nav-toggle');
     var navLinks = document.querySelector('.nav-links');
+    var ddItems = document.querySelectorAll('.has-dd');
+
+    function isDesktopNav() {
+        return window.innerWidth > 992;
+    }
+
+    function closeAllMegas() {
+        ddItems.forEach(function (el) {
+            el.classList.remove('open');
+        });
+    }
+
+    function closeMobileNav() {
+        if (!navLinks || !navToggle) return;
+        navLinks.classList.remove('open');
+        navToggle.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+        closeAllMegas();
+    }
 
     if (navToggle && navLinks) {
         navToggle.addEventListener('click', function () {
             var isOpen = navLinks.classList.toggle('open');
             navToggle.classList.toggle('active', isOpen);
             navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            if (!isOpen) closeAllMegas();
         });
 
-        // Close mobile nav on plain link click (but not on dropdown parent links)
+        // Close mobile nav on a plain (non-dropdown-trigger) link click
         navLinks.querySelectorAll('a').forEach(function (link) {
             link.addEventListener('click', function () {
-                if (window.innerWidth <= 992 && link.closest('.has-dd') && !link.parentElement.classList.contains('has-dd')) {
-                    // links inside an open mega menu: close everything after navigating
-                }
-                navLinks.classList.remove('open');
-                navToggle.classList.remove('active');
-                navToggle.setAttribute('aria-expanded', 'false');
+                var parentLi = link.parentElement;
+                var isDropdownTrigger = parentLi && parentLi.classList.contains('has-dd');
+                // Dropdown triggers are handled by the mega-menu click
+                // handler below (they toggle the panel instead of
+                // navigating on mobile). Real destination links close
+                // the whole drawer.
+                if (!isDesktopNav() && isDropdownTrigger) return;
+                closeMobileNav();
             });
+        });
+
+        // Close the drawer if the user taps outside of it
+        document.addEventListener('click', function (e) {
+            if (!navLinks.classList.contains('open')) return;
+            if (navLinks.contains(e.target) || navToggle.contains(e.target)) return;
+            closeMobileNav();
         });
     }
 
-    /* ---------- Mega menu: hoverable, focusable, click-safe ----------
-       Fix: the previous version used `item.querySelector('> a')`, an
-       invalid selector without a `:scope` prefix, which throws and
-       aborts the whole script. It's replaced below with a safe,
-       tree-order-based lookup. The open/close state is now driven by
-       a small delay timer so moving the mouse from the trigger link
-       down into the panel (or tabbing through it with a keyboard)
-       never causes it to disappear before you can click a link.
+    /* ---------- Mega menu: hoverable on desktop, tap-toggle on mobile ----------
+       Desktop (>992px): opens on hover/focus with a short close-delay
+       grace period so moving the pointer from the trigger into the
+       panel doesn't close it prematurely.
+       Mobile (<=992px): hover/focus listeners are inert (guarded by
+       isDesktopNav()) and the trigger's click handler does a plain,
+       predictable open/close toggle — no competing state changes.
     ---------------------------------------------------------------- */
-    var ddItems = document.querySelectorAll('.has-dd');
-    var CLOSE_DELAY = 300; // ms grace period before a mega menu closes
+    var CLOSE_DELAY = 300; // ms grace period before a desktop mega menu closes
 
     ddItems.forEach(function (item) {
         var mega = item.querySelector('.mega');
-        var trigger = item.querySelector('a'); // first <a> in DOM order = the trigger link
+        var trigger = item.querySelector(':scope > a');
         if (!mega || !trigger) return;
 
         var closeTimer = null;
 
         function openMenu() {
+            if (!isDesktopNav()) return;
             if (closeTimer) {
                 clearTimeout(closeTimer);
                 closeTimer = null;
@@ -84,6 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         function scheduleClose() {
+            if (!isDesktopNav()) return;
             if (closeTimer) clearTimeout(closeTimer);
             closeTimer = setTimeout(function () {
                 item.classList.remove('open');
@@ -96,25 +154,38 @@ document.addEventListener('DOMContentLoaded', function () {
         mega.addEventListener('mouseenter', openMenu);
         mega.addEventListener('mouseleave', scheduleClose);
 
-        // Keyboard accessibility: opening on focus, closing when focus fully leaves
+        // Keyboard accessibility (desktop only — on mobile the tap
+        // handler below owns opening/closing so focus doesn't race it)
         item.addEventListener('focusin', openMenu);
         item.addEventListener('focusout', function (e) {
-            // if the newly focused element is still inside this item, keep it open
+            if (!isDesktopNav()) return;
             if (item.contains(e.relatedTarget)) return;
             scheduleClose();
         });
 
-        // Mobile / touch: tap the trigger link to toggle the panel instead of navigating
+        // Mobile / touch: tap the trigger link to toggle the panel
+        // instead of navigating. This is the single source of truth
+        // for open/close state on mobile — nothing else mutates the
+        // 'open' class at these widths.
         trigger.addEventListener('click', function (e) {
-            if (window.innerWidth <= 992) {
+            if (!isDesktopNav()) {
                 e.preventDefault();
+                e.stopPropagation();
                 var willOpen = !item.classList.contains('open');
-                ddItems.forEach(function (other) {
-                    other.classList.remove('open');
-                });
+                closeAllMegas();
                 if (willOpen) item.classList.add('open');
             }
         });
+    });
+
+    // If the viewport crosses into desktop width with menus open
+    // (e.g. rotating a tablet, or resizing a browser window), reset
+    // everything so neither mode inherits stale state from the other.
+    window.addEventListener('resize', function () {
+        if (isDesktopNav()) {
+            closeAllMegas();
+            closeMobileNav();
+        }
     });
 
     /* ---------- Hero carousel: auto-rotating, animated slides,

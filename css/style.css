@@ -5,6 +5,21 @@
    Body/CTA  : Poppins / Oswald (labels)
    Signature : the "seam" motif — a thin gold wave path, echoing the
                interlocking L·I logo mark, threaded between sections
+
+   FIX LOG (this revision):
+   - The navbar used to snap between --topbar-h and a hardcoded
+     --topbar-h-mobile (56px). On narrow screens the top bar wraps
+     onto more lines than that, so the navbar landed on top of it
+     and everything below (including the hamburger) visually
+     collided. main.js now measures the real top bar height and
+     writes it into --topbar-h on load/resize, and the navbar
+     always reads from that single variable at every breakpoint.
+   - Added overflow-x guards on html/body and flex-shrink guards on
+     the navbar row so long brand text or a wrapped top bar can
+     never push the hamburger button past the right edge.
+   - Mobile mega-menu accordion now animates open/closed instead of
+     snapping, so the Services/Portfolio sub-items are unmistakably
+     visible when tapped.
    ============================================================ */
 
 :root {
@@ -26,9 +41,12 @@
   --gap-lg: clamp(2.5rem, 5vw, 5rem);
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 
-  /* measured heights used to offset fixed chrome */
+  /* Default/fallback height for the fixed top bar. main.js measures
+     the real, rendered height (which changes as the top bar wraps
+     at different widths) and overwrites this on load/resize, so the
+     navbar is always offset correctly instead of guessing a fixed
+     number per breakpoint. */
   --topbar-h: 38px;
-  --topbar-h-mobile: 56px;
 }
 
 * {
@@ -39,11 +57,15 @@
 html {
   scroll-behavior: smooth;
 }
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
 body {
   font-family: var(--font-body);
   color: var(--charcoal);
   background: var(--white);
-  overflow-x: hidden;
   font-size: 16px;
   line-height: 1.7;
 }
@@ -177,7 +199,10 @@ button:focus-visible {
 }
 
 /* ============================================================
-   TOP BAR — sits in normal document flow at the very top
+   TOP BAR — sits in normal document flow at the very top.
+   Its rendered height (which varies as its content wraps at
+   different widths) is measured by main.js and written into
+   --topbar-h, which the navbar below always reads from.
    ============================================================ */
 .top-bar {
   background: var(--charcoal);
@@ -200,6 +225,7 @@ button:focus-visible {
   align-items: center;
   gap: 1.2rem;
   flex-wrap: wrap;
+  min-width: 0;
 }
 .top-bar-left a,
 .top-bar-left span {
@@ -220,6 +246,7 @@ button:focus-visible {
   display: flex;
   align-items: center;
   gap: 0.6rem;
+  flex-shrink: 0;
 }
 .top-bar-right a {
   display: inline-flex;
@@ -240,14 +267,21 @@ button:focus-visible {
   .top-bar-inner {
     flex-direction: column;
     align-items: flex-start;
-    padding: 0.3rem 0;
+    padding: 0.4rem 0;
   }
   .top-bar-left {
-    gap: 0.8rem;
-    font-size: 0.7rem;
+    gap: 0.5rem 0.9rem;
+    font-size: 0.68rem;
   }
   .top-bar-right {
     gap: 0.3rem;
+  }
+}
+@media (max-width: 420px) {
+  /* Trim to the essentials on very small screens so the top bar
+     stays compact and predictable rather than wrapping to 3-4 lines */
+  .top-bar-left span {
+    display: none;
   }
 }
 
@@ -256,7 +290,9 @@ button:focus-visible {
    Fixed at all times so it never scrolls away, but it starts
    *below* the top bar (top: var(--topbar-h)) and animates flush
    to top:0 once the page has scrolled past it — the standard
-   "shrink and stick" pattern.
+   "shrink and stick" pattern. --topbar-h is kept accurate at
+   every breakpoint by main.js (see FIX LOG above), so this no
+   longer needs a separate hardcoded mobile value.
    ============================================================ */
 .navbar {
   position: fixed;
@@ -265,18 +301,13 @@ button:focus-visible {
   width: 100%;
   z-index: 1000;
   padding: 0.8rem 0;
-  transition: top 0.4s var(--ease), padding 0.4s var(--ease), background 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  transition: top 0.3s var(--ease), padding 0.4s var(--ease), background 0.4s var(--ease), box-shadow 0.4s var(--ease);
   /* A permanent, subtle scrim (never fully transparent) so the logo and
      links stay legible the instant the page loads, no matter what is or
      isn't rendered behind the bar yet. This is what removes the "blank
      until you scroll" gap: the bar no longer depends on the hero image
      underneath it to be readable. */
   background: linear-gradient(180deg, rgba(10, 9, 7, 0.55) 0%, rgba(10, 9, 7, 0.05) 100%);
-}
-@media (max-width: 768px) {
-  .navbar {
-    top: var(--topbar-h-mobile);
-  }
 }
 .navbar.scrolled {
   top: 0;
@@ -289,12 +320,15 @@ button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 1rem;
 }
 
 .brand {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  min-width: 0;
 }
 .brand-mark {
   width: 42px;
@@ -310,6 +344,7 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   line-height: 1;
+  min-width: 0;
 }
 .brand-text .name {
   font-family: var(--font-display);
@@ -317,6 +352,7 @@ button:focus-visible {
   font-weight: 700;
   letter-spacing: 0.03em;
   color: var(--white);
+  white-space: nowrap;
 }
 .brand-text .tag {
   font-size: 0.5rem;
@@ -324,12 +360,22 @@ button:focus-visible {
   text-transform: uppercase;
   color: var(--gold-300);
   margin-top: 0.2rem;
+  white-space: nowrap;
+}
+@media (max-width: 400px) {
+  .brand-text .tag {
+    display: none;
+  }
+  .brand-text .name {
+    font-size: 1.1rem;
+  }
 }
 
 .nav-links {
   display: flex;
   align-items: center;
   gap: 2rem;
+  min-width: 0;
 }
 .nav-links > li > a {
   font-size: 0.75rem;
@@ -442,6 +488,7 @@ button:focus-visible {
   display: flex;
   align-items: center;
   gap: 1.2rem;
+  flex-shrink: 0;
 }
 .nav-toggle {
   display: none;
@@ -450,6 +497,7 @@ button:focus-visible {
   gap: 5px;
   width: 44px;
   height: 44px;
+  flex: none;
   z-index: 1002;
   background: rgba(10, 9, 7, 0.35);
   border: 1px solid rgba(255, 255, 255, 0.18);
@@ -473,16 +521,20 @@ button:focus-visible {
 }
 
 @media (max-width: 992px) {
+  /* the middle <nav> wrapper collapses to zero width once its only
+     child (.nav-links) goes fixed-position below, which is exactly
+     what we want for the space-between layout above */
   .nav-links {
     position: fixed;
     inset: 0 0 0 auto;
     height: 100vh;
-    width: min(80vw, 360px);
+    width: min(85vw, 360px);
+    max-width: calc(100vw - 1.5rem);
     background: var(--charcoal);
     flex-direction: column;
     align-items: flex-start;
-    padding: 7rem 2.2rem;
-    gap: 1.6rem;
+    padding: 7rem 2rem 3rem;
+    gap: 1.4rem;
     transform: translateX(100%);
     transition: transform 0.5s var(--ease);
     overflow-y: auto;
@@ -491,26 +543,47 @@ button:focus-visible {
   .nav-links.open {
     transform: translateX(0);
   }
+  .nav-links > li {
+    width: 100%;
+  }
   .mega {
     position: static;
     width: 100%;
+    max-width: 100%;
     transform: none;
     grid-template-columns: 1fr;
     box-shadow: none;
     border: none;
-    padding: 1rem 0 0;
+    padding: 0;
     margin-top: 0;
     background: transparent;
+    z-index: auto;
+    /* Accordion reveal driven by max-height so the panel visibly
+       expands rather than snapping between display:none/grid,
+       which reads as "nothing happened" on a fast tap. */
+    display: grid;
     opacity: 1;
     visibility: visible;
-    pointer-events: auto;
-    display: none;
+    pointer-events: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s var(--ease);
   }
   .mega::before {
     display: none;
   }
   .has-dd.open .mega {
-    display: grid;
+    max-height: 700px;
+    pointer-events: auto;
+    padding: 0.6rem 0 0.2rem;
+  }
+  .mega a {
+    padding: 0.65rem 0.4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .mega .mega-title {
+    color: var(--white);
+    font-size: 1rem;
   }
   .mega .mega-desc {
     display: none;
@@ -1245,6 +1318,7 @@ button:focus-visible {
 }
 .newsletter-form input {
   flex: 1;
+  min-width: 0;
   background: transparent;
   border: none;
   padding: 0.9rem 1rem;

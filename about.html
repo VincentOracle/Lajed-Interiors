@@ -24,10 +24,6 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
-    />
 
     <!-- Owl Carousel / Lightbox (reuse) -->
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
@@ -37,14 +33,15 @@
     <link rel="stylesheet" href="css/style.css" />
 
     <style>
-      /* About page specific overrides / additions */
+      /* ===== About page specific styles ===== */
+
       .about-hero {
-        min-height: 70vh;
+        min-height: 60vh;
         background: var(--charcoal) url("img/about-hero.jpg") center/cover
           no-repeat;
         position: relative;
         display: flex;
-        align-items: center;
+        align-items: flex-end;
         isolation: isolate;
       }
       .about-hero::before {
@@ -52,35 +49,55 @@
         position: absolute;
         inset: 0;
         background: linear-gradient(
-          135deg,
-          rgba(15, 15, 15, 0.6) 0%,
-          rgba(15, 15, 15, 0.85) 100%
+          180deg,
+          rgba(15, 15, 15, 0.35) 0%,
+          rgba(15, 15, 15, 0.9) 100%
         );
         z-index: 0;
       }
       .about-hero .container {
         position: relative;
         z-index: 2;
-        padding: 8rem 0 4rem;
+        padding: 8rem 0 3.5rem;
         color: var(--white);
+      }
+      .about-hero .crumb {
+        font-size: 0.72rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.55);
+        margin-top: 1.4rem;
+      }
+      .about-hero .crumb a {
+        color: rgba(255, 255, 255, 0.55);
+        transition: color 0.3s;
+      }
+      .about-hero .crumb a:hover {
+        color: var(--gold-300);
+      }
+      .about-hero .crumb .sep {
+        margin: 0 0.5rem;
+        color: rgba(255, 255, 255, 0.3);
       }
       .about-hero h1 {
-        font-size: clamp(3rem, 6vw, 5rem);
+        font-size: clamp(2.6rem, 6vw, 4.6rem);
         color: var(--white);
-        max-width: 14ch;
+        max-width: 16ch;
+        margin-top: 1rem;
       }
       .about-hero p {
-        max-width: 540px;
-        color: rgba(255, 255, 255, 0.75);
-        font-size: 1.1rem;
-        margin-top: 1.2rem;
+        max-width: 560px;
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 1.05rem;
+        margin-top: 1rem;
       }
 
+      /* Split sections (Who We Are / Mission & Vision) */
       .split-section {
         padding: var(--gap-xl) 0;
         background: var(--white);
       }
-      .split-section:nth-child(even) {
+      .split-section.alt {
         background: var(--ivory);
       }
       .split-grid {
@@ -95,9 +112,6 @@
       .split-grid.reverse > * {
         direction: ltr;
       }
-      .split-text .eyebrow {
-        margin-bottom: 0.5rem;
-      }
       .split-text h2 {
         font-size: clamp(2rem, 3.8vw, 3.2rem);
         line-height: 1.1;
@@ -108,6 +122,17 @@
         margin-top: 1.2rem;
         font-size: 1rem;
         max-width: 540px;
+      }
+      .split-text p + p {
+        margin-top: 1rem;
+      }
+      .split-text .pillar-label {
+        font-family: var(--font-label);
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--gold-700);
+        font-weight: 600;
       }
       .split-image {
         border-radius: 4px;
@@ -126,20 +151,36 @@
         transform: scale(1.04);
       }
 
-      /* Values cards (same as homepage pillars, but with brand color) */
+      /* Philosophy strip */
+      .philosophy {
+        background: var(--charcoal);
+        color: var(--white);
+        padding: clamp(3rem, 6vw, 5rem) 0;
+        text-align: center;
+      }
+      .philosophy blockquote {
+        font-family: var(--font-display);
+        font-style: italic;
+        font-size: clamp(1.3rem, 3vw, 2.1rem);
+        line-height: 1.5;
+        max-width: 900px;
+        margin: 1.2rem auto 0;
+        color: var(--gold-300);
+      }
+
+      /* Values cards */
       .values-grid {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1.8rem;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.6rem;
         margin-top: 2rem;
       }
       .value-card {
         background: var(--white);
-        padding: 2.4rem 1.6rem 1.8rem;
+        padding: 2.4rem 1.8rem;
         border-radius: 4px;
-        text-align: center;
         border: 1px solid rgba(15, 15, 15, 0.06);
-        transition: all 0.5s ease;
+        transition: all 0.5s var(--ease);
       }
       .value-card:hover {
         transform: translateY(-8px);
@@ -147,34 +188,89 @@
         box-shadow: 0 30px 60px -30px rgba(201, 161, 74, 0.3);
       }
       .value-card .icon {
-        font-size: 2.4rem;
-        color: var(--gold-500);
-        margin-bottom: 1rem;
+        width: 52px;
+        height: 52px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 1px solid var(--gold-500);
+        color: var(--gold-700);
+        font-size: 1.3rem;
+        margin-bottom: 1.2rem;
+        transition: all 0.5s var(--ease);
+      }
+      .value-card:hover .icon {
+        background: var(--gold-500);
+        color: var(--white);
       }
       .value-card h4 {
-        font-family: var(--font-body);
-        font-weight: 600;
-        font-size: 1rem;
-        letter-spacing: 0.04em;
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 1.3rem;
+      }
+      .value-card .focus {
+        margin-top: 0.9rem;
+        font-family: var(--font-label);
+        font-size: 0.68rem;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
+        color: var(--gold-700);
       }
       .value-card p {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         color: var(--stone);
         margin-top: 0.6rem;
+        line-height: 1.6;
+      }
+
+      /* Stats strip (reuses the .num[data-count] counter engine from main.js) */
+      .stats-strip {
+        background: var(--charcoal);
+        color: var(--white);
+      }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+      }
+      .stat-item {
+        padding: 2.8rem 1.6rem;
+        border-right: 1px solid rgba(255, 255, 255, 0.12);
+        text-align: center;
+      }
+      .stat-item:last-child {
+        border-right: none;
+      }
+      .stat-item .num {
+        font-family: var(--font-display);
+        font-size: 3rem;
+        color: var(--gold-300);
+        line-height: 1;
+      }
+      .stat-item p {
+        font-size: 0.82rem;
+        color: rgba(255, 255, 255, 0.6);
+        margin-top: 0.7rem;
+        letter-spacing: 0.04em;
+      }
+      @media (max-width: 700px) {
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+        .stat-item {
+          border-right: none;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .stat-item:last-child {
+          border-bottom: none;
+        }
       }
 
       /* Sourcing section */
       .sourcing {
-        background: var(--charcoal);
-        color: var(--white);
+        background: var(--ivory);
         padding: var(--gap-xl) 0;
-      }
-      .sourcing .section-title {
-        color: var(--white);
-      }
-      .sourcing .section-lede {
-        color: rgba(255, 255, 255, 0.6);
       }
       .sourcing-grid {
         display: grid;
@@ -182,12 +278,6 @@
         gap: 3rem;
         align-items: center;
         margin-top: var(--gap-lg);
-      }
-      .sourcing-grid .stat {
-        font-family: var(--font-display);
-        font-size: 2.6rem;
-        color: var(--gold-300);
-        margin-right: 1rem;
       }
       .sourcing-grid ul {
         list-style: none;
@@ -197,25 +287,44 @@
         display: flex;
         gap: 1rem;
         align-items: flex-start;
-        margin-bottom: 1.2rem;
+        margin-bottom: 1.3rem;
         font-size: 0.95rem;
-        color: rgba(255, 255, 255, 0.7);
+        color: var(--stone);
+        line-height: 1.6;
       }
       .sourcing-grid ul li i {
         color: var(--gold-500);
-        font-size: 1.2rem;
-        margin-top: 0.2rem;
+        font-size: 1.15rem;
+        margin-top: 0.25rem;
+        flex: none;
+      }
+      .sourcing-grid ul li strong {
+        color: var(--charcoal);
       }
       .sourcing-image {
         border-radius: 4px;
         overflow: hidden;
-        box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.3);
       }
       .sourcing-image img {
         width: 100%;
         aspect-ratio: 4/3;
         object-fit: cover;
         display: block;
+      }
+
+      /* Gallery preview grid */
+      .gallery-preview-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+      .gallery-preview-grid .split-image {
+        aspect-ratio: 1;
+      }
+      .gallery-preview-grid .split-image img {
+        aspect-ratio: 1;
       }
 
       @media (max-width: 992px) {
@@ -232,20 +341,22 @@
         .sourcing-grid {
           grid-template-columns: 1fr;
         }
+        .gallery-preview-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
       }
       @media (max-width: 600px) {
         .values-grid {
           grid-template-columns: 1fr;
         }
         .about-hero {
-          min-height: 60vh;
+          min-height: 54vh;
         }
       }
 
-      /* small extra spacing for CTA */
       .about-cta {
         padding: var(--gap-xl) 0;
-        background: var(--ivory);
+        background: var(--white);
         text-align: center;
       }
       .about-cta .btn {
@@ -408,13 +519,18 @@
     <!-- ===== ABOUT HERO ===== -->
     <section class="about-hero">
       <div class="container">
+        <div class="crumb">
+          <a href="index.html">Home</a><span class="sep">/</span
+          ><span>About</span>
+        </div>
         <span class="eyebrow" style="color: var(--gold-300)"
           >About Lajed Interiors</span
         >
-        <h1>Crafting Spaces with Purpose</h1>
+        <h1>Crafting Spaces with Purpose, Since Day One</h1>
         <p>
-          With over two decades of experience, we combine global sourcing, local
-          craftsmanship, and a deep respect for each client’s vision.
+          For more than two decades we've paired global sourcing with local
+          craftsmanship — designing homes, offices and hospitality spaces that
+          are as functional as they are beautiful.
         </p>
       </div>
     </section>
@@ -429,14 +545,16 @@
             <p>
               Lajed Interiors is a Nairobi-based studio that believes great
               design begins with listening. We create refined, functional, and
-              enduring spaces that reflect each client’s unique vision,
-              lifestyle, and needs. Whether it’s a family home, a boutique
+              enduring spaces that reflect each client's unique vision,
+              lifestyle, and needs. Whether it's a family home, a boutique
               hotel, or a corporate office, we bring the same level of care and
               precision to every project.
             </p>
-            <p style="margin-top: 0.8rem">
-              Our approach blends high-end aesthetics with practical innovation,
-              ensuring that every space we touch stands the test of time.
+            <p>
+              Guided by creativity, integrity, and a client-focused approach, we
+              strive to enhance daily living through spaces that are both
+              visually compelling and purposefully designed to stand the test of
+              time.
             </p>
           </div>
           <div class="split-image reveal reveal-delay-1">
@@ -450,27 +568,27 @@
     </section>
 
     <!-- ===== MISSION & VISION (split, reversed) ===== -->
-    <section class="split-section">
+    <section class="split-section alt">
       <div class="container">
         <div class="split-grid reverse">
           <div class="split-text reveal">
             <span class="eyebrow">Our Compass</span>
             <h2>Mission &amp; Vision</h2>
-            <p>
-              <strong>Mission:</strong> To create refined, functional, and
-              enduring spaces that reflect each client’s unique vision,
-              lifestyle, and needs. We are dedicated to delivering thoughtful
-              design solutions that seamlessly integrate aesthetics, comfort,
-              and practicality while upholding the highest standards of quality
-              and precision.
+            <p class="pillar-label" style="margin-top: 1.4rem">Mission</p>
+            <p style="margin-top: 0.4rem">
+              To create refined, functional, and enduring spaces that reflect
+              each client's unique vision, lifestyle, and needs. We are
+              dedicated to delivering thoughtful design solutions that
+              seamlessly integrate aesthetics, comfort, and practicality while
+              upholding the highest standards of quality and precision.
             </p>
-            <p style="margin-top: 1rem">
-              <strong>Vision:</strong> To be the premier provider of luxury
-              interior solutions, recognized for transforming spaces through
-              flawless design and enduring quality. We aim to elevate daily
-              living by seamlessly blending high-end aesthetics with practical
-              innovation, ensuring that every space we touch stands the test of
-              time.
+            <p class="pillar-label" style="margin-top: 1.4rem">Vision</p>
+            <p style="margin-top: 0.4rem">
+              To be the premier provider of luxury interior solutions,
+              recognized for transforming spaces through flawless design and
+              enduring quality. We aim to elevate daily living by seamlessly
+              blending high-end aesthetics with practical innovation, ensuring
+              that every space we touch stands the test of time.
             </p>
           </div>
           <div class="split-image reveal reveal-delay-1">
@@ -480,56 +598,112 @@
       </div>
     </section>
 
+    <!-- ===== PHILOSOPHY QUOTE STRIP ===== -->
+    <section class="philosophy reveal">
+      <div class="container">
+        <span class="eyebrow" style="color: var(--gold-300)"
+          >Our Philosophy</span
+        >
+        <blockquote>
+          "Guided by creativity, integrity, and a client-focused approach, we
+          strive to enhance daily living through spaces that are both visually
+          compelling and purposefully designed to stand the test of time."
+        </blockquote>
+      </div>
+    </section>
+
     <!-- ===== CORE VALUES (cards) ===== -->
-    <section class="split-section" style="background: var(--ivory)">
+    <section class="split-section">
       <div class="container">
         <div class="section-head center reveal">
           <span class="eyebrow">Our Values</span>
           <h2 class="section-title">What Drives Us</h2>
+          <p class="section-lede">
+            Five commitments that shape every project we take on, from first
+            site visit to final handover.
+          </p>
         </div>
         <div class="values-grid">
           <div class="value-card reveal">
             <div class="icon"><i class="fa-solid fa-gem"></i></div>
             <h4>Premium Quality &amp; Craftsmanship</h4>
+            <div class="focus">
+              High-quality materials · Expert team · Flawless finishes
+            </div>
             <p>
-              High-quality materials, expert team, flawless finishes, and
-              lasting durability.
+              We accept nothing less than excellence — from the materials we
+              source to the finishes our craftsmen deliver, we build spaces that
+              exude luxury and structural integrity.
             </p>
           </div>
           <div class="value-card reveal reveal-delay-1">
             <div class="icon"><i class="fa-solid fa-scale-balanced"></i></div>
             <h4>Integrity &amp; Trust</h4>
+            <div class="focus">Open communication · Honest pricing</div>
             <p>
-              Open communication, honest pricing, and service you can rely on.
+              Exceptional design is built on a foundation of reliability and
+              transparency. We deliver premium interior solutions that our
+              clients can confidently rely on.
             </p>
           </div>
           <div class="value-card reveal reveal-delay-2">
             <div class="icon"><i class="fa-solid fa-lightbulb"></i></div>
             <h4>Purposeful Innovation</h4>
+            <div class="focus">Smart storage · Seamless execution</div>
             <p>
-              Stylish layouts, smart storage, seamless execution,
-              low-maintenance solutions.
+              We don't just decorate — we transform how a space works, balancing
+              visual impact with everyday utility and low-maintenance solutions.
             </p>
           </div>
           <div class="value-card reveal reveal-delay-3">
             <div class="icon"><i class="fa-solid fa-clock"></i></div>
             <h4>Professional Reliability</h4>
+            <div class="focus">
+              On-time delivery · Efficient project management
+            </div>
             <p>
-              On-time delivery, efficient project management, and seamless
-              execution.
+              We respect our clients' time and investments. Every project is
+              executed with precision and delivered strictly on schedule.
             </p>
           </div>
-          <div
-            class="value-card reveal reveal-delay-4"
-            style="grid-column: span 2; max-width: 480px; margin: 0 auto"
-          >
+          <div class="value-card reveal reveal-delay-4">
             <div class="icon"><i class="fa-solid fa-star"></i></div>
             <h4>Absolute Customer Satisfaction</h4>
+            <div class="focus">Tailored experiences · Dedicated service</div>
             <p>
-              100% customer satisfaction, tailored design experiences, and
-              dedicated service.
+              Our clients are at the centre of our creative journey. We listen
+              closely and tailor bespoke solutions that consistently exceed
+              expectations.
             </p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STATS STRIP ===== -->
+    <section class="stats-strip reveal">
+      <div class="container" style="padding-top: clamp(2.5rem, 5vw, 4rem)">
+        <div class="section-head center">
+          <span class="eyebrow" style="color: var(--gold-300)"
+            >By the Numbers</span
+          >
+          <h2 class="section-title" style="color: var(--white)">
+            Two Decades of Global Sourcing
+          </h2>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="num" data-count="20" data-suffix="+">0</div>
+          <p>Years of Experience</p>
+        </div>
+        <div class="stat-item">
+          <div class="num" data-count="15" data-suffix="+">0</div>
+          <p>Years of Logistics Expertise</p>
+        </div>
+        <div class="stat-item">
+          <div class="num" data-count="100" data-suffix="%">0</div>
+          <p>Customer Satisfaction</p>
         </div>
       </div>
     </section>
@@ -538,13 +712,12 @@
     <section class="sourcing">
       <div class="container">
         <div class="section-head reveal">
-          <span class="eyebrow" style="color: var(--gold-300)"
-            >Global Reach, Local Heart</span
-          >
+          <span class="eyebrow">Global Reach, Local Heart</span>
           <h2 class="section-title">Product Sourcing Experience</h2>
           <p class="section-lede">
-            We bring over 20 years of experience in sourcing furnishings,
-            fixtures, and decorative items from across the globe.
+            We bring over 20 years of experience sourcing furnishings, fixtures,
+            finishes, construction materials and decorative items — both for our
+            own hotels and retail outlets, and for our clients.
           </p>
         </div>
         <div class="sourcing-grid">
@@ -553,48 +726,37 @@
               <li>
                 <i class="fa-solid fa-globe"></i>
                 <span
-                  ><strong>International procurement</strong> — compliance with
-                  import regulations across Zanzibar, Nairobi, USA, and
-                  Europe.</span
+                  ><strong>International procurement.</strong> Having imported
+                  all the furniture and fittings for our hotels in Zanzibar,
+                  Nairobi, USA and Europe, we've built deep experience
+                  navigating international importation regulations.</span
                 >
               </li>
               <li>
                 <i class="fa-solid fa-building"></i>
                 <span
-                  ><strong>Own sourcing offices</strong> in India and China,
-                  with teams of professionals spanning 15+ years in container
-                  management and shipping.</span
+                  ><strong>Own sourcing offices in India and China,</strong>
+                  each staffed by professionals whose experience in sourcing,
+                  container management and shipping spans over 15 years.</span
                 >
               </li>
               <li>
                 <i class="fa-solid fa-hand-sparkles"></i>
                 <span
-                  ><strong>Local manufacturing</strong> in Kenya: professional
-                  tailors, upholsterers, metal workers, and installation
-                  engineers.</span
+                  ><strong>Local manufacturing in Kenya,</strong> where we
+                  retain a team of professional tailors, upholsterers, metal
+                  workers and installation engineers.</span
                 >
               </li>
               <li>
                 <i class="fa-solid fa-handshake"></i>
                 <span
-                  >Experience working with both large factories and small-scale
-                  artisans worldwide.</span
+                  >Deep experience commissioning bespoke items worldwide,
+                  working comfortably with both large factories and small-scale
+                  artisans alike.</span
                 >
               </li>
             </ul>
-            <div
-              style="
-                margin-top: 2rem;
-                display: flex;
-                gap: 2.5rem;
-                flex-wrap: wrap;
-              "
-            >
-              <div><span class="stat">20+</span> Years of experience</div>
-              <div>
-                <span class="stat">15+</span> Years of logistics expertise
-              </div>
-            </div>
           </div>
           <div class="sourcing-image reveal reveal-delay-1">
             <img
@@ -613,17 +775,10 @@
           <span class="eyebrow">Our Work</span>
           <h2 class="section-title">Gallery Preview</h2>
           <p class="section-lede">
-            A glimpse into the homes and spaces we’ve transformed.
+            A glimpse into the homes and spaces we've transformed.
           </p>
         </div>
-        <div
-          style="
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-            margin-top: 1.5rem;
-          "
-        >
+        <div class="gallery-preview-grid">
           <div class="split-image reveal">
             <img src="img/gallery-1.jpg" alt="Project 1" />
           </div>
@@ -655,25 +810,25 @@
         <div class="t-wrap">
           <div class="t-slide active">
             <p>
-              “Lajed Interiors turned our tired living room into a space we are
+              "Lajed Interiors turned our tired living room into a space we are
               proud to host in. The finishing on the epoxy floor alone changed
-              how the whole house feels.”
+              how the whole house feels."
             </p>
             <div class="who">Wanjiru K, Karen</div>
           </div>
           <div class="t-slide">
             <p>
-              “From the first site visit to the final handover, the team
+              "From the first site visit to the final handover, the team
               communicated clearly and delivered exactly on schedule. Our new
-              kitchen is both beautiful and practical.”
+              kitchen is both beautiful and practical."
             </p>
             <div class="who">Brian O, Runda</div>
           </div>
           <div class="t-slide">
             <p>
-              “What stood out was the attention to detail on our wardrobes.
+              "What stood out was the attention to detail on our wardrobes.
               Every drawer and shelf was designed around how we actually live,
-              not just how it looks.”
+              not just how it looks."
             </p>
             <div class="who">Amina H, Ruaka</div>
           </div>
@@ -687,10 +842,10 @@
       <div class="container">
         <span class="eyebrow">Ready to Create?</span>
         <h2 class="section-title" style="margin-top: 0.5rem">
-          Let’s Transform Your Space
+          Let's Transform Your Space
         </h2>
         <p style="max-width: 540px; margin: 0.8rem auto 0; color: var(--stone)">
-          Book a free site visit and quotation. We’ll listen, then design.
+          Book a free site visit and quotation. We'll listen, then design.
         </p>
         <a
           href="https://wa.me/254722601669"
