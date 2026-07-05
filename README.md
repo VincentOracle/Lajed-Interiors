@@ -222,16 +222,18 @@ CLOUDINARY_API_SECRET=your-api-secret
 *Project grid with masonry layout and hover overlays.*
 
 ### Blog Page
-
+<img width="1587" height="812" alt="image" src="https://github.com/user-attachments/assets/080a7a4c-ae9f-409b-b364-2b080c4ee960" />
 
 *Blog cards with categories, engagement metrics, and read more functionality.*
 
 ### Contact Page
-![Contact Page Screenshot](screenshots/contact.png)
+<img width="1586" height="775" alt="image" src="https://github.com/user-attachments/assets/17500ce7-50fa-4400-8556-655b0a49f164" />
+
 *Contact form with validation and integrated map.*
 
 ### Gallery Page
-![Gallery Page Screenshot](screenshots/gallery.png)
+<img width="1589" height="767" alt="image" src="https://github.com/user-attachments/assets/8663a855-9464-448c-b3a4-cee03c19c5b2" />
+
 *Image and video gallery with lightbox viewer.*
 
 *Screenshots are located in the `/screenshots` directory.*
