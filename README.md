@@ -197,23 +197,33 @@ CLOUDINARY_API_SECRET=your-api-secret
 ## 📸 Screenshots
 
 ### Homepage
-![Homepage Screenshot](screenshots/homepage.png)
+<img width="1600" height="813" alt="image" src="https://github.com/user-attachments/assets/1b04579c-588e-4fb8-88a8-6c2a4c6e2500" />
+
+
 *The main landing page featuring the hero section with auto-rotating slides and wavy carousel.*
 
 ### About Page
-![About Page Screenshot](screenshots/about.png)
+<img width="1593" height="768" alt="image" src="https://github.com/user-attachments/assets/da708068-11a6-4c23-9d32-4d3926baebcb" />
+
 *Company story with mission, vision, and core values displayed in elegant cards.*
 
 ### Services Page
-![Services Page Screenshot](screenshots/services.png)
+<img width="1582" height="774" alt="image" src="https://github.com/user-attachments/assets/0c84daf2-70e5-4bda-a415-ae3e9784b7af" />
+
 *Service cards with icons and hover animations for each offering.*
 
+<img width="1587" height="764" alt="image" src="https://github.com/user-attachments/assets/bb91373d-3e7f-4b1a-a7a5-fbb4922f3ced" />
+
+
 ### Portfolio Page
-![Portfolio Page Screenshot](screenshots/portfolio.png)
+<img width="1589" height="770" alt="image" src="https://github.com/user-attachments/assets/74e3e5aa-e02b-4a16-97c5-2b8461031e52" />
+
+
 *Project grid with masonry layout and hover overlays.*
 
 ### Blog Page
-![Blog Page Screenshot](screenshots/blog.png)
+
+
 *Blog cards with categories, engagement metrics, and read more functionality.*
 
 ### Contact Page
